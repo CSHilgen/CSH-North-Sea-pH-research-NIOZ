@@ -8,43 +8,6 @@ from cartopy import crs as ccrs, feature as cfeature
 import cmocean
 from cartopy.mpl.gridliner import LONGITUDE_FORMATTER, LATITUDE_FORMATTER
 
-#%% # Import dataframs
-
-# Initial dataframes are in study area, the wrong data points are dropped
-# datetime is created, and distance_to_shore is included
-glodapns = pd.read_csv("dataframes_made/glodapns.csv")
-socatns = pd.read_csv("dataframes_made/socatns.csv")
-mss = pd.read_csv("dataframes_made/mss.csv")
-Cefas = pd.read_csv("dataframes_made/Cefas.csv")
-D366 = pd.read_csv("dataframes_made/D366.csv")
-RWSn = pd.read_csv("dataframes_made/RWSn.csv")
-RWSo = pd.read_csv("dataframes_made/RWSo.csv")
-
-# Results are the dataframes of pyCO2sys (all data points)
-resultsglodapns = pd.read_csv("dataframes_made/resultsglodapns.csv")
-resultssocatnsair = pd.read_csv("dataframes_made/resultssocatnsair.csv")
-resultssocatns = pd.read_csv("dataframes_made/resultssocatns.csv")
-#resultsmss = pd.read_csv("dataframes_made/resultsmss.csv")
-resultsCefas = pd.read_csv("dataframes_made/resultsCefas.csv")
-resultsD366 = pd.read_csv("dataframes_made/resultsD366.csv")
-resultsD366 = pd.read_csv("dataframes_made/resultsD366.csv")
-resultsRWSn = pd.read_csv("dataframes_made/resultsRWSn.csv")
-resultsRWSo = pd.read_csv("dataframes_made/resultsRWSo.csv")
-
-# Mean are the dataframes of pyCO2sys (mean per month)
-glodapnsmean = pd.read_csv("dataframes_made/glodapnsmean.csv")
-socatnsairmean = pd.read_csv("dataframes_made/socatnsairmean.csv")
-socatnsmean = pd.read_csv("dataframes_made/socatnsmean.csv")
-#mssmean = pd.read_csv("dataframes_made/mssmean.csv")
-Cefasmean = pd.read_csv("dataframes_made/Cefasmean.csv")
-D366mean = pd.read_csv("dataframes_made/D366mean.csv")
-RWSnmean = pd.read_csv("dataframes_made/RWSnmean.csv")
-RWSomean = pd.read_csv("dataframes_made/RWSomean.csv")
-
-combined = pd.read_csv("dataframes_made/combined.csv")
-resultscombined = pd.read_csv("dataframes_made/resultscombined.csv")
-combinedmean = pd.read_csv("dataframes_made/combinedmean.csv")
-
 #%% # Plotting NS longitude latitude and bathymetry
 
 gebco = xr.open_dataset("data_North_Sea/gebco_2020_noordzee.nc")
@@ -58,8 +21,17 @@ ax = fig.add_subplot(projection=ccrs.Robinson(central_longitude=0))
 
 ax.coastlines()
 
-ax.scatter("longitude", "latitude", data=RWSo, c='xkcd:aqua',
+ax.scatter("longitude", "latitude", data=RWSo, marker='o', facecolors='none', edgecolors='black',
     transform=ccrs.PlateCarree())
+ax.scatter("longitude", "latitude", data=glodapns, marker='^', facecolors='none', edgecolors='black',
+    transform=ccrs.PlateCarree())
+ax.scatter("longitude", "latitude", data=D366, marker='P', facecolors='none', edgecolors='black',
+    transform=ccrs.PlateCarree())
+ax.scatter("longitude", "latitude", data=Cefas, marker='x', facecolors='none', edgecolors='black',
+    transform=ccrs.PlateCarree())
+#ax.scatter("longitude", "latitude", data=socatns, marker='', facecolors='none', edgecolors='black',
+   # transform=ccrs.PlateCarree())
+
 
 # Plot bathymetry from data
 gmin = -150
@@ -102,7 +74,7 @@ ax.set_xlabel('Longitude')
 ax.set_ylabel('Latitude')
 
 plt.tight_layout()
-plt.savefig("figures/Maps/Map_datapoints_and_bathymetry_RWSo.png")
+#plt.savefig("figures/Maps/Map_datapoints_and_bathymetry_RWSo.png")
 plt.show()
 
 #%% # Plotting NS longitude latitude and bathymetry

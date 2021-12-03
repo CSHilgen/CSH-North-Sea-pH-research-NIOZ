@@ -11,9 +11,12 @@ from scipy import interpolate
 from scipy.stats import linregress
 from scipy.optimize import least_squares
 from scipy.optimize import curve_fit
+from scipy import stats
 from numpy import arange
 import seaborn as sns
-from cartopy.mpl.gridliner import LONGITUDE_FORMATTER, LATITUDE_FORMATTER
+from sklearn.cluster import MeanShift
+# from cartopy.mpl.gridliner import LONGITUDE_FORMATTER, LATITUDE_FORMATTER
+from matplotlib.ticker import (MultipleLocator, AutoMinorLocator)
 
 #%% # Import dataframes
 
