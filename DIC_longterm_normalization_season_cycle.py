@@ -108,6 +108,7 @@ fig, axs = plt.subplots(nrows=3, dpi=300, figsize=(10,6), sharex=True)
 ax = axs[0]
 sns.regplot(x='datenum', y='dic', data=combinedmean, ax=ax,
             scatter_kws={"color": "purple"}, line_kws={"color": "blue"})
+
 ax.set_title("DIC - Fitting North Sea")
 ax.grid(alpha=0.3)
 ax.set_xlabel("Time (yrs)")
@@ -184,9 +185,9 @@ xend = 18808
 ybegin = (slope * xbegin) + intercept
 yend = (slope * xend) + intercept
 changelongterm = yend - ybegin
-print(changelongterm) # 62.23026888348886 umol/kg
+print(changelongterm) # 62.23026888348886 (μmol/kg)
 changeperyear = changelongterm / ((xend-xbegin)/365)
-print(changeperyear) # 3.1360000196705005 umol/kg
+print(changeperyear) # 3.1360000196705005 (μmol/kg)
 
 #%% # Normalized DIC LONG TERM CHANGE
 
@@ -310,7 +311,10 @@ fig, axs = plt.subplots(nrows=3, dpi=300, figsize=(10,6), sharex=True)
 
 ax = axs[0]
 sns.regplot(x='datenum', y='normalized_DIC', data=combinedmean, ax=ax,
-            scatter_kws={"color": "grey"}, line_kws={"color": "blue"})
+            scatter_kws={"color": "purple"}, line_kws={"color": "blue", 'label': 'y = 0.001x + 2130.4'}, label='Normalized DIC')
+combinedmean.plot.scatter("datenum", "dic", ax=ax, c='purple', label='Initial DIC', marker='x')
+# combinedmeandic2.plot.scatter("datenum", "dic_final2", ax=ax, label='Final DIC', marker='s', facecolors='none', edgecolors='yellow')
+
 ax.set_title("Normalized DIC - Fitting North Sea")
 ax.grid(alpha=0.3)
 ax.set_xlabel("Time (yrs)")
@@ -318,10 +322,11 @@ ax.set_ylabel('DIC (μmol/kg)')
 ax.xaxis.set_major_locator(mdates.YearLocator())
 ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
 ax.xaxis.set_minor_locator(mdates.MonthLocator())
-plt.xticks(rotation=0)
+plt.xticks(rotation=30)
+ax.legend()
 
 ax = axs[1]
-combinedmean.plot.scatter("datenum", "normalized_DIC", ax=ax, c='grey', label="Normalized DIC")
+combinedmean.plot.scatter("datenum", "normalized_DIC", ax=ax, c='purple', label="Normalized DIC")
 combinedmeandic.plot('datenum', 'interpolator_dic', ax=ax, c='g', label='Seasonal cycle')
 
 ax.grid(alpha=0.3)
@@ -330,12 +335,17 @@ ax.set_ylabel('DIC (μmol/kg)')
 ax.xaxis.set_major_locator(mdates.YearLocator())
 ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
 ax.xaxis.set_minor_locator(mdates.MonthLocator())
-plt.xticks(rotation=0)
+plt.xticks(rotation=30)
+ax.legend()
+
+combinedmeandic2['dic_final'] = 0.0005 * combinedmeandic2['datenum'] + 2130.4
+combinedmeandic2['dic_final2'] = combinedmeandic2['dicminusseason'] + 2139.3
 
 ax = axs[2]
-#combinedmean['dic_minusseasonality'] = combinedmean['dic'] - combinedmean['point_on_seasoncycle']
-sns.regplot(x='datenum', y='dicminusseason', data=combinedmeandic2, ax=ax, ci=99.9,
-            scatter_kws={"color": "grey"}, line_kws={"color": "blue"})
+# sns.regplot(x='datenum', y='dicminusseason', data=combinedmeandic2, ax=ax, ci=99.9,
+#             scatter_kws={"color": "purple"}, line_kws={"color": "blue", 'label': 'y = 0.0005x + -8.9'}, label='Seasonal corrected')
+sns.regplot(x='datenum', y='dic_final2', data=combinedmeandic2, ax=ax, ci=99.9,
+             scatter_kws={"color": "purple"}, line_kws={"color": "blue", 'label': 'y = 0.0005x + 2130.4'}, label='Seasonal corrected')
 
 ax.grid(alpha=0.3)
 ax.set_xlabel("Time (yrs)")
@@ -343,10 +353,12 @@ ax.set_ylabel('DIC (μmol/kg)')
 ax.xaxis.set_major_locator(mdates.YearLocator())
 ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
 ax.xaxis.set_minor_locator(mdates.MonthLocator())
-plt.xticks(rotation=0)
+plt.xticks(rotation=30)
+ax.set_ylim(1980,2240)
+ax.legend()
 
 plt.tight_layout()
-plt.savefig("figures/DIC_longterm/DIC_normalized_season_fitting.png")    
+plt.savefig("figures/DIC_longterm/DIC_normalized_season_fitting_final2.png")    
 
 # Use the fit to predict DIC in console: fco2_fit(opt_result['x'], 1)
 # Last number is date (1 = 1 january 1970)
@@ -382,3 +394,65 @@ print(changelongterm) # 3.6613627882205613 (μmol/kg)
 changeperyear = changelongterm / ((xend-xbegin)/365)
 print(changeperyear) # 0.18450882475500552 (μmol/kg)
 
+#%% # Uncertainties DIC
+slope, intercept, r, p, se = linregress(combinedmean['datenum'], combinedmean['dic'])
+opt_result = least_squares(lsq_fco2_fit, [-0.055, 1182, 166, 686], 
+                           args=(combinedmean['datenum'], combinedmean['dic']))
+
+slope, intercept, r, p, se = linregress(combinedmean['datenum'], combinedmean['normalized_DIC'])
+opt_result = least_squares(lsq_fco2_fit, [-0.055, 1182, 166, 686], 
+                           args=(combinedmean['datenum'], combinedmean['normalized_DIC']))
+
+slope, intercept, r, p, se = linregress(combinedmeandic2['datenum'], combinedmeandic2['dicminusseason'])
+opt_result = least_squares(lsq_fco2_fit, [-0.055, 1182, 166, 686], 
+                           args=(combinedmeandic2['datenum'], combinedmeandic2['dicminusseason']))
+
+slope, intercept, r, p, se = linregress(combinedmeandic2['datenum'], combinedmeandic2['dic_final2'])
+opt_result = least_squares(lsq_fco2_fit, [-0.055, 1182, 166, 686], 
+                           args=(combinedmeandic2['datenum'], combinedmeandic2['dic_final2']))
+
+# From linear regression
+J = opt_result.jac
+cov = np.linalg.inv(J.T.dot(J))
+var = np.sqrt(np.diagonal(cov))
+std_dev = np.sqrt(var) 
+print(std_dev)
+# [0.00797924 1.08199306 0.72505228 0.51856887] # Initial data
+# 0.00797924, 1.08199, 0.729208, 0.557956 # Normalized data
+# 0.00797924, 1.08199, 0.720852, 2.4578 # Corrected data
+# [0.00797924 1.08199283 0.72085103 2.45782298] # Final data
+doublestd_dev = std_dev[0] * 2
+print(doublestd_dev) # 0.01595848261385133 # Final data
+
+# From data
+std_dev_data = statistics.stdev(combinedmean['dic']) # 45.70502319214557
+var_data = statistics.variance(combinedmean['dic'])
+std_dev_data = statistics.stdev(combinedmean['normalized_DIC']) # 38.999942632900634
+var_data = statistics.variance(combinedmean['normalized_DIC'])
+std_dev_data = statistics.stdev(combinedmeandic2['dicminusseason']) # 26.368641663508285
+var_data = statistics.variance(combinedmeandic2['dicminusseason'])
+
+# Residual std dev
+combinedmean['yest'] = slope * combinedmean['datenum'] + intercept
+combinedmean['residual'] = combinedmean['dic'] - combinedmean['yest']
+combinedmean['residual_squared'] = combinedmean['residual']**2
+sum_of_squared_residuals = combinedmean['residual_squared'].sum()
+n_of_residuals = 50 - 2 # Datapoints in dataframe - 2 
+residual_std_dev = np.sqrt((sum_of_squared_residuals / n_of_residuals))
+print(residual_std_dev) # Outcome is 41.82685707976837
+
+combinedmean['yest'] = slope * combinedmean['datenum'] + intercept
+combinedmean['residual'] = combinedmean['normalized_DIC'] - combinedmean['yest']
+combinedmean['residual_squared'] = combinedmean['residual']**2
+sum_of_squared_residuals = combinedmean['residual_squared'].sum()
+n_of_residuals = 50 - 2 # Datapoints in dataframe - 2 
+residual_std_dev = np.sqrt((sum_of_squared_residuals / n_of_residuals))
+print(residual_std_dev) # Outcome is 39.30501185944042
+
+combinedmeandic2['yest'] = slope * combinedmeandic2['datenum'] + intercept
+combinedmeandic2['residual'] = combinedmeandic2['dicminusseason'] - combinedmeandic2['yest']
+combinedmeandic2['residual_squared'] = combinedmeandic2['residual']**2
+sum_of_squared_residuals = combinedmeandic2['residual_squared'].sum()
+n_of_residuals = 50 - 2 # Datapoints in dataframe - 2 
+residual_std_dev = np.sqrt((sum_of_squared_residuals / n_of_residuals))
+print(residual_std_dev) # Outcome is 26.61734376139221

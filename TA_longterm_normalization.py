@@ -107,43 +107,46 @@ fig, axs = plt.subplots(nrows=3, dpi=300, figsize=(10,6), sharex=True)
 
 ax = axs[0]
 sns.regplot(x='datenum', y='alkalinity', data=combinedmean, ax=ax,
-            scatter_kws={"color": "red"}, line_kws={"color": "blue"})
+            scatter_kws={"color": "red"}, line_kws={"color": "blue", 'label': 'y = 0.01x + 2181.8'}, label='Initial TA', marker='x')
 
 ax.set_title("TA - Fitting North Sea")
 ax.grid(alpha=0.3)
 ax.set_xlabel("Time (yrs)")
-ax.set_ylabel('Alkalinity')
+ax.set_ylabel('TA (μmol/kg)')
 ax.xaxis.set_major_locator(mdates.YearLocator())
 ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
 ax.xaxis.set_minor_locator(mdates.MonthLocator())
-plt.xticks(rotation=0)
+plt.xticks(rotation=30)
 ax.set_ylim([2275,2425])
+ax.legend()
 
 ax = axs[1]
-combinedmean.plot.scatter("datenum", "alkalinity", ax=ax, c='red', label='TA data')
-combinedmean.plot.scatter('datenum', 'normalized_TA', ax=ax, c='g', label='Normalized TA data')
+combinedmean.plot.scatter("datenum", "alkalinity", ax=ax, c='red', label='Initial TA', marker='x')
+combinedmean.plot.scatter('datenum', 'normalized_TA', ax=ax, c='red', label='Normalized TA')
 
 ax.grid(alpha=0.3)
 ax.set_xlabel("Time (yrs)")
-ax.set_ylabel('Alkalinity')
+ax.set_ylabel('TA (μmol/kg)')
 ax.xaxis.set_major_locator(mdates.YearLocator())
 ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
 ax.xaxis.set_minor_locator(mdates.MonthLocator())
-plt.xticks(rotation=0)
+plt.xticks(rotation=30)
 ax.set_ylim([2275,2425])
+ax.legend()
 
 ax = axs[2]
 sns.regplot(x='datenum', y='normalized_TA', data=combinedmean, ax=ax, ci=99.9,
-            scatter_kws={"color": "g"}, line_kws={"color": "blue"})
+            scatter_kws={"color": "red"}, line_kws={"color": "blue", 'label': 'y = 0.002x + 2327.9'}, label='Normalized TA')
 
 ax.grid(alpha=0.3)
 ax.set_xlabel("Time (yrs)")
-ax.set_ylabel('Normalized TA')
+ax.set_ylabel('TA (μmol/kg)')
 ax.xaxis.set_major_locator(mdates.YearLocator())
 ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
 ax.xaxis.set_minor_locator(mdates.MonthLocator())
-plt.xticks(rotation=0)
+plt.xticks(rotation=30)
 ax.set_ylim([2275,2425])
+ax.legend()
 
 plt.tight_layout()
 plt.savefig("figures/TA_longterm/TA_normalization_fitting.png")    
@@ -199,3 +202,42 @@ changelongterm = yend - ybegin
 print(changelongterm) # 16.14871000883568 umol/kg
 changeperyear = changelongterm / ((xend-xbegin)/365)
 print(changeperyear) # 0.8137897491681655 umol/kg
+
+#%% # Uncertainties TA
+
+slope, intercept, r, p, se = linregress(combinedmean['datenum'], combinedmean['normalized_TA'])
+opt_result = least_squares(lsq_fco2_fit, [-0.055, 1182, 166, 686], 
+                           args=(combinedmean['datenum'], combinedmean['normalized_TA']))
+
+# From linear regression
+J = opt_result.jac
+cov = np.linalg.inv(J.T.dot(J))
+var = np.sqrt(np.diagonal(cov))
+std_dev = np.sqrt(var) 
+print(std_dev)
+# [0.00797511 1.07754092 0.68898182 0.93064161] # Normalized data
+doublestd_dev = std_dev[0] * 2
+print(doublestd_dev) # 0.01595022796864141
+
+# From data
+std_dev_data = statistics.stdev(combinedmean['alkalinity']) # 33.375514613538726
+var_data = statistics.variance(combinedmean['alkalinity'])
+std_dev_data = statistics.stdev(combinedmean['normalized_TA']) # 20.78599491432976
+var_data = statistics.variance(combinedmean['normalized_TA'])
+
+# Residual std dev
+combinedmean['yest'] = slope * combinedmean['datenum'] + intercept
+combinedmean['residual'] = combinedmean['alkalinity'] - combinedmean['yest']
+combinedmean['residual_squared'] = combinedmean['residual']**2
+sum_of_squared_residuals = combinedmean['residual_squared'].sum()
+n_of_residuals = 50 - 2 # Datapoints in dataframe - 2 
+residual_std_dev = np.sqrt((sum_of_squared_residuals / n_of_residuals))
+print(residual_std_dev) # Outcome is 32.91268030957801
+
+combinedmean['yest'] = slope * combinedmean['datenum'] + intercept
+combinedmean['residual'] = combinedmean['normalized_TA'] - combinedmean['yest']
+combinedmean['residual_squared'] = combinedmean['residual']**2
+sum_of_squared_residuals = combinedmean['residual_squared'].sum()
+n_of_residuals = 50 - 2 # Datapoints in dataframe - 2 
+residual_std_dev = np.sqrt((sum_of_squared_residuals / n_of_residuals))
+print(residual_std_dev) # Outcome is 20.37814417302904

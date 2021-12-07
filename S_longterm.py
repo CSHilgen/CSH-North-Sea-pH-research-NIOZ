@@ -310,7 +310,6 @@ plt.tight_layout()
 plt.savefig("figures/S_longterm/pH_mean_time_datasets_RWSo&RWSnspectro&RWSopred3_zoomin.png")
 plt.show()
 
-
 #%% # Interpolation of Salinity RWSomean
 
 # L = RWSomean.year > 2000
@@ -338,7 +337,7 @@ fig, axs = plt.subplots(nrows=3, dpi=300, figsize=(10,6), sharex=True)
 
 ax = axs[0]
 sns.regplot(x='datenum', y='salinity', data=RWSomean, ax=ax, ci=99.9,
-            scatter_kws={"color": "xkcd:golden"}, line_kws={"color": "blue"})
+            scatter_kws={"color": "xkcd:golden"}, line_kws={"color": "blue", 'label': 'y = 0.00004x + 32.5'}, label='Initial S')
 
 ax.set_title("RWSo Salinity data - North Sea")
 ax.grid(alpha=0.3)
@@ -349,14 +348,15 @@ ax.xaxis.set_major_locator(mdates.YearLocator())
 ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
 ax.xaxis.set_minor_locator(mdates.MonthLocator())
 plt.xticks(rotation=30)
+ax.legend()
 
 ax = axs[1]
-RWSomean.plot.scatter("datenum", "salinity", ax=ax, c='xkcd:golden', label='RWSo S')
+RWSomean.plot.scatter("datenum", "salinity", ax=ax, c='xkcd:golden', label='Initial S')
 
 fx = np.linspace(RWSomean.datenum.min(), RWSomean.datenum.max(), 1000)
 fy = fco2_fit(opt_result['x'], fx)
 fx_datetime = mdates.num2date(fx)
-ax.plot(fx, fy, 'g') # fy + 55.61 is the difference between the orange line and blue line (start point -> date 1991-11-30)
+ax.plot(fx, fy, 'g', label='Seasonal cycle') # fy + 55.61 is the difference between the orange line and blue line (start point -> date 1991-11-30)
 
 ax.grid(alpha=0.3)
 ax.set_xlabel("Time (yrs)")
@@ -371,10 +371,11 @@ ax.legend()
 # Minus the sin cycle trend and the long-term trend
 RWSomean['minusseasonality'] = RWSomean['salinity'] - RWSomean['seasoncycle']
 
+slope, intercept, r, p, se = linregress(RWSomean['datenum'], RWSomean['minusseasonality'])
+
 ax = axs[2]
-#RWSomean.plot.scatter("datetime", "minusseasonality", ax=ax)
 sns.regplot(x='datenum', y='minusseasonality', data=RWSomean, ax=ax, ci=99.9,
-            scatter_kws={"color": "xkcd:golden"}, line_kws={"color": "blue"})
+            scatter_kws={"color": "xkcd:golden"}, line_kws={"color": "blue", 'label': 'y = 0'}, label='Seasonal correction')
 
 ax.grid(alpha=0.3)
 ax.set_xlabel("Time (yrs)")
@@ -384,6 +385,7 @@ ax.xaxis.set_major_locator(mdates.YearLocator(5))
 ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
 # ax.xaxis.set_minor_locator(mdates.MonthLocator())
 plt.xticks(rotation=30)
+ax.legend()
 
 plt.tight_layout()
 plt.savefig("figures/S_longterm/S_season_fitting_RWSomean.png")    
@@ -391,10 +393,24 @@ plt.savefig("figures/S_longterm/S_season_fitting_RWSomean.png")
 # Use the fit to predict fCO2 in console: fco2_fit(opt_result['x'], 1)
 # Last number is date (1 = 1 january 1970)
 
-
 #%% # Outcome linear regression
 
-#slope, intercept, r, p, se = linregress(RWSomean['datenum'], RWSomean['salinity'])
+slope, intercept, r, p, se = linregress(RWSomean['datenum'], RWSomean['salinity'])
+
+result = linregress(RWSomean['datenum'], RWSomean['salinity'])
+print(result.intercept, result.intercept_stderr)
+
+res = stats.linregress(RWSomean['datenum'], RWSomean['salinity'])
+print(f"R-squared: {res.rvalue**2:.6f}")
+
+# S data
+# slope = 3.576870372607725e-05
+# intercept = 32.514414280894854
+# result.intercept_stderr = 0.08652311452438789
+# r = 0.19571492569881213
+# p = 7.834457861142654e-06
+# se = 7.920691591811762e-06
+# R-squared = 0.038304
 
 slope, intercept, r, p, se = linregress(RWSomean['datenum'], RWSomean['minusseasonality'])
 
@@ -404,7 +420,7 @@ print(result.intercept, result.intercept_stderr)
 res = stats.linregress(RWSomean['datenum'], RWSomean['minusseasonality'])
 print(f"R-squared: {res.rvalue**2:.6f}")
 
-# Seasonal corrected DIC data
+# Seasonal corrected S data
 # slope = -2.455358405858721e-12
 # intercept = 3.654470315155289e-08
 # result.intercept_stderr = 0.3754383349050931
@@ -422,6 +438,33 @@ xend = 17876
 ybegin = (slope * xbegin) + intercept
 yend = (slope * xend) + intercept
 changelongterm = yend - ybegin
-print(changelongterm) # -1.601630288141644e-08 (μmol/kg)
+print(changelongterm) # -1.601630288141644e-08
 changeperyear = changelongterm / ((xend-xbegin)/365)
-print(changeperyear) # -8.962058181384332e-10 (μmol/kg)
+print(changeperyear) # -8.962058181384332e-10 
+
+#%% # Uncertainties S
+
+slope, intercept, r, p, se = linregress(RWSomean['datenum'], RWSomean['minusseasonality'])
+opt_result = least_squares(lsq_fco2_fit, [slope, intercept, sine_stretch, sine_shift], 
+                           args=(RWSomean['datenum'], RWSomean['minusseasonality']))
+
+# From linear regression
+J = opt_result.jac
+cov = np.linalg.inv(J.T.dot(J))
+var = np.sqrt(np.diagonal(cov))
+std_dev = np.sqrt(var) # [3.10055386e-03 3.72331860e-01 3.75674672e-01 4.80369393e+03]
+print(std_dev)
+
+# From data
+std_dev_data = statistics.stdev(RWSomean['minusseasonality']) # 0.7982779717549606
+var_data = statistics.variance(RWSomean['minusseasonality'])
+print(std_dev_data)
+
+# Residual std dev
+RWSomean['yest'] = slope * RWSomean['datenum'] + intercept
+RWSomean['residual'] = RWSomean['minusseasonality'] - RWSomean['yest']
+RWSomean['residual_squared'] = RWSomean['residual']**2
+sum_of_squared_residuals = RWSomean['residual_squared'].sum()
+n_of_residuals = 514 - 2 # Datapoints in dataframe - 2 
+residual_std_dev = np.sqrt((sum_of_squared_residuals / n_of_residuals))
+print(residual_std_dev) # Outcome is 0.799057159809427

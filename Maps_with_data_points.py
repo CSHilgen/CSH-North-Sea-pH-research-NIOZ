@@ -142,7 +142,6 @@ ax.set_ylabel('Latitude')
 # plt.tight_layout()
 #plt.savefig("figures/Maps/Map_datapoints_Km_and_bathymetry_D366.png")
 
-
 #%% # Plotting NS longitude latitude and bathymetry
 
 gebco = xr.open_dataset("data_North_Sea/gebco_2020_noordzee.nc")
@@ -208,9 +207,7 @@ ax.set_ylabel('Latitude')
 # plt.tight_layout()
 plt.savefig("figures/Maps/Map_datapoints_T_and_bathymetry_RWSo.png")
 
-
 #%% # pH plots
-
 
 resultsmss['latitude'] = mss['latitude']
 resultsmss['longitude'] = mss['longitude']

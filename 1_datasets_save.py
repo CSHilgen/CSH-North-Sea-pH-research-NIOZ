@@ -346,11 +346,11 @@ resultsRWSo['datetime'] = RWSo['datetime']
 resultsRWSo['longitude'] = RWSo['longitude']
 resultsRWSo['latitude'] = RWSo['latitude']
 resultsRWSo['station'] = RWSo['station']
-resultsRWSo['nitrate'] = RWSo['nitrate']
 resultsRWSo['oxygen'] = RWSo['oxygen']
 resultsRWSo['total_ammonia'] = RWSo['ammonia']
 resultsRWSo['total_nitrate'] = RWSo['nitrate']
 resultsRWSo['chlorophyll'] = RWSo['chlorophyll']
+resultsRWSo['total_calcium'] = RWSo['calcium']
 
 # Make dataset based on the mean 
 RWSomean = resultsRWSo.set_index('datetime').resample('M').mean()
@@ -473,6 +473,7 @@ combinedmean = pd.concat(objs=(Cefasmean, D366mean, RWSnmean, glodapnsmean), key
 
 #resultscombined = resultscombined.dropna(axis='rows', how='all', subset=['par1'])
 combinedmean['datenum'] = mdates.date2num(combinedmean.datetime)
+
 #%% # Save datasets
 
 socatns.to_csv("dataframes_made/socatns.csv")

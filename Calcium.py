@@ -31,8 +31,17 @@ plt.show()
 fig, ax = plt.subplots(dpi=300)
 cm = plt.cm.get_cmap('twilight')
 
+L0 = (RWSo.year <= 2014)
+L1 = (RWSo.year >= 2015) & (RWSo.datenum <= 16996.3)
+L2 = (RWSo.datenum >= 17014.4)      
+      
 ax = ax
-sc = ax.scatter('datetime', 'calcium', c='dayofyear', cmap=cm, vmin=1, vmax=365, data=RWSo, s=20)
+# sc = ax.scatter('datetime', 'calcium', c='dayofyear', cmap=cm, vmin=1, vmax=365, data=RWSo[L0], s=20, label='method1')
+# sc = ax.scatter('datetime', 'calcium', c='dayofyear', cmap=cm, vmin=1, vmax=365, data=RWSo[L1], s=20, label='method2')
+# sc = ax.scatter('datetime', 'calcium', c='dayofyear', cmap=cm, vmin=1, vmax=365, data=RWSo[L2], s=20, label ='method3')
+ax.scatter('datetime', 'calcium', edgecolors='yellow', facecolors='yellow', data=RWSo[L0], s=20, label='method1')
+ax.scatter('datetime', 'calcium', edgecolors='orange', facecolors='orange', data=RWSo[L1], s=20, label='method2')
+ax.scatter('datetime', 'calcium', edgecolors='green', facecolors='green', data=RWSo[L2], s=20, label ='method3')
 
 ax.grid(alpha=0.3)
 ax.set_xlabel("Time (yrs)")
@@ -44,15 +53,16 @@ ax.minorticks_on()
 ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
 ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
 ax.set_title('Calcium data - Seasons North Sea')
+ax.legend()
 
-cbar=fig.colorbar(sc, ax=ax, orientation='vertical')
-cbar.set_label('Seasons')
-label=[80,172,264,355]
-cbar.set_ticks(label)
-cbar.set_ticklabels(['Spring', 'Summer', 'Autumn', 'Winter'])
+# cbar=fig.colorbar(sc, ax=ax, orientation='vertical')
+# cbar.set_label('Seasons')
+# label=[80,172,264,355]
+# cbar.set_ticks(label)
+# cbar.set_ticklabels(['Spring', 'Summer', 'Autumn', 'Winter'])
 
 plt.tight_layout()
-plt.savefig("figures/Ca_mean_time_seasons.png")
+plt.savefig("figures/Ca_mean_time_methods.png")
 plt.show()
 
 #%% # Calcium - Time - Regions
