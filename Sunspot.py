@@ -1,19 +1,19 @@
-# Sunny data
+import pandas as pd
+from matplotlib import pyplot as plt
+import matplotlib.dates as mdates
 import json
 
 #%% # Sunspot cycle
 
-sunspot = pd.io.json.read_json('C:/Users/cecil/Documenten/Datasets/Sunspotcycle/observed-solar-cycle-indices-1.json')
+sunspot = pd.io.json.read_json('data_sun_spots/observed-solar-cycle-indices-1.json')
 sunspot['datetime'] = pd.to_datetime(sunspot['time-tag'])
-# sunspot['f10.7'] = sunspot['f10.7'].apply(lambda x: "nan" if x == -1.0 else x)
-# sunspot = sunspot.where(sunspot == '-1.0', "nan")
 
 #%% # Space weather prediction center (NOAA: https://www.swpc.noaa.gov/products/solar-cycle-progression)
 
 fig, ax = plt.subplots(dpi=300)
 
 ax=ax
-ax.plot('datetime', 'ssn', data=sunspot, c='xkcd:banana')
+ax.scatter('datetime', 'ssn', data=sunspot, c='xkcd:banana')
 
 ax.grid(alpha=0.3)
 ax.set_xlabel("Time (yrs)")
@@ -30,7 +30,7 @@ plt.show()
 
 #%% # Solar Irradiance
 
-tsi = pd.read_csv('C:/Users/cecil/Documenten/Datasets/Sunspotcycle/tsi-ssi_v02r01_observed-tsi-composite_s19780101_e20210930_c20211021.txt', header=56, na_values=-99)
+tsi = pd.read_csv('data_sun_spots/tsi-ssi_v02r01_observed-tsi-composite_s19780101_e20210930_c20211021.txt', header=56, na_values=-99)
 tsi['datetime'] = pd.to_datetime(tsi['; time (yyyy-MM-dd)'])
 tsi = tsi.rename(columns={' TSI (W m-2)':'TSI (W m-2)', ' uncertainty (W m-2)': 'Uncertainty (W m-2)'})
 tsi = tsi.dropna(axis='rows', how='all', subset=['TSI (W m-2)'])
@@ -58,7 +58,7 @@ plt.show()
 
 #%% # Sunspot & TSI
 
-fig, ax = plt.subplots(dpi=300)#, figsize=[6,3])
+fig, ax = plt.subplots(dpi=300)
 
 ax1=ax
 ax.scatter('datetime', 'ssn', data=sunspot, s=20, alpha=0.4, c='xkcd:banana')
