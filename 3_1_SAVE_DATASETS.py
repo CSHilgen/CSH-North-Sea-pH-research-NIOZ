@@ -280,6 +280,13 @@ molarmass = 40.078
 convertfactor = ((0.001 / molarmass) * 1000000) / densitysw
 RWSo['calcium umol/kg'] = RWSo['calcium'] * convertfactor
 
+# Correct calcium data for method change (smooth the boundaries)
+RWSo['calcium_corrected'] = RWSo['calcium umol/kg']
+# Only Method 1 values - 720 (to lower the first method)
+RWSo.loc[RWSo.year <= 2014, 'calcium_corrected'] = RWSo.loc[RWSo.year <= 2014, 'calcium_corrected'] - 720
+# Make the dataset relative 
+RWSo['calcium_corrected'] = RWSo['calcium_corrected'] - 7000
+
 pH = RWSo['pH']
 phos = RWSo['phosphate'] 
 sil = RWSo['silicate']

@@ -14,13 +14,6 @@ def get_calcium_plots(RWSo, RWSoCa):
     #%% # Corrected Calcium data based on the methods (Method 1 - 720)
     
     RWSoCa = RWSo.dropna(axis='rows', how='all', subset=['calcium umol/kg'])
-    RWSoCa['calcium_corrected'] = RWSoCa['calcium umol/kg']
-    # Only Method 1 values - 720 (to lower the first method)
-    RWSoCa.loc[RWSoCa.year <= 2014, 'calcium_corrected'] = RWSoCa.loc[RWSoCa.year <= 2014, 'calcium_corrected'] - 720
-    # Make the dataset relative 
-    RWSoCa['calcium_corrected'] = RWSoCa['calcium_corrected'] - 7000
-    
-    RWSoCa = RWSoCa.reset_index()
 
     L0 = (RWSoCa.year <= 2014)
     L1 = (RWSoCa.year >= 2015) & (RWSoCa.datenum <= 16996.3)
