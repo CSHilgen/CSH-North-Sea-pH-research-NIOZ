@@ -16,7 +16,7 @@ RWSnmean = pd.read_csv("dataframes_made/RWSnmean_final.csv")
 RWStotalmean = pd.read_csv("dataframes_made/RWStotalmean_final.csv")
 combinedmean = pd.read_csv("dataframes_made/combinedmean_final.csv")
 
-#%% # Seasonal corrected for fCO2 air, fCO2 sea and ΔfCO2 (SOCAT)
+#%% # Seasonal correction for fCO2 air, fCO2 sea and ΔfCO2 (SOCAT)
 
 # Seasonal cycle correction fCO2 air
 socatnsmeanair = socatnsmean.dropna(axis='rows', how='all', subset=['fco2_air'])
@@ -44,7 +44,7 @@ socatnsmeandelta['sc_deltafco2'] = SF_tools.seasonalcycle_fit_fco2_sea(opt_resul
 slope, intercept, sine_stretch, sine_shift = opt_result['x']
 socatnsmeandelta['ms_deltafco2'] = socatnsmeandelta['deltafco2'] - socatnsmeandelta['sc_deltafco2']
 
-#%% # Seasonal corrected for chlorophyll, oxygen umol/kg, total_ammonia, total_nitrate, total_phosphate, total_silicate
+#%% # Seasonal correction for chlorophyll, oxygen umol/kg, total_ammonia, total_nitrate, total_phosphate, total_silicate
 
 # Seasonal cycle correction Chlorophyll
 RWSomeanChl = RWSomean.dropna(axis='rows', how='all', subset=['chlorophyll'])
@@ -91,7 +91,7 @@ RWSomeanS['sc_total_silicate'] = SF_tools.seasonalcycle_fit(opt_result['x'], RWS
 slope, intercept, sine_stretch, sine_shift = opt_result['x']
 RWSomeanS['ms_total_silicate'] = RWSomeanS['total_silicate'] - RWSomeanS['sc_total_silicate']
 
-#%% # Seasonal corrected for Temperature
+#%% # Seasonal correction for Temperature
 
 # Seasonal cycle correction Temperature
 RWStotalmeanT = RWStotalmean.dropna(axis='rows', how='all', subset=['temperature'])
@@ -102,9 +102,9 @@ RWStotalmeanT['sc_temperature'] = SF_tools.seasonalcycle_fit_T(opt_result['x'], 
 slope, intercept, sine_stretch, sine_shift = opt_result['x']
 RWStotalmeanT['ms_temperature'] = RWStotalmeanT['temperature'] - RWStotalmeanT['sc_temperature']
 
-#%% # Seasonal corrected for DIC
+#%% # Seasonal correction for DIC
 
-# Make new dateframe to get a more cyclic curve
+# Make new dateframe to get a cyclic curve
 combinedmeandubbel = combinedmean.append(combinedmean.loc[[7] *1].assign(**{'dayofyear':396}), ignore_index=True)
 combinedmeandubbel = combinedmeandubbel.append(combinedmeandubbel.loc[[19] *1].assign(**{'dayofyear':396}), ignore_index=True)
 combinedmeandubbel = combinedmeandubbel.append(combinedmeandubbel.loc[[36] *1].assign(**{'dayofyear':396}), ignore_index=True)
@@ -137,22 +137,26 @@ combinedmeansc_dic['datetime'] = mdates.num2date(combinedmeansc_dic.datenum)
 combinedmeansc_dic['dayofyear'] = combinedmeansc_dic.datetime.dt.dayofyear
 combinedmeansc_dic['interpolator_dic'] = interpolator(combinedmeansc_dic['dayofyear'])
 
-# Seasonal cycle correction DIC
+# Calculate the corrected DIC and final values
 combinedmean['sc_dic'] = interpolator(combinedmean['dayofyear'])
 combinedmean['ms_dic'] = (combinedmean['normalized_DIC'] - combinedmean['sc_dic'])
 combinedmean['dic_corrected'] = 0.0005 * combinedmean['datenum'] + 2131.4
 combinedmean['dic_correctd_final'] = combinedmean['ms_dic'] + 2140.3
 
+# Plot the clustered DIC seasonal cycle
 TV_plots.plot_DIC_combined_clustering(combinedmeandubbel)
 
-# Make new dateframe to get a more cyclic curve
+# Make new dateframe to get a cyclic curve
 RWSnmeandubbel = RWSnmean.append(RWSnmean.loc[[11] *1].assign(**{'dayofyear':0, 'year':2019}), ignore_index=True)
 RWSnmeandubbel = RWSnmeandubbel.append(RWSnmeandubbel.loc[[10] *1].assign(**{'dayofyear':-31, 'year':2019}), ignore_index=True)
 RWSnmeandubbel = RWSnmeandubbel.append(RWSnmeandubbel.loc[[28] *1].assign(**{'dayofyear':-30, 'year':2021}), ignore_index=True)
 RWSnmeandubbel = RWSnmeandubbel.append(RWSnmeandubbel.loc[[0] *1].assign(**{'dayofyear':396, 'year':2019}), ignore_index=True)
 RWSnmeandubbel = RWSnmeandubbel.append(RWSnmeandubbel.loc[[12] *1].assign(**{'dayofyear':396, 'year':2020}), ignore_index=True)
 
+# Plot the DIC seasonal cycle from 2018-2021 per year
 TV_plots.plot_DIC_dayofyear_cycle_RWSn(RWSnmeandubbel)
+
+# Plot the clustered DIC seasonal cycle and RWS Chlorophyll
 TV_plots.plot_DIC_and_Chl(combinedmeandubbel, RWSo)
 
 #%% # Save all datasets assessing the temporal variability
