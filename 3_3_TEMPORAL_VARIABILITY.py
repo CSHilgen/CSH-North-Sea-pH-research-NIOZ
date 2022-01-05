@@ -9,6 +9,7 @@ import tools.plots_temporal_variability as TV_plots
 
 #%% # Import dataframes
 
+RWSo = pd.read_csv("dataframes_made/RWSo_final.csv")
 socatnsmean = pd.read_csv("dataframes_made/socatnsmean_final.csv")
 RWSomean = pd.read_csv("dataframes_made/RWSomean_final.csv")
 RWSnmean = pd.read_csv("dataframes_made/RWSnmean_final.csv")
@@ -151,21 +152,22 @@ RWSnmeandubbel = RWSnmeandubbel.append(RWSnmeandubbel.loc[[28] *1].assign(**{'da
 RWSnmeandubbel = RWSnmeandubbel.append(RWSnmeandubbel.loc[[0] *1].assign(**{'dayofyear':396, 'year':2019}), ignore_index=True)
 RWSnmeandubbel = RWSnmeandubbel.append(RWSnmeandubbel.loc[[12] *1].assign(**{'dayofyear':396, 'year':2020}), ignore_index=True)
 
-# TV_plots.plot_DIC_dayofyear_cycle_RWSn(RWSnmeandubbel)
+TV_plots.plot_DIC_dayofyear_cycle_RWSn(RWSnmeandubbel)
+TV_plots.plot_DIC_and_Chl(combinedmeandubbel, RWSo)
 
-#%% # Save all datasets assessing the spatial variability
+#%% # Save all datasets assessing the temporal variability
 
-# combinedmean.to_csv("dataframes_made/combinedmean_final.csv")
-# socatnsmean.to_csv("dataframes_made/socatnsmean_final.csv")
-# RWStotalmean.to_csv("dataframes_made/RWStotalmean_final.csv")
-# combinedmeandubbel.to_csv("dataframes_made/combinedmeandubbel_final.csv")
-# combinedmeansc_dic.to_csv("dataframes_made/combinedmeansc_dic_final.csv")
-# socatnsmeanair.to_csv("dataframes_made/socatnsmeanair_final.csv")
-# socatnsmeandelta.to_csv("dataframes_made/socatnsmeandelta_final.csv")
-# RWSomeanChl.to_csv("dataframes_made/RWSomeanChl_final.csv")
-# RWSomeano2.to_csv("dataframes_made/RWSomeano2_final.csv")
-# RWSomeanA.to_csv("dataframes_made/RWSomeanA_final.csv")
-# RWSomeanN.to_csv("dataframes_made/RWSomeanN_final.csv")
-# RWSomeanP.to_csv("dataframes_made/RWSomeanP_final.csv")
-# RWSomeanS.to_csv("dataframes_made/RWSomeanS_final.csv")
-# RWStotalmeanT.to_csv("dataframes_made/RWStotalmeanT_final.csv")
+combinedmean.to_csv("dataframes_made/combinedmean_final.csv")
+socatnsmean.to_csv("dataframes_made/socatnsmean_final.csv")
+RWStotalmean.to_csv("dataframes_made/RWStotalmean_final.csv")
+combinedmeandubbel.to_csv("dataframes_made/combinedmeandubbel_final.csv")
+combinedmeansc_dic.to_csv("dataframes_made/combinedmeansc_dic_final.csv")
+socatnsmeanair.to_csv("dataframes_made/socatnsmeanair_final.csv")
+socatnsmeandelta.to_csv("dataframes_made/socatnsmeandelta_final.csv")
+RWSomeanChl.to_csv("dataframes_made/RWSomeanChl_final.csv")
+RWSomeano2.to_csv("dataframes_made/RWSomeano2_final.csv")
+RWSomeanA.to_csv("dataframes_made/RWSomeanA_final.csv")
+RWSomeanN.to_csv("dataframes_made/RWSomeanN_final.csv")
+RWSomeanP.to_csv("dataframes_made/RWSomeanP_final.csv")
+RWSomeanS.to_csv("dataframes_made/RWSomeanS_final.csv")
+RWStotalmeanT.to_csv("dataframes_made/RWStotalmeanT_final.csv")

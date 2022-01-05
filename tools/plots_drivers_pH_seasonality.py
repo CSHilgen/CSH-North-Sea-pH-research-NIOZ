@@ -356,7 +356,7 @@ def get_T_DIC_TA_curves(allparametersdubbel, allparameters, timeperiod):
         df[fvar] = y_plotting
         
         plt.tight_layout()
-        plt.savefig("figures/pH_Hagens&Middelburg_2016/Data_" + timeperiod + "_" + fvar + ".png") 
+        # plt.savefig("figures/pH_Hagens&Middelburg_2016/Data_" + timeperiod + "_" + fvar + ".png") 
         plt.show()
                
     return Tdata, DICdata, TAdata

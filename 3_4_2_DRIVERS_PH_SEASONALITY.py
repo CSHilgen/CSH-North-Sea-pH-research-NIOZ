@@ -1,6 +1,6 @@
 import pandas as pd
 import tools as HM16_tools
-import tools.plots_HM as HM16_plots
+import tools.plots_drivers_pH_seasonality as HM16_plots
 
 #%% # Import dataframes
 
@@ -21,14 +21,14 @@ allparameters = HM16_tools.get_pH_predicted(LR, LC, resultsRWSo, resultscombined
 # # Function for cyclic curve
 resultsRWSodubbel, allparametersdubbel = HM16_tools.cycliccurve_2000_2021(allparameters, resultsRWSo, LR)
 
-# # Function to get the ΔpH winter-to-summer for each individual parameter
-# HM16_tools.deltapH_winter_summer(allparametersdubbel, resultsRWSodubbel)
+# Function to get the ΔpH winter-to-summer for each individual parameter
+HM16_tools.deltapH_winter_summer(allparametersdubbel, resultsRWSodubbel)
 
-# # Function to get plot of lines pH predicted, pH fitted, pH due to T, DIC and TA
-# HM16_plots.get_curve_parameters(allparametersdubbel, resultsRWSodubbel, timeperiod)
+# Function to get plot of lines pH predicted, pH fitted, pH due to T, DIC and TA
+HM16_plots.get_curve_parameters(allparametersdubbel, resultsRWSodubbel, timeperiod)
 
-# Function to get plot of T, DIC and TA data
-# Tdata, DICdata, TAdata = HM16_plots.get_T_DIC_TA_curves(allparametersdubbel, allparameters, timeperiod)
+Function to get plot of T, DIC and TA data
+Tdata, DICdata, TAdata = HM16_plots.get_T_DIC_TA_curves(allparametersdubbel, allparameters, timeperiod)
 
 # Function to get plot of pH predicted and pH fitted
 pH_preddata, pH_fitdata = HM16_plots.get_pHpred_pHfit(allparameters, allparametersdubbel, resultsRWSodubbel, resultsRWSo, LR, timeperiod)
@@ -46,14 +46,14 @@ allparameters = HM16_tools.get_pH_predicted(LR, LC, resultsRWSo, resultscombined
 # Function for cyclic curve
 resultsRWSodubbel, allparametersdubbel = HM16_tools.cycliccurve_2000_2005(allparameters, resultsRWSo, LR)
 
-# # Function to get the ΔpH winter-to-summer for each individual parameter
-# HM16_tools.deltapH_winter_summer(allparametersdubbel, resultsRWSodubbel)
+# Function to get the ΔpH winter-to-summer for each individual parameter
+HM16_tools.deltapH_winter_summer(allparametersdubbel, resultsRWSodubbel)
 
-# # Function to get plot of lines pH predicted, pH fitted, pH due to T, DIC and TA
-# HM16_plots.get_curve_parameters(allparametersdubbel, resultsRWSodubbel, timeperiod)
+# Function to get plot of lines pH predicted, pH fitted, pH due to T, DIC and TA
+HM16_plots.get_curve_parameters(allparametersdubbel, resultsRWSodubbel, timeperiod)
 
-# # Function to get plot of T, DIC and TA data
-# Tdata, DICdata, TAdata = HM16_plots.get_T_DIC_TA_curves(allparametersdubbel, allparameters, timeperiod)
+# Function to get plot of T, DIC and TA data
+Tdata, DICdata, TAdata = HM16_plots.get_T_DIC_TA_curves(allparametersdubbel, allparameters, timeperiod)
 
 # Function to get plot of pH predicted and pH fitted
 pH_preddata, pH_fitdata = HM16_plots.get_pHpred_pHfit(allparameters, allparametersdubbel, resultsRWSodubbel, resultsRWSo, LR, timeperiod)
@@ -99,13 +99,13 @@ allparameters = HM16_tools.get_pH_predicted(LR, LC, resultsRWSo, resultscombined
 resultsRWSodubbel, allparametersdubbel = HM16_tools.cycliccurve_2010_2015(allparameters, resultsRWSo, LR)
 
 # Function to get the ΔpH winter-to-summer for each individual parameter
-# HM16_tools.deltapH_winter_summer(allparametersdubbel, resultsRWSodubbel)
+HM16_tools.deltapH_winter_summer(allparametersdubbel, resultsRWSodubbel)
 
-# # Function to get plot of lines pH predicted, pH fitted, pH due to T, DIC and TA
-# HM16_plots.get_curve_parameters(allparametersdubbel, resultsRWSodubbel, timeperiod)
+# Function to get plot of lines pH predicted, pH fitted, pH due to T, DIC and TA
+HM16_plots.get_curve_parameters(allparametersdubbel, resultsRWSodubbel, timeperiod)
 
-# # Function to get plot of T, DIC and TA data
-# Tdata, DICdata, TAdata = HM16_plots.get_T_DIC_TA_curves(allparametersdubbel, allparameters, timeperiod)
+# Function to get plot of T, DIC and TA data
+Tdata, DICdata, TAdata = HM16_plots.get_T_DIC_TA_curves(allparametersdubbel, allparameters, timeperiod)
 
 # Function to get plot of pH predicted and pH fitted
 pH_preddata, pH_fitdata = HM16_plots.get_pHpred_pHfit(allparameters, allparametersdubbel, resultsRWSodubbel, resultsRWSo, LR, timeperiod)
@@ -124,13 +124,13 @@ allparameters = HM16_tools.get_pH_predicted(LR, LC, resultsRWSo, resultscombined
 resultsRWSodubbel, allparametersdubbel = HM16_tools.cycliccurve_2015_2018(allparameters, resultsRWSo, LR)
 
 # Function to get the ΔpH winter-to-summer for each individual parameter
-# HM16_tools.deltapH_winter_summer(allparametersdubbel, resultsRWSodubbel)
+HM16_tools.deltapH_winter_summer(allparametersdubbel, resultsRWSodubbel)
 
-# # Function to get plot of lines pH predicted, pH fitted, pH due to T, DIC and TA
-# HM16_plots.get_curve_parameters(allparametersdubbel, resultsRWSodubbel, timeperiod)
+# Function to get plot of lines pH predicted, pH fitted, pH due to T, DIC and TA
+HM16_plots.get_curve_parameters(allparametersdubbel, resultsRWSodubbel, timeperiod)
 
-# # Function to get plot of T, DIC and TA data
-# Tdata, DICdata, TAdata = HM16_plots.get_T_DIC_TA_curves(allparametersdubbel, allparameters, timeperiod)
+# Function to get plot of T, DIC and TA data
+Tdata, DICdata, TAdata = HM16_plots.get_T_DIC_TA_curves(allparametersdubbel, allparameters, timeperiod)
 
 # Function to get plot of pH predicted and pH fitted
 pH_preddata, pH_fitdata = HM16_plots.get_pHpred_pHfit(allparameters, allparametersdubbel, resultsRWSodubbel, resultsRWSo, LR, timeperiod)
@@ -148,14 +148,14 @@ allparameters = HM16_tools.get_pH_predicted_RWSn(LR, LC, resultsRWSo, resultscom
 # Function for cyclic curve
 resultsRWSodubbel, allparametersdubbel, resultsRWSndubbel = HM16_tools.cycliccurve_2018_2021(allparameters, resultsRWSo, LR, resultsRWSn)
 
-# Function to get the ΔpH winter-to-summer for each individual parameter
-# HM16_tools.deltapH_winter_summer_RWSn(allparametersdubbel, resultsRWSodubbel, resultsRWSndubbel)
+Function to get the ΔpH winter-to-summer for each individual parameter
+HM16_tools.deltapH_winter_summer_RWSn(allparametersdubbel, resultsRWSodubbel, resultsRWSndubbel)
 
-# # Function to get plot of lines pH predicted, pH fitted, pH due to T, DIC and TA
-# HM16_plots.get_curve_parameters_2018_2021(allparametersdubbel, resultsRWSodubbel, resultsRWSndubbel)
+# Function to get plot of lines pH predicted, pH fitted, pH due to T, DIC and TA
+HM16_plots.get_curve_parameters_2018_2021(allparametersdubbel, resultsRWSodubbel, resultsRWSndubbel)
 
-# # Function to get plot of T, DIC and TA data
-# Tdata, DICdata, TAdata = HM16_plots.get_T_DIC_TA_curves(allparametersdubbel, allparameters, timeperiod)
+# Function to get plot of T, DIC and TA data
+Tdata, DICdata, TAdata = HM16_plots.get_T_DIC_TA_curves(allparametersdubbel, allparameters, timeperiod)
 
 # Function to get plot of pH predicted and pH fitted
 pH_preddata, pH_fitdata = HM16_plots.get_pHpred_pHfit_2018_2021(allparametersdubbel, resultsRWSndubbel, allparameters, resultsRWSn, timeperiod)

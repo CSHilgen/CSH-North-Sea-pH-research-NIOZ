@@ -13,7 +13,7 @@ RWSomean = pd.read_csv("dataframes_made/RWSomean_final.csv")
 RWSnmean = pd.read_csv("dataframes_made/RWSnmean_final.csv")
 combinedmean = combinedmean.rename(columns={list(combinedmean)[4]:'dataset'})
 
-#%%  
+#%% # Use pyCO2sys to calculate pH and fCO2 sea based on nTA and corrected nDIC 
  
 combinedmean = combinedmean.reset_index()
 
@@ -41,7 +41,8 @@ resultscombinedmean['latitude'] = combinedmean['latitude']
 resultscombinedmean['dataset'] = combinedmean['dataset']
 resultscombinedmean['datenum'] = combinedmean['datenum']
 
-#%%
+#%% # Logicals for colours in plots
+
 Lg = combinedmean['dataset'] == str('glodapnsmean')
 Ld = combinedmean['dataset'] == str('D366mean')
 Lc = combinedmean['dataset'] == str('Cefasmean')
@@ -172,7 +173,7 @@ ax.legend()
 plt.tight_layout()
 plt.savefig("figures/Final_plots/pH_prediction_TA_DIC.png")   
 
-#%%
+#%% # Use pyCO2sys to calculate pH and fCO2 sea based on nTA and nDIC 
 
 combinedmean = combinedmean.reset_index()
 
