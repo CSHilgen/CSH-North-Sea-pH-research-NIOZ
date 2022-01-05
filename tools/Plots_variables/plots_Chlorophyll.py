@@ -24,7 +24,7 @@ def get_chlorophyll_plots(RWSomean, RWSomeanChl):
 
     ax.grid(alpha=0.3)
     ax.set_xlabel("Time (yrs)")
-    ax.set_ylabel("Chlorophyll")
+    ax.set_ylabel("Chlorophyll-a (µg/L)")
     ax.set_ylim(0, 30)
     ax.legend()
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
@@ -48,7 +48,7 @@ def get_chlorophyll_plots(RWSomean, RWSomeanChl):
 
     ax.grid(alpha=0.3)
     ax.set_xlabel("Time (yrs)")
-    ax.set_ylabel("Chlorophyll")
+    ax.set_ylabel("Chlorophyll-a (µg/L)")
     ax.set_ylim(0, 30)
     ax.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
     ax.get_legend().set_title("Dataset")
@@ -74,7 +74,7 @@ def get_chlorophyll_plots(RWSomean, RWSomeanChl):
 
     ax.grid(alpha=0.3)
     ax.set_xlabel("Time (yrs)")
-    ax.set_ylabel("Chlorophyll")
+    ax.set_ylabel("Chlorophyll-a (µg/L)")
     ax.set_ylim(0, 30)
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
@@ -128,7 +128,7 @@ def get_chlorophyll_plots(RWSomean, RWSomeanChl):
 
     ax.grid(alpha=0.3)
     ax.set_xlabel('Time (yrs)')
-    ax.set_ylabel('Chlorophyll')
+    ax.set_ylabel("Chlorophyll-a (µg/L)")
     ax.set_ylim(0, 30)
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
@@ -152,7 +152,7 @@ def get_chlorophyll_plots(RWSomean, RWSomeanChl):
     ax.scatter('dayofyear', 'chlorophyll', c='xkcd:aqua', data=RWSomeanChl, label='RWS', s=20, alpha=0.4)
 
     ax.grid(alpha=0.3)
-    ax.set_ylabel("Chlorophyll")
+    ax.set_ylabel("Chlorophyll-a (µg/L)")
     ax.set_ylim(0, 30)
     ax.set_xlabel("Months of year")
     month_fmt = DateFormatter('%b')
@@ -206,7 +206,7 @@ def get_chlorophyll_plots(RWSomean, RWSomeanChl):
     ax.scatter(x[L10], y[L10], alpha=0.5, s=40, c='xkcd:eggplant', edgecolor='none', label='250-300')
 
     ax.grid(alpha=0.3)
-    ax.set_ylabel('Chlorophyll')
+    ax.set_ylabel("Chlorophyll-a (µg/L)")
     ax.set_ylim(0, 30)
     ax.set_xlabel("Months of year")
     month_fmt = DateFormatter('%b')
@@ -244,7 +244,7 @@ def get_chlorophyll_plots(RWSomean, RWSomeanChl):
     cbar.set_ticklabels([1975, 1980, 1985, 1990, 1995, 2000, 2005, 2010, 2015, 2020])
 
     ax.grid(alpha=0.3)
-    ax.set_ylabel('Chlorophyll')
+    ax.set_ylabel("Chlorophyll-a (µg/L)")
     ax.set_ylim(0, 30)
     ax.set_xlabel("Months of year")
     month_fmt = DateFormatter('%b')
@@ -272,7 +272,7 @@ def get_chlorophyll_plots(RWSomean, RWSomeanChl):
 
     ax.grid(alpha=0.3)
     ax.set_xlabel("Distance to shore (km)")
-    ax.set_ylabel('Chlorophyll')
+    ax.set_ylabel("Chlorophyll-a (µg/L)")
     ax.set_ylim(0, 30)
     ax.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
     ax.get_legend().set_title("Dataset")
@@ -295,7 +295,7 @@ def get_chlorophyll_plots(RWSomean, RWSomeanChl):
 
     ax.grid(alpha=0.3)
     ax.set_xlabel("Distance to shore (km)")
-    ax.set_ylabel('Chlorophyll')
+    ax.set_ylabel("Chlorophyll-a (µg/L)")
     ax.set_ylim(0, 30)
     ax.minorticks_on()
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
@@ -330,7 +330,7 @@ def get_chlorophyll_plots(RWSomean, RWSomeanChl):
 
     ax.grid(alpha=0.3)
     ax.set_xlabel('Distance to shore (km)')
-    ax.set_ylabel('Chlorophyll')
+    ax.set_ylabel("Chlorophyll-a (µg/L)")
     ax.set_ylim(0, 30)
     ax.minorticks_on()
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
@@ -367,7 +367,7 @@ def get_chlorophyll_plots(RWSomean, RWSomeanChl):
     ax.set_title("Chlorophyll RWSo data - North Sea")
     ax.grid(alpha=0.3)
     ax.set_xlabel("Time (yrs)")
-    ax.set_ylabel('Chlorophyll')
+    ax.set_ylabel("Chlorophyll-a (µg/L)")
     ax.set_ylim(0, 30)
     ax.xaxis.set_major_locator(mdates.YearLocator())
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
@@ -396,7 +396,7 @@ def get_chlorophyll_plots(RWSomean, RWSomeanChl):
 
     ax.grid(alpha=0.3)
     ax.set_xlabel("Time (yrs)")
-    ax.set_ylabel('Chlorophyll')
+    ax.set_ylabel("Chlorophyll-a (µg/L)")
     ax.set_ylim(0, 30)
     ax.xaxis.set_major_locator(mdates.YearLocator())
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
@@ -421,7 +421,7 @@ def get_chlorophyll_plots(RWSomean, RWSomeanChl):
 
     ax.grid(alpha=0.3)
     ax.set_xlabel("Time (yrs)")
-    ax.set_ylabel('Chlorophyll')
+    ax.set_ylabel("Chlorophyll-a (µg/L)")
     ax.set_ylim(-10, 20)
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
@@ -439,12 +439,13 @@ def get_chlorophyll_plots(RWSomean, RWSomeanChl):
     xbegin = 1976
     xend = 17896
     slope, intercept, r, p, se = linregress(RWSomeanChl['datenum'], RWSomeanChl['chlorophyll'])
-    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
     ybegin = (slope * xbegin) + intercept
     yend = (slope * xend) + intercept
     changelongterm = yend - ybegin
     print(f"Change over 1975-2018: {changelongterm:6e}")
-    changeperyear = changelongterm / ((xend-xbegin)/365)
+    changeperyear = changelongterm / (year)
     print(f"Change per year: {changeperyear:.6e}") 
 
     # Use the fit to predict fCO2 in console: SC_tools.seasonalcycle_fit(opt_result['x'], 1)
@@ -467,7 +468,7 @@ def get_chlorophyll_plots(RWSomean, RWSomeanChl):
     ax.set_title("Chlorophyll RWSo data - North Sea")
     ax.grid(alpha=0.3)
     ax.set_xlabel(None)
-    ax.set_ylabel('Chlorophyll')
+    ax.set_ylabel("Chlorophyll-a (µg/L)")
     ax.set_ylim(0, 30)
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
@@ -485,7 +486,7 @@ def get_chlorophyll_plots(RWSomean, RWSomeanChl):
 
     ax.grid(alpha=0.3)
     ax.set_xlabel(None)
-    ax.set_ylabel('Chlorophyll')
+    ax.set_ylabel("Chlorophyll-a (µg/L)")
     ax.set_ylim(0, 30)
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
@@ -503,7 +504,7 @@ def get_chlorophyll_plots(RWSomean, RWSomeanChl):
 
     ax.grid(alpha=0.3)
     ax.set_xlabel("Time (yrs)")
-    ax.set_ylabel('Chlorophyll')
+    ax.set_ylabel("Chlorophyll-a (µg/L)")
     ax.set_ylim(0, 30)
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
@@ -542,7 +543,7 @@ def get_chlorophyll_plots(RWSomean, RWSomeanChl):
     ax.set_title("Chlorophyll RWSo data - North Sea")
     ax.grid(alpha=0.3)
     ax.set_xlabel("Time (yrs)")
-    ax.set_ylabel('Chlorophyll')
+    ax.set_ylabel("Chlorophyll-a (µg/L)")
     ax.set_ylim(0, 30)
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))

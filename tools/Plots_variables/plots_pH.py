@@ -422,14 +422,29 @@ def get_pH_plots(RWSomean, RWSnmean):
     xbegin = 2006
     xend = 17896
     slope, intercept, r, p, se = linregress(RWSomeanpH['datenum'], RWSomeanpH['pH_total'])
-    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
     ybegin = (slope * xbegin) + intercept
     yend = (slope * xend) + intercept
     changelongterm = yend - ybegin
     print(f"Change over 1975-2018: {changelongterm:6e}")
-    changeperyear = changelongterm / ((xend-xbegin)/365)
+    changeperyear = changelongterm / (year)
     print(f"Change per year: {changeperyear:.6e}") 
-
+    
+    # pH 2018-2021
+    xbegin = 17562
+    xend = 18747
+    slope, intercept, r, p, se = linregress(RWSnmeanpH['datenum'], RWSnmeanpH['pH_total_spectro_out'])
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2018-2021: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}") 
+    
     # Use the fit to predict fCO2 in console: SC_tools.seasonalcycle_fit(opt_result['x'], 1)
     # Last number is date (1 = 1 january 1970)
 

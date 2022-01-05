@@ -381,12 +381,13 @@ def get_TA_plots(combinedmean, glodapnsmean, Cefasmean, D366mean, RWSnmean):
     # TA 2001-2021
     xbegin = 11565
     xend = 18808
-
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
     ybegin = (slope * xbegin) + intercept
     yend = (slope * xend) + intercept
     changelongterm = yend - ybegin
     print(f"Change over 2001-2021: {changelongterm:6e}")
-    changeperyear = changelongterm / ((xend-xbegin)/365)
+    changeperyear = changelongterm / (year)
     print(f"Change per year: {changeperyear:.6e}") 
 
     # Use the fit to predict fCO2 in console: SC_tools.seasonalcycle_fit(opt_result['x'], 1)

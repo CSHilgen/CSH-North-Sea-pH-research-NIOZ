@@ -1,6 +1,7 @@
 
 def plot_DIC_combined_clustering(combinedmeandubbel):
     """ CLuster DIC and day of year profile with MeanShift and interpolate"""
+ #%%
     import pandas as pd, numpy as np
     from matplotlib import pyplot as plt
     import seaborn as sns
@@ -8,6 +9,10 @@ def plot_DIC_combined_clustering(combinedmeandubbel):
     from scipy import interpolate 
     from matplotlib.ticker import FuncFormatter
     from matplotlib.dates import MonthLocator, DateFormatter 
+  
+    cm = plt.cm.get_cmap('rainbow')
+    vmin = 2000
+    vmax = 2021
     
     x = combinedmeandubbel['dayofyear'].to_numpy()
     y = combinedmeandubbel.normalized_DIC.to_numpy()
@@ -31,7 +36,8 @@ def plot_DIC_combined_clustering(combinedmeandubbel):
   
     fig, ax = plt.subplots(dpi=300)
 
-    ax.scatter('dayofyear', 'dic', data=combinedmeandubbel, c='xkcd:velvet', s=50, label='Initial DIC Combined')
+    sc = ax.scatter('dayofyear', 'dic', data=combinedmeandubbel, c='year', s=50, cmap=cm, 
+               vmin=vmin, vmax=vmax+1, label='Initial DIC Combined')
     ax.scatter(x_clusters, y_clusters, c='xkcd:green', s=10)
     ax.plot(x_plotting, y_plotting, c='xkcd:green', label='Seasonal cycle')
     
@@ -50,12 +56,17 @@ def plot_DIC_combined_clustering(combinedmeandubbel):
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.legend()
-    
+
+    ticks = np.linspace(vmin, vmax, 5)
+    cbar = plt.colorbar(sc, ax=ax, orientation='vertical', ticks=ticks)
+    cbar.set_label('Time (yrs)')
+    cbar.set_ticklabels([2000, 2005, 2010, 2015, 2020])
+
     plt.tight_layout()
     plt.savefig("figures/Temporal_variability/DIC_Combined_Clustering.png")
     plt.show()
   
-
+#%%
 def plot_DIC_dayofyear_cycle_RWSn(RWSnmeandubbel):
     import pandas as pd, numpy as np
     from matplotlib import pyplot as plt

@@ -439,12 +439,13 @@ def get_silicate_plots(RWSomean, RWSomeanS):
     xbegin = 1976
     xend = 17896
     slope, intercept, r, p, s = linregress(RWSomeanS['datenum'], RWSomeanS['total_silicate'])
-    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
     ybegin = (slope * xbegin) + intercept
     yend = (slope * xend) + intercept
     changelongterm = yend - ybegin
     print(f"Change over 1975-2018: {changelongterm:6e}")
-    changeperyear = changelongterm / ((xend-xbegin)/365)
+    changeperyear = changelongterm / (year)
     print(f"Change per year: {changeperyear:.6e}") 
     
     # Use the fit to predict fCO2 in console: SC_tools.seasonalcycle_fit(opt_result['x'], 1)

@@ -301,15 +301,26 @@ def get_T_DIC_TA_curves(allparametersdubbel, allparameters, timeperiod):
     
     fvarr = ['temperature', 'normalized_DIC', 'normalized_TA']
     colourr = ['xkcd:pink', 'xkcd:purple', 'xkcd:red']
-    label_yy = ['Temperature (°C)', 'DIC (µmol/kg)', 'Total alkalinity (µmol/kg)']
-
-    for fvar, colour, label_y in zip(fvarr, colourr, label_yy):
+    label_yy = ['Temperature (°C)', 'DIC (µmol/kg)', 'A$_T$ (µmol/kg)']
+    Tdata = pd.DataFrame(columns=['dayofyear', 'temperature'])
+    DICdata = pd.DataFrame(columns=['dayofyear', 'normalized_DIC'])
+    TAdata = pd.DataFrame(columns=['dayofyear', 'normalized_TA'])
+    dff = [Tdata, DICdata, TAdata]
+    # if timeperiod == str(2000_2021):
+    yrangee = [[2.5, 23], [1900, 2400], [2200, 2500]] # period 2000-2021
+    # yrangee = [[2.5, 23], [2075, 2225], [2320, 2400]] # period 2000-2005
+    # yrangee = [[2.5, 21], [2100, 2200], [2340, 2410]] # period 2010-2015
+    # yrangee = [[2.5, 21], [1700, 2400], [2250, 2450]] # period 2015-2018
+    # yrangee = [[2.5, 23], [1700, 2400], [2100, 2500]] # period 2018-2021
+    
+    for fvar, colour, label_y, yrange, df in zip(fvarr, colourr, label_yy, yrangee, dff):
        
-        fig, ax = plt.subplots(dpi=300)
+        Ldic = (allparametersdubbel.normalized_DIC >= 1900) & (allparametersdubbel.normalized_DIC <= 2400)
         
+        fig, ax = plt.subplots(dpi=300)
         allparametersdubbelx = allparametersdubbel.dropna(axis='rows', how='all', subset=[fvar])
-        x = allparametersdubbelx['dayofyear'].to_numpy()
-        y = allparametersdubbelx[fvar].to_numpy()
+        x = allparametersdubbelx['dayofyear'][Ldic].to_numpy()
+        y = allparametersdubbelx[fvar][Ldic].to_numpy()
         
         x_v = np.vstack(x)
         clustering = MeanShift(bandwidth=12).fit(x_v)
@@ -326,10 +337,11 @@ def get_T_DIC_TA_curves(allparametersdubbel, allparameters, timeperiod):
         y_plotting = interpolator(x_plotting)
         
         ax.plot(x_plotting, y_plotting, c=colour)
-        ax.scatter('dayofyear', fvar,  c=colour, data=allparameters, s=20)
+        ax.scatter('dayofyear', fvar,  c=colour, data=allparameters, s=15, alpha=0.1)
         
         ax.set_xlim(0, 365)
         ax.set_xlabel("Months of year")
+        ax.set_ylim(yrange)
         month_fmt = DateFormatter('%b')
         def m_fmt(x, pos=None):
             return month_fmt(x)[0]
@@ -339,11 +351,16 @@ def get_T_DIC_TA_curves(allparametersdubbel, allparameters, timeperiod):
         ax.set_ylabel(label_y)
         ax.grid(alpha=0.3)
         ax.set_title(fvar + ' ' + timeperiod + ' - North Sea')
+
+        df['dayofyear'] = x_plotting
+        df[fvar] = y_plotting
         
         plt.tight_layout()
         plt.savefig("figures/pH_Hagens&Middelburg_2016/Data_" + timeperiod + "_" + fvar + ".png") 
         plt.show()
-     
+               
+    return Tdata, DICdata, TAdata
+        
 def get_pHpred_pHfit(allparameters, allparametersdubbel, resultsRWSodubbel, resultsRWSo, LR, timeperiod):
     from matplotlib import pyplot as plt
     import numpy as np
@@ -352,7 +369,9 @@ def get_pHpred_pHfit(allparameters, allparametersdubbel, resultsRWSodubbel, resu
     import pandas as pd
     from matplotlib.ticker import FuncFormatter
     from matplotlib.dates import MonthLocator, DateFormatter 
-      
+    
+    pH_preddata = pd.DataFrame(columns=['dayofyear', 'pHpredicted'])
+    pH_fitdata = pd.DataFrame(columns=['dayofyear', 'pH_total'])
     LpHp = (allparametersdubbel.pHpredicted >= 7.5) & (allparametersdubbel.pHpredicted <= 8.5)
     LpHf = (resultsRWSodubbel.pH_total >= 7.5) & (resultsRWSodubbel.pH_total <= 8.5)
 
@@ -378,8 +397,11 @@ def get_pHpred_pHfit(allparameters, allparametersdubbel, resultsRWSodubbel, resu
     y_plotting = interpolator(x_plotting)
     
     ax.plot(x_plotting, y_plotting, c='xkcd:dark blue', label='pH$_{pred}$')
-    ax.scatter('dayofyear', 'pHpredicted', data=allparameters, c='xkcd:water blue', s=50, alpha=0.3, label='pH$_{pred}$')
+    ax.scatter('dayofyear', 'pHpredicted', data=allparameters, c='xkcd:water blue', s=15, alpha=0.4, label='pH$_{pred}$')
     ax.legend()
+    
+    pH_preddata['dayofyear'] = x_plotting
+    pH_preddata['pHpredicted'] = y_plotting
     
     x = resultsRWSodubbel['dayofyear'][LpHf].to_numpy()
     y = resultsRWSodubbel.pH_total[LpHf].to_numpy()
@@ -399,8 +421,11 @@ def get_pHpred_pHfit(allparameters, allparametersdubbel, resultsRWSodubbel, resu
     y_plotting = interpolator(x_plotting)
     
     ax.plot(x_plotting, y_plotting, c='xkcd:black', label='pH$_{fit}$')
-    ax.scatter('dayofyear', 'pH_total', data=resultsRWSo[LR], c='xkcd:black', s=50, alpha=0.3, label='pH$_{fit}$')
+    ax.scatter('dayofyear', 'pH_total', data=resultsRWSo[LR], c='xkcd:black', s=15, alpha=0.4, label='pH$_{fit}$')
     ax.legend() 
+    
+    pH_fitdata['dayofyear'] = x_plotting
+    pH_fitdata['pH_total'] = y_plotting
      
     ax.grid(alpha=0.3)
     ax.set_xlabel("Months of year")
@@ -414,10 +439,13 @@ def get_pHpred_pHfit(allparameters, allparametersdubbel, resultsRWSodubbel, resu
     ax.legend(loc='lower center')
     ax.set_title('pH ' + timeperiod + ' - North Sea')
     ax.set_xlim(0, 365)
+    ax.set_ylim(7, 8.65)
     
     plt.tight_layout()
     plt.savefig("figures/pH_Hagens&Middelburg_2016/pH_" + timeperiod + ".png")
     plt.show()  
+    
+    return pH_preddata, pH_fitdata
     
 def get_pHpred_pHfit_2018_2021(allparametersdubbel, resultsRWSndubbel, allparameters, resultsRWSn, timeperiod):
     from matplotlib import pyplot as plt
@@ -427,7 +455,9 @@ def get_pHpred_pHfit_2018_2021(allparametersdubbel, resultsRWSndubbel, allparame
     import pandas as pd
     from matplotlib.ticker import FuncFormatter
     from matplotlib.dates import MonthLocator, DateFormatter 
-        
+       
+    pH_preddata = pd.DataFrame(columns=['dayofyear', 'pHpredicted'])
+    pH_fitdata = pd.DataFrame(columns=['dayofyear', 'pH_total_spectro_out'])
     LpHp = (allparametersdubbel.pHpredicted >= 7.5) & (allparametersdubbel.pHpredicted <= 8.5)
     LpHout = (resultsRWSndubbel.pH_total_spectro_out >= 7.5) & (resultsRWSndubbel.pH_total_spectro_out <= 8.5)
 
@@ -456,6 +486,9 @@ def get_pHpred_pHfit_2018_2021(allparametersdubbel, resultsRWSndubbel, allparame
     ax.scatter('dayofyear', 'pHpredicted', data=allparameters, c='xkcd:water blue', s=50, alpha=0.3, label='pH$_{pred}$')
     ax.legend()
     
+    pH_preddata['dayofyear'] = x_plotting
+    pH_preddata['pHpredicted'] = y_plotting
+    
     x = resultsRWSndubbel['dayofyear'][LpHout].to_numpy()
     y = resultsRWSndubbel.pH_total_spectro_out[LpHout].to_numpy()
     
@@ -477,6 +510,9 @@ def get_pHpred_pHfit_2018_2021(allparametersdubbel, resultsRWSndubbel, allparame
     ax.scatter('dayofyear', 'pH_total_spectro_out', data=resultsRWSn, c='xkcd:black', s=50, alpha=0.3, label='pH$_{fit}$')
     ax.legend() 
      
+    pH_fitdata['dayofyear'] = x_plotting
+    pH_fitdata['pH_total_spectro_out'] = y_plotting
+    
     ax.grid(alpha=0.3)
     ax.set_xlabel("Months of year")
     month_fmt = DateFormatter('%b')
@@ -489,10 +525,13 @@ def get_pHpred_pHfit_2018_2021(allparametersdubbel, resultsRWSndubbel, allparame
     ax.legend(loc='lower center')
     ax.set_title('pH ' + timeperiod + ' - North Sea')
     ax.set_xlim(0, 365)
+    ax.set_ylim(7, 8.65)
     
     plt.tight_layout()
     plt.savefig("figures/pH_Hagens&Middelburg_2016/pH_" + timeperiod + ".png")
     plt.show()
+    
+    return pH_preddata, pH_fitdata
 
 def get_quantitative_contribution():
     

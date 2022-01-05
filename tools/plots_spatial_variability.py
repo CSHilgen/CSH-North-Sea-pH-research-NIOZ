@@ -5,7 +5,7 @@ def plot_salinity_vs_DIC(combinedmean):
     import seaborn as sns   
     from scipy.stats import linregress
     
-    fig, ax = plt.subplots(dpi=300)
+    fig, ax = plt.subplots(dpi=300, figsize=(6,4))
     cm = plt.cm.get_cmap('twilight')
     
     vmin = 1
@@ -15,7 +15,7 @@ def plot_salinity_vs_DIC(combinedmean):
     
     ax=ax
     sns.regplot(x='salinity', y='dic', data=combinedmean, ax=ax,
-                scatter_kws={"color": "none"}, line_kws={"color": "blue", 'label': f'y = {slope:.1e}x + {intercept:.1f}'})
+                scatter_kws={"color": "none"}, line_kws={"color": "blue", 'label': f'y = {slope:.1f}x + {intercept:.1f}'})
     
     sc = ax.scatter('salinity', 'normalized_DIC', c='dayofyear', cmap=cm, data=combinedmean, label='Normalized DIC', vmin=vmin, vmax=vmax)
     sc = ax.scatter('salinity', 'dic', c='dayofyear', cmap=cm, data=combinedmean, marker='x', label='Initial DIC', vmin=vmin, vmax=vmax)
@@ -47,7 +47,7 @@ def plot_salinity_vs_TA(combinedmean):
     import seaborn as sns   
     from scipy.stats import linregress
     
-    fig, ax = plt.subplots(dpi=300)
+    fig, ax = plt.subplots(dpi=300, figsize=(6,4))
     cm = plt.cm.get_cmap('twilight')
     
     vmin = 1
@@ -57,7 +57,7 @@ def plot_salinity_vs_TA(combinedmean):
     
     ax=ax
     sns.regplot(x='salinity', y='alkalinity', data=combinedmean, ax=ax,
-                scatter_kws={"color": "none"}, line_kws={"color": "blue", 'label': f'y = {slope:.1e}x + {intercept:.1f}'})
+                scatter_kws={"color": "none"}, line_kws={"color": "blue", 'label': f'y = {slope:.1f}x + {intercept:.1f}'})
     
     sc = ax.scatter('salinity', 'normalized_TA', c='dayofyear', cmap=cm, data=combinedmean, label='Normalized A$_T$', vmin=vmin, vmax=vmax)
     sc = ax.scatter('salinity', 'alkalinity', c='dayofyear', cmap=cm, data=combinedmean, marker='x', label='Initial A$_T$', vmin=vmin, vmax=vmax)
@@ -220,7 +220,7 @@ def plot_normalized_TA(combinedmean):
 def plot_DIC_TA(combinedmean):
     from matplotlib import pyplot as plt
 
-    fig, ax = plt.subplots(dpi=300)
+    fig, ax = plt.subplots(dpi=300, figsize=(6,4))
     cm = plt.cm.get_cmap('twilight')
     
     sc = ax.scatter(combinedmean['dic'], combinedmean['alkalinity'], c=combinedmean['dayofyear'], vmin=0, vmax=365, s=35, cmap=cm, edgecolor="None")
@@ -250,7 +250,7 @@ def plot_DIC_TA_year(combinedmean):
     from matplotlib import pyplot as plt
     import numpy as np
     
-    fig, ax = plt.subplots(dpi=300, figsize=(5.5,4))
+    fig, ax = plt.subplots(dpi=300, figsize=(6,4))
     cm = plt.cm.get_cmap('rainbow')
     vmin = 2000
     vmax = 2021
@@ -280,7 +280,7 @@ def plot_DIC_TA_year(combinedmean):
 def plot_NDIC_NTA(combinedmean):
     from matplotlib import pyplot as plt
     
-    fig, ax = plt.subplots(dpi=300)
+    fig, ax = plt.subplots(dpi=300, figsize=(6,4))
     cm = plt.cm.get_cmap('twilight')
     
     sc = ax.scatter(combinedmean['normalized_DIC'], combinedmean['normalized_TA'], c=combinedmean['dayofyear'], vmin=0, vmax=365, s=35, cmap=cm, edgecolor="None")
@@ -310,7 +310,7 @@ def plot_NDIC_NTA_year(combinedmean):
     from matplotlib import pyplot as plt
     import numpy as np
     
-    fig, ax = plt.subplots(dpi=300, figsize=(5.5,4))
+    fig, ax = plt.subplots(dpi=300, figsize=(6,4))
     cm = plt.cm.get_cmap('rainbow')
     vmin = 2000
     vmax = 2021
@@ -344,8 +344,8 @@ def plot_pH_verification(RWSomean, RWSnmean, results_TA_fCO2, results_TA_pCO2):
     fig, ax = plt.subplots(dpi=300)
 
     ax = ax
-    ax.scatter('datenum', 'pH_total', c='xkcd:aqua', data=RWSomean, label='pH$_{initial}$ RWS', s=20, alpha=0.4)
-    ax.scatter('datenum', 'pH_total_spectro_out', c='xkcd:dark aqua', data=RWSnmean, label='pH$_{spectro}$ RWS', s=20, alpha=0.4)
+    ax.scatter('datenum', 'pH_total', c='xkcd:water blue', data=RWSomean, label='pH$_{initial}$ RWS$_{1975-2018}$', s=20, alpha=0.4)
+    ax.scatter('datenum', 'pH_total_spectro_out', c='xkcd:cobalt blue', data=RWSnmean, label='pH$_{spectro}$ RWS$_{2018-2021}$', s=20, alpha=0.4)
     # pCO2 air
     ax.scatter('datenum', 'pH_total', c='xkcd:black', data=results_TA_pCO2, label='pH$_{pred}$ A$_T$ & pCO$_{2AIR}$', s=20, alpha=0.4)
     # fCO2 sea
@@ -377,8 +377,8 @@ def plot_pH_predicted_vs_initial(RWSomean):
     y = np.linspace(7.5,8.5,100)
     
     ax = ax
-    ax.scatter('pH_pred_TA_pCO2', 'pH_total', c='xkcd:aqua', data=RWSomean, label='pH$_{pred}$ based on A$_T$ & pCO$_{2AIR}$', s=20, alpha=0.4)
-    ax.plot(x, y, color='blue', label='y = x', alpha=0.3)
+    ax.scatter('pH_pred_TA_pCO2', 'pH_total', c='xkcd:water blue', data=RWSomean, label='pH$_{pred}$ based on A$_T$ & pCO$_{2AIR}$', s=20, alpha=0.4)
+    ax.plot(x, y, color='xkcd:dark grey', label='y = x', alpha=0.3)
     
     ax.grid(alpha=0.3)
     ax.set_xlabel("pH$_{pred}$ A$_T$ & pCO$_{2AIR}$")
@@ -386,6 +386,7 @@ def plot_pH_predicted_vs_initial(RWSomean):
     ax.set_ylim(7.5, 8.5)
     ax.set_xlim(7.5, 8.5)
     ax.legend()
+    ax.set_aspect(1)
     ax.minorticks_on()
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
@@ -398,8 +399,8 @@ def plot_pH_predicted_vs_initial(RWSomean):
     fig, ax = plt.subplots(dpi=300)
 
     ax = ax
-    ax.scatter('pH_pred_TA_fCO2', 'pH_total', c='xkcd:aqua', data=RWSomean, label='pH$_{pred}$ based on A$_T$ & fCO$_{2SW}$', s=20, alpha=0.4)
-    ax.plot(x, y, color='blue', label='y = x', alpha=0.3)
+    ax.scatter('pH_pred_TA_fCO2', 'pH_total', c='xkcd:water blue', data=RWSomean, label='pH$_{pred}$ based on A$_T$ & fCO$_{2SW}$', s=20, alpha=0.4)
+    ax.plot(x, y, color='xkcd:dark grey', label='y = x', alpha=0.3)
     
     ax.grid(alpha=0.3)
     ax.set_xlabel("pH$_{pred}$ A$_T$ & fCO$_{2SW}$")
@@ -407,6 +408,7 @@ def plot_pH_predicted_vs_initial(RWSomean):
     ax.set_ylim(7.5, 8.5)
     ax.set_xlim(7.5, 8.5)
     ax.legend()
+    ax.set_aspect(1)
     ax.minorticks_on()
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)

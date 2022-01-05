@@ -440,12 +440,13 @@ def get_nitrate_plots(RWSomean, RWSomeanN):
     xbegin = 1976
     xend = 17531
     slope, intercept, r, p, se = linregress(RWSomeanN['datenum'], RWSomeanN['total_nitrate'])
-
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
     ybegin = (slope * xbegin) + intercept
     yend = (slope * xend) + intercept
     changelongterm = yend - ybegin
     print(f"Change over 1975-2017: {changelongterm:6e}")
-    changeperyear = changelongterm / ((xend-xbegin)/365)
+    changeperyear = changelongterm / (year)
     print(f"Change per year: {changeperyear:.6e}") 
 
     # Use the fit to predict fCO2 in console: SC_tools.seasonalcycle_fit(opt_result['x'], 1)
