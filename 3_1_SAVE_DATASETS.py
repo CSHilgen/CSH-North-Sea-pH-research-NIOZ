@@ -280,13 +280,6 @@ molarmass = 40.078
 convertfactor = ((0.001 / molarmass) * 1000000) / densitysw
 RWSo['calcium umol/kg'] = RWSo['calcium'] * convertfactor
 
-# Correct calcium data for method change (smooth the boundaries)
-RWSo['calcium_corrected'] = RWSo['calcium umol/kg']
-# Only Method 1 values - 720 (to lower the first method)
-RWSo.loc[RWSo.year <= 2014, 'calcium_corrected'] = RWSo.loc[RWSo.year <= 2014, 'calcium_corrected'] - 720
-# Make the dataset relative 
-RWSo['calcium_corrected'] = RWSo['calcium_corrected'] - 7000
-
 pH = RWSo['pH']
 phos = RWSo['phosphate'] 
 sil = RWSo['silicate']
@@ -367,17 +360,38 @@ for dataset in [socatns, resultssocatns, socatnsmean, glodapns, resultsglodapns,
     
 print('All dataframes are ready for further analysis.')
     
+#%% # Correct the calcium (method 1 - 720) to smooth the method boundaries for all RWSo datasets
+
+# Correct calcium data for method change based on year
+RWSo['calcium_corrected'] = RWSo['calcium umol/kg']
+resultsRWSo['calcium_corrected'] = resultsRWSo['calcium umol/kg']
+RWSomean['calcium_corrected'] = RWSomean['calcium umol/kg']
+# Only Method 1 values - 720 (to lower the first method)
+RWSo.loc[RWSo.year <= 2014, 'calcium_corrected'] = RWSo.loc[RWSo.year <= 2014, 'calcium_corrected'] - 720
+resultsRWSo.loc[resultsRWSo.year <= 2014, 'calcium_corrected'] = resultsRWSo.loc[resultsRWSo.year <= 2014, 'calcium_corrected'] - 720
+RWSomean.loc[RWSomean.year <= 2014, 'calcium_corrected'] = RWSomean.loc[RWSomean.year <= 2014, 'calcium_corrected'] - 720
+# Make the dataset relative 
+RWSo['calcium_corrected'] = RWSo['calcium_corrected'] - 7000
+resultsRWSo['calcium_corrected'] = resultsRWSo['calcium_corrected'] - 7000
+RWSomean['calcium_corrected'] = RWSomean['calcium_corrected'] - 7000
+
 #%% # Make combined datasets of DIC and TA data, and RWS data
 
 # Combined dataset includes GLODAP, D366, CEFAS, RWSn (all DIC and TA data)
-combined = pd.concat(objs=(Cefas, D366, RWSn, glodapns), keys=['Cefas', 'D366', 'RWSn', 'glodapns'])
-resultscombined = pd.concat(objs=(resultsCefas, resultsD366, resultsRWSn, resultsglodapns), keys=['resultsCefas', 'resultsD366', 'resultsRWSn', 'resultsglodapns'])
-combinedmean = pd.concat(objs=(Cefasmean, D366mean, RWSnmean, glodapnsmean), keys=['Cefasmean', 'D366mean', 'RWSnmean', 'glodapnsmean'])
+combined = pd.concat(objs=(Cefas, D366, RWSn, glodapns), keys=['Cefas', 'D366', 'RWSn', 'glodapns'], names=['dataset'])
+combined = combined.reset_index()
+resultscombined = pd.concat(objs=(resultsCefas, resultsD366, resultsRWSn, resultsglodapns), keys=['resultsCefas', 'resultsD366', 'resultsRWSn', 'resultsglodapns'], names=['dataset'])
+resultscombined = resultscombined.reset_index()
+combinedmean = pd.concat(objs=(Cefasmean, D366mean, RWSnmean, glodapnsmean), keys=['Cefasmean', 'D366mean', 'RWSnmean', 'glodapnsmean'], names=['dataset'])
+combinedmean = combinedmean.reset_index()
 
 # RWS dataset includes RWSn and RWSo (both RWS dataset)
-RWStotal = pd.concat(objs=(RWSn, RWSo), keys=['RWSn', 'RWSo'])
-resultsRWStotal = pd.concat(objs=(resultsRWSn, resultsRWSo), keys=['resultsRWSn', 'resultsRWSo'])
-RWStotalmean = pd.concat(objs=(RWSnmean, RWSomean), keys=['RWSnmean', 'RWSomean'])            
+RWStotal = pd.concat(objs=(RWSn, RWSo), keys=['RWSn', 'RWSo'], names=['dataset'])
+RWStotal = RWStotal.reset_index()
+resultsRWStotal = pd.concat(objs=(resultsRWSn, resultsRWSo), keys=['resultsRWSn', 'resultsRWSo'], names=['dataset'])
+resultsRWStotal = resultsRWStotal.reset_index()
+RWStotalmean = pd.concat(objs=(RWSnmean, RWSomean), keys=['RWSnmean', 'RWSomean'], names=['dataset'])            
+RWStotalmean = RWStotalmean.reset_index()
 
 #%% # Save all datasets
 

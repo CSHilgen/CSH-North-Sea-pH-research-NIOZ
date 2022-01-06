@@ -9,7 +9,10 @@ import tools.plots_pH_verification as pHV_plots
 #%% # Import dataframes
 
 RWSomean = pd.read_csv("dataframes_made/RWSomean_final.csv")
+RWSnmean = pd.read_csv("dataframes_made/RWSnmean_final.csv")
+resultsRWSo = pd.read_csv("dataframes_made/resultsRWSo_final.csv")
 combinedmean = pd.read_csv("dataframes_made/combinedmean_final.csv")
+resultscombined = pd.read_csv("dataframes_made/resultscombined_final.csv")
 socatnsmean = pd.read_csv("dataframes_made/socatnsmean_final.csv")
 
 #%% # pH verification model TA (combined) & pCO2 air (SOCAT) & fCO2 sea (SOCAT)

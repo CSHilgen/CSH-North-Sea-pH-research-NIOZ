@@ -17,8 +17,8 @@ def plot_salinity_vs_DIC(combinedmean):
     sns.regplot(x='salinity', y='dic', data=combinedmean, ax=ax,
                 scatter_kws={"color": "none"}, line_kws={"color": "blue", 'label': f'y = {slope:.1f}x + {intercept:.1f}'})
     
-    sc = ax.scatter('salinity', 'normalized_DIC', c='dayofyear', cmap=cm, data=combinedmean, label='Normalized DIC', vmin=vmin, vmax=vmax)
-    sc = ax.scatter('salinity', 'dic', c='dayofyear', cmap=cm, data=combinedmean, marker='x', label='Initial DIC', vmin=vmin, vmax=vmax)
+    #sc = ax.scatter('salinity', 'normalized_DIC', c='dayofyear', cmap=cm, data=combinedmean, label='Normalized DIC', vmin=vmin, vmax=vmax)
+    sc = ax.scatter('salinity', 'dic', c='dayofyear', cmap=cm, data=combinedmean, label='Initial DIC', vmin=vmin, vmax=vmax)
     
     ax.grid(alpha=0.3)
     ax.set_xlabel("Salinity")
@@ -59,8 +59,8 @@ def plot_salinity_vs_TA(combinedmean):
     sns.regplot(x='salinity', y='alkalinity', data=combinedmean, ax=ax,
                 scatter_kws={"color": "none"}, line_kws={"color": "blue", 'label': f'y = {slope:.1f}x + {intercept:.1f}'})
     
-    sc = ax.scatter('salinity', 'normalized_TA', c='dayofyear', cmap=cm, data=combinedmean, label='Normalized A$_T$', vmin=vmin, vmax=vmax)
-    sc = ax.scatter('salinity', 'alkalinity', c='dayofyear', cmap=cm, data=combinedmean, marker='x', label='Initial A$_T$', vmin=vmin, vmax=vmax)
+    #sc = ax.scatter('salinity', 'normalized_TA', c='dayofyear', cmap=cm, data=combinedmean, label='Normalized A$_T$', vmin=vmin, vmax=vmax)
+    sc = ax.scatter('salinity', 'alkalinity', c='dayofyear', cmap=cm, data=combinedmean, label='Initial A$_T$', vmin=vmin, vmax=vmax)
     
     ax.grid(alpha=0.3)
     ax.set_xlabel("Salinity")
