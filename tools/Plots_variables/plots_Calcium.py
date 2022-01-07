@@ -113,9 +113,9 @@ def get_calcium_plots(RWSo, RWSoCa):
     sns.regplot(x='salinity', y='calcium_corrected', data=RWSoCa, ax=ax,
                 scatter_kws={"color": "aqua"}, line_kws={"color": "blue"})
 
-    sc = ax.scatter('salinity', 'calcium_corrected', c='yellow', cmap=cm, data=RWSoCa[L0],  label='Method 1$_{corr}$')
-    sc = ax.scatter('salinity', 'calcium_corrected', c='orange', cmap=cm, data=RWSoCa[L1], label='Method 2')
-    sc = ax.scatter('salinity', 'calcium_corrected', c='green', cmap=cm, data=RWSoCa[L2], label='Method 3')
+    sc = ax.scatter('salinity', 'calcium_corrected', c='yellow', data=RWSoCa[L0],  label='Method 1$_{corr}$')
+    sc = ax.scatter('salinity', 'calcium_corrected', c='orange', data=RWSoCa[L1], label='Method 2')
+    sc = ax.scatter('salinity', 'calcium_corrected', c='green', data=RWSoCa[L2], label='Method 3')
 
     ax.grid(alpha=0.3)
     ax.set_xlabel("Salinity")

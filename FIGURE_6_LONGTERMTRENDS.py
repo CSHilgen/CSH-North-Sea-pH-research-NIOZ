@@ -980,71 +980,77 @@ plt.show()
 #%%
 print('Calcium')
 fig, axs = plt.subplots(dpi=300, ncols=3, gridspec_kw={'width_ratios': [1, 1, 5]}, figsize=(10.5,2.25), sharey=True)
-  
+
+RWSoCa = RWSo.dropna(axis='rows', how='all', subset=['calcium_corrected'])  
+L0 = (RWSoCa.year <= 2014)
+L1 = (RWSoCa.year >= 2015) & (RWSoCa.datenum <= 16996.3)
+L2 = (RWSoCa.datenum >= 17014.4)  
+
 ax = axs[0]
-ax.scatter('distance_to_shore', 'calcium_corrected', c='xkcd:grey', data=RWSo, s=20, alpha=0.4)
+sc = ax.scatter('salinity', 'calcium_corrected', c='yellow', data=RWSoCa[L0],  s=20, label='Method 1$_{corr}$')
+sc = ax.scatter('salinity', 'calcium_corrected', c='orange', data=RWSoCa[L1], s=20, label='Method 2')
+sc = ax.scatter('salinity', 'calcium_corrected', c='green', data=RWSoCa[L2], s=20, label='Method 3')
 
 ax.grid(alpha=0.3)
-ax.set_xlabel("Distance to shore (km)")
+ax.set_xlabel("Salinity")
 ax.set_ylabel("Relative Calcium (μmol/kg)")
-ax.set_xlim(0, 75)
 ax.set_ylim(0, 7500)
-ax.minorticks_on()
-ax.xaxis.set_major_locator(MultipleLocator(25))
-ax.yaxis.set_major_locator(MultipleLocator(2500))
-# ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
-# ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
 
 ax = axs[1]
-ax.scatter('dayofyear', 'calcium_corrected', c='xkcd:grey', data=RWSo, s=20, alpha=0.4)
+ax.scatter('dayofyear', 'calcium_corrected', c='yellow', data=RWSoCa[L0], s=20, label='Method 1$_{corr}$')
+ax.scatter('dayofyear', 'calcium_corrected', c='orange', data=RWSoCa[L1], s=20, label='Method 2')
+ax.scatter('dayofyear', 'calcium_corrected', c='green', data=RWSoCa[L2], s=20, label ='Method 3')
 
 ax.grid(alpha=0.3)
-ax.set_ylabel(None)
-ax.set_xlabel('Months of year')
-fmt = mdates.DateFormatter('%b')
-ax.xaxis.set_major_locator(mdates.MonthLocator([2,5,8,11]))
-ax.xaxis.set_major_formatter(FuncFormatter(fmt))
-ax.set_xlim(0, 365)
+ax.set_xlabel("Months of year")
+month_fmt = DateFormatter('%b')
+def m_fmt(x, pos=None):
+    return month_fmt(x)[0]
+
+ax.xaxis.set_major_locator(MonthLocator())
+ax.xaxis.set_major_formatter(FuncFormatter(m_fmt))
+ax.set_ylim(None)
 ax.minorticks_on()
 # ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
 # ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
 
-RWSoCa = RWSo.dropna(axis='rows', how='all', subset=['calcium_corrected'])
-L0 = (RWSoCa.year <= 2014)
-L1 = (RWSoCa.year >= 2015) & (RWSoCa.datenum <= 17315.6)
-L2 = (RWSoCa.datenum >= 17315.6)  
+LR0 = (RWSoCa.datenum <= 16629)
+LR1 = (RWSoCa.datenum >= 16500) & (RWSoCa.datenum <= 17315.6)
+LR2 = (RWSoCa.datenum >= 17315.6)  
 
-slope, intercept, r, p, se = linregress(RWSoCa[L0]['datenum'], RWSoCa[L0]['calcium_corrected'])
-aslope, aintercept, ar, ap, ase = linregress(RWSoCa[L1]['datenum'], RWSoCa[L1]['calcium_corrected'])
-bslope, bintercept, br, bp, bse = linregress(RWSoCa[L2]['datenum'], RWSoCa[L2]['calcium_corrected'])    
+slope, intercept, r, p, se = linregress(RWSoCa[LR0]['datenum'], RWSoCa[LR0]['calcium_corrected'])
+aslope, aintercept, ar, ap, ase = linregress(RWSoCa[LR1]['datenum'], RWSoCa[LR1]['calcium_corrected'])
+bslope, bintercept, br, bp, bse = linregress(RWSoCa[LR2]['datenum'], RWSoCa[LR2]['calcium_corrected'])    
 print(f"p value 2009-2015 = {p:6f}")
 print(f"p value 2015-2017 = {ap:6f}")
 print(f"p value 2017-2018 = {bp:6f}")
 
 ax = axs[2]
-sns.regplot(x='datenum', y='calcium_corrected', data=RWSoCa[L0], ax=ax,
-            scatter_kws={"color": "xkcd:grey"}, line_kws={"color": "blue", 'label': f'y = {slope:.1e}x + {intercept:.1f}', 'linestyle': '--',}, label='Corrected Ca RWS')
-sns.regplot(x='datenum', y='calcium_corrected', data=RWSoCa[L1], ax=ax,
-            scatter_kws={"color": "xkcd:grey"}, line_kws={"color": "blue", 'label': f'y = {aslope:.1e}x + {aintercept:.1f}'})
-sns.regplot(x='datenum', y='calcium_corrected', data=RWSoCa[L2], ax=ax,
-            scatter_kws={"color": "xkcd:grey"}, line_kws={"color": "blue", 'label': f'y = {bslope:.1e}x + {bintercept:.1f}', 'linestyle': 'dotted'})
+sns.regplot(x='datenum', y='calcium_corrected', data=RWSoCa[LR0], ax=ax,
+            scatter_kws={"color": "none"}, line_kws={"color": "blue", 'label': f'y = {slope:.1e}x + {intercept:.1e}', 'linestyle': '--'})
+sns.regplot(x='datenum', y='calcium_corrected', data=RWSoCa[LR1], ax=ax,
+            scatter_kws={"color": "none"}, line_kws={"color": "blue", 'label': f'y = {aslope:.1e}x + {aintercept:.1e}'})
+sns.regplot(x='datenum', y='calcium_corrected', data=RWSoCa[LR2], ax=ax,
+            scatter_kws={"color": "none"}, line_kws={"color": "blue", 'label': f'y = {bslope:.1f}x + {bintercept:.1e}', 'linestyle': 'dotted'})
+ax.scatter('datenum', 'calcium_corrected', c='yellow', data=RWSoCa[L0], s=20, label='Corrected M1 Ca RWS')
+ax.scatter('datenum', 'calcium_corrected', c='orange', data=RWSoCa[L1], s=20, label='M2 Ca RWS')
+ax.scatter('datenum', 'calcium_corrected', c='green', data=RWSoCa[L2], s=20, label='M3 Ca RWS')
 
 ax.grid(alpha=0.3)
 ax.set_xlabel('Time (yrs)')
 ax.set_ylabel(None)
-ax.set_xlim(10950, 19345)
-ax.xaxis.set_major_locator(mdates.YearLocator(5))
+ax.xaxis.set_major_locator(mdates.YearLocator())
 ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
 ax.xaxis.set_minor_locator(mdates.YearLocator())
 ax.minorticks_on()
 # ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
 # ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
 handles, labels = ax.get_legend_handles_labels()
-order = [3,0,1,2]
-fig.legend([handles[idx] for idx in order],[labels[idx] for idx in order], loc="lower center", ncol=4, bbox_to_anchor=(.075, 0.95, 0.9, 1.02), borderaxespad=0, mode='expand', fontsize=9)
+order = [3,4,5,0,1,2]
+fig.legend([handles[idx] for idx in order],[labels[idx] for idx in order], loc="lower center", ncol=6, bbox_to_anchor=(.075, 0.95, 0.9, 1.02), borderaxespad=0, mode='expand', fontsize=9)
 
 plt.subplots_adjust(wspace=0, hspace=0)
 
 plt.tight_layout(pad=0.5)
-plt.savefig("figures/Final_plots/Longterm_Ca.png")
+plt.savefig("figures/Final_plots/Longterm_Ca2.png")
 plt.show()

@@ -6,7 +6,7 @@ def plot_pH_verification(RWSomean, RWSnmean, results_TA_fCO2, results_TA_pCO2):
     fig, ax = plt.subplots(dpi=300)
 
     ax = ax
-    ax.scatter('datenum', 'pH_total', c='xkcd:water blue', data=RWSomean, label='pH$_{initial}$ RWS$_{1975-2018}$', s=20, alpha=0.4)
+    ax.scatter('datenum', 'pH_total', c='xkcd:water blue', data=RWSomean, label='pH RWS$_{1975-2018}$', s=20, alpha=0.4)
     ax.scatter('datenum', 'pH_total_spectro_out', c='xkcd:cobalt blue', data=RWSnmean, label='pH$_{spectro}$ RWS$_{2018-2021}$', s=20, alpha=0.4)
     # pCO2 air
     ax.scatter('datenum', 'pH_total', c='xkcd:black', data=results_TA_pCO2, label='pH$_{pred}$ A$_T$ & pCO$_{2AIR}$', s=20, alpha=0.4)
@@ -16,7 +16,9 @@ def plot_pH_verification(RWSomean, RWSnmean, results_TA_fCO2, results_TA_pCO2):
     ax.grid(alpha=0.3)
     ax.set_ylabel("pH$_{total}$")
     ax.set_xlabel("Time (yrs)")
-    ax.set_xlim([9069, 19000])
+    #ax.set_xlim([9069, 19000])
+    ax.set_xlim(10950, 19345)
+    ax.set_ylim(7, 8.5)
     ax.legend()
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
@@ -27,7 +29,7 @@ def plot_pH_verification(RWSomean, RWSnmean, results_TA_fCO2, results_TA_pCO2):
     ax.set_title('pH predicted - Datasets North Sea') 
 
     plt.tight_layout()
-    plt.savefig("figures/Spatial_variability/Predicted_pH_mean_time_datasets.png")
+    plt.savefig("figures/pH_verification_model/Predicted_pH_mean_time_datasets.png")
     plt.show()
     
 def plot_pH_predicted_vs_initial(RWSomean):
@@ -55,7 +57,7 @@ def plot_pH_predicted_vs_initial(RWSomean):
     ax.set_title('pH initial vs predicted - Datasets North Sea') 
 
     plt.tight_layout()
-    plt.savefig("figures/Spatial_variability/Predicted_pH_vs_initial_pH_pCO2air.png")
+    plt.savefig("figures/pH_verification_model/Predicted_pH_vs_initial_pH_pCO2air.png")
     plt.show()
     
     fig, ax = plt.subplots(dpi=300)
@@ -77,7 +79,7 @@ def plot_pH_predicted_vs_initial(RWSomean):
     ax.set_title('pH initial vs predicted - Datasets North Sea') 
 
     plt.tight_layout()
-    plt.savefig("figures/Spatial_variability/Predicted_pH_vs_initial_pH_fCO2sea.png")
+    plt.savefig("figures/pH_verification_model/Predicted_pH_vs_initial_pH_fCO2sea.png")
     plt.show()
     
 def predicted_fCO2_pCO2_alkalinity_RWSo(RWSomean):    
@@ -94,7 +96,6 @@ def predicted_fCO2_pCO2_alkalinity_RWSo(RWSomean):
     ax.set_xlabel("Time (yrs)")
     ax.set_ylabel("A$_T$ (μmol/kg)")
     ax.set_title("Predicted TA for RWSomean - North Sea")
-    ax.legend()
     ax.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
     ax.get_legend().set_title("Dataset")
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
@@ -105,7 +106,7 @@ def predicted_fCO2_pCO2_alkalinity_RWSo(RWSomean):
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     
     plt.tight_layout()
-    plt.savefig("figures/Spatial_variability/Predicted_alkalinity_RWSomean.png")
+    plt.savefig("figures/pH_verification_model/Predicted_alkalinity_RWSomean.png")
     plt.show()
     
     fig, ax = plt.subplots(dpi=300)
@@ -117,7 +118,6 @@ def predicted_fCO2_pCO2_alkalinity_RWSo(RWSomean):
     ax.set_xlabel("Time (yrs)")
     ax.set_ylabel("pCO$_2$ (uatm)")
     ax.set_title("Predicted pCO$_2$ air for RWSomean - North Sea")
-    ax.legend()
     ax.set_xlim([9069,19000])
     ax.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
     ax.get_legend().set_title("Dataset")
@@ -129,7 +129,7 @@ def predicted_fCO2_pCO2_alkalinity_RWSo(RWSomean):
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     
     plt.tight_layout()
-    plt.savefig("figures/Spatial_variability/Predicted_pCO2_air_RWSomean.png")
+    plt.savefig("figures/pH_verification_model/Predicted_pCO2_air_RWSomean.png")
     plt.show()
     
     fig, ax = plt.subplots(dpi=300)
@@ -153,5 +153,5 @@ def predicted_fCO2_pCO2_alkalinity_RWSo(RWSomean):
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     
     plt.tight_layout()
-    plt.savefig("figures/Spatial_variability/Predicted_fCO2_sea_RWSomean.png")
+    plt.savefig("figures/pH_verification_model/Predicted_fCO2_sea_RWSomean.png")
     plt.show()

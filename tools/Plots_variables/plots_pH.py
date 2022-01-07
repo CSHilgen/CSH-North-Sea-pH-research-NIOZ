@@ -494,7 +494,6 @@ def get_pH_plots(RWSomean, RWSnmean):
     ax.legend()
 
     slope, intercept, r, p, se = linregress(RWSomean[L2]['datenum'], RWSomean[L2]['pH_total'])
-    RWSnmeanpH = RWSnmean.dropna(axis='rows', how='all', subset=['pH_total_spectro_out'])
     nslope, nintercept, nr, np, nse = linregress(RWSnmeanpH['datenum'], RWSnmeanpH['pH_total_spectro_out'])
 
     ax = axs[2]
