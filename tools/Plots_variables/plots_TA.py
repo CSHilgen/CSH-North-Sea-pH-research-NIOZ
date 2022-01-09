@@ -43,10 +43,10 @@ def get_TA_plots(combinedmean, glodapnsmean, Cefasmean, D366mean, RWSnmean):
     fig, ax = plt.subplots(dpi=300, figsize=(5.5,4))
 
     ax = ax
-    ax.scatter("datenum", "alkalinity", c="b", data=glodapnsmean, label='GLODAP', s=20, alpha=0.4)
-    ax.scatter('datenum', 'alkalinity', c='xkcd:greenish', data=Cefasmean, label='CEFAS', s=20, alpha=0.4)
+    ax.scatter("datenum", "alkalinity", c="xkcd:violet", data=glodapnsmean, label='GLODAP', s=20, alpha=0.4)
+    ax.scatter('datenum', 'alkalinity', c='xkcd:orange', data=Cefasmean, label='CEFAS', s=20, alpha=0.4)
     ax.scatter('datenum', 'alkalinity', c='xkcd:neon pink', data=D366mean, label='D366', s=20, alpha=0.4)
-    ax.scatter('datenum', 'alkalinity', c='xkcd:dark aqua', data=RWSnmean, label='RWSn', s=20, alpha=0.4)
+    ax.scatter('datenum', 'alkalinity', c='xkcd:evergreen', data=RWSnmean, label='RWSn', s=20, alpha=0.4)
 
     ax.set_ylabel("Total Alkalinity (µmol/kg)")
     ax.grid(alpha=0.3)
@@ -149,10 +149,10 @@ def get_TA_plots(combinedmean, glodapnsmean, Cefasmean, D366mean, RWSnmean):
     fig, ax = plt.subplots(dpi=300, figsize=(5.5,4))
 
     ax = ax
-    ax.scatter("dayofyear", "alkalinity", c="b", data=glodapnsmean, label='GLODAP', s=20, alpha=0.4)
-    ax.scatter('dayofyear', 'alkalinity', c='xkcd:greenish', data=Cefasmean, label='CEFAS', s=20, alpha=0.4)
+    ax.scatter("dayofyear", "alkalinity", c="xkcd:violet", data=glodapnsmean, label='GLODAP', s=20, alpha=0.4)
+    ax.scatter('dayofyear', 'alkalinity', c='xkcd:orange', data=Cefasmean, label='CEFAS', s=20, alpha=0.4)
     ax.scatter('dayofyear', 'alkalinity', c='xkcd:neon pink', data=D366mean, label='D366', s=20, alpha=0.4)
-    ax.scatter('dayofyear', 'alkalinity', c='xkcd:dark aqua', data=RWSnmean, label='RWSn', s=20, alpha=0.4)
+    ax.scatter('dayofyear', 'alkalinity', c='xkcd:evergreen', data=RWSnmean, label='RWSn', s=20, alpha=0.4)
 
     ax.set_ylabel("Total Alkalinity (µmol/kg)")
     ax.grid(alpha=0.3)
@@ -269,10 +269,10 @@ def get_TA_plots(combinedmean, glodapnsmean, Cefasmean, D366mean, RWSnmean):
     fig, ax = plt.subplots(dpi=300, figsize=(5.5,4))
 
     ax = ax
-    ax.scatter("distance_to_shore", "alkalinity", c="b", data=glodapnsmean, label='GLODAP', s=20, alpha=0.4)
-    ax.scatter('distance_to_shore', 'alkalinity', c='xkcd:greenish', data=Cefasmean, label='CEFAS', s=20, alpha=0.4)
+    ax.scatter("distance_to_shore", "alkalinity", c="xkcd:violet", data=glodapnsmean, label='GLODAP', s=20, alpha=0.4)
+    ax.scatter('distance_to_shore', 'alkalinity', c='xkcd:orange', data=Cefasmean, label='CEFAS', s=20, alpha=0.4)
     ax.scatter('distance_to_shore', 'alkalinity', c='xkcd:neon pink', data=D366mean, label='D366', s=20, alpha=0.4)
-    ax.scatter('distance_to_shore', 'alkalinity', c='xkcd:dark aqua', data=RWSnmean, label='RWSn', s=20, alpha=0.4)
+    ax.scatter('distance_to_shore', 'alkalinity', c='xkcd:evergreen', data=RWSnmean, label='RWSn', s=20, alpha=0.4)
 
     ax.set_ylabel("Total Alkalinity (µmol/kg)")
     ax.grid(alpha=0.3)

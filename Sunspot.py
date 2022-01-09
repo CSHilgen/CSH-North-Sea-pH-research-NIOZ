@@ -97,10 +97,9 @@ RWSomeano2year = RWSomeano2.set_index('datetime').resample('Y').mean()
 RWSomeano2year = RWSomeano2year.reset_index()
 
 ax=ax1
-ax.scatter('datenum', 'oxygen umol/kg', data=RWSomeano2, s=20, alpha=0.4, c='xkcd:green')
-# ax.plot('datenum', 'oxygen umol/kg', data=RWSomeano2year, c='xkcd:green')
+#ax.scatter('datenum', 'oxygen umol/kg', data=RWSomeano2, s=20, alpha=0.4, c='xkcd:green')
+ax.plot('datenum', 'oxygen umol/kg', data=RWSomeano2year, c='xkcd:green')
 ax1.set_ylabel('Oxygen (µmol/kg)')
-ax.legend(bbox_to_anchor=(1.1, 1.0), loc='upper left')
 
 ax2 = ax1.twinx()
 ax=ax2
@@ -109,7 +108,6 @@ ax2.set_ylabel('Sunspot number')
 
 ax1.grid(alpha=0.3)
 ax1.set_xlabel("Time (yrs)")
-ax.legend(bbox_to_anchor=(1.1, 1.2), loc='upper left')
 ax1.xaxis.set_major_locator(mdates.YearLocator(5))
 ax1.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
 ax1.xaxis.set_minor_locator(mdates.YearLocator())
@@ -130,10 +128,9 @@ RWSomeanAOUyear = RWSomeanAOU.set_index('datetime').resample('Y').mean()
 RWSomeanAOUyear = RWSomeanAOUyear.reset_index()
 
 ax=ax1
-ax.scatter('datenum', 'aou', data=RWSomeanAOU, s=20, alpha=0.4, c='xkcd:spring green')
-# ax.plot('datenum', 'aou', data=RWSomeanAOUyear, c='xkcd:spring green')
+#ax.scatter('datenum', 'aou', data=RWSomeanAOU, s=20, alpha=0.4, c='xkcd:spring green')
+ax.plot('datenum', 'aou', data=RWSomeanAOUyear, c='xkcd:spring green')
 ax1.set_ylabel('AOU (µmol/kg)')
-ax.legend(bbox_to_anchor=(1.1, 1.0), loc='upper left')
 
 ax2 = ax1.twinx()
 ax=ax2
@@ -142,7 +139,6 @@ ax2.set_ylabel('Sunspot number')
 
 ax1.grid(alpha=0.3)
 ax1.set_xlabel("Time (yrs)")
-ax.legend(bbox_to_anchor=(1.1, 1.2), loc='upper left')
 ax1.xaxis.set_major_locator(mdates.YearLocator(5))
 ax1.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
 ax1.xaxis.set_minor_locator(mdates.YearLocator())
@@ -162,10 +158,9 @@ RWStotalmeanTyear = RWStotalmeanT.set_index('datetime').resample('Y').mean()
 RWStotalmeanTyear = RWStotalmeanTyear.reset_index()
 
 ax=ax1
-ax.scatter('datenum', 'ms_temperature', data=RWStotalmeanT, s=20, alpha=0.4, c='xkcd:pink')
-# ax.plot('datenum', 'ms_temperature', data=RWStotalmeanTyear, c='xkcd:pink')
+#ax.scatter('datenum', 'temperature', data=RWStotalmeanT, s=20, alpha=0.4, c='xkcd:pink')
+ax.plot('datenum', 'ms_temperature', data=RWStotalmeanTyear, c='xkcd:pink')
 ax1.set_ylabel('Temperature (°C)')
-ax.legend(bbox_to_anchor=(1.1, 1.0), loc='upper left')
 
 ax2 = ax1.twinx()
 ax=ax2
@@ -174,7 +169,6 @@ ax2.set_ylabel('Sunspot number')
 
 ax1.grid(alpha=0.3)
 ax1.set_xlabel("Time (yrs)")
-ax.legend(bbox_to_anchor=(1.1, 1.2), loc='upper left')
 ax1.xaxis.set_major_locator(mdates.YearLocator(5))
 ax1.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
 ax1.xaxis.set_minor_locator(mdates.YearLocator())

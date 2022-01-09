@@ -23,7 +23,7 @@ glodapnsmean = pd.read_csv("dataframes_made/glodapnsmean_final.csv")
 
 gebco = xr.open_dataset("data_North_Sea/gebco_2020_noordzee.nc")
 fvarr = [Cefas, D366, glodapns, RWSn, RWSo, socatns]
-colourr = ["xkcd:orange", "xkcd:neon pink", "xkcd:light violet", "xkcd:evergreen", "xkcd:ultramarine blue", "xkcd:goldenrod"]
+colourr = ["xkcd:orange", "xkcd:neon pink", "xkcd:violet", "xkcd:evergreen", "xkcd:ultramarine blue", "xkcd:goldenrod"]
 datasett = ['CEFAS', 'D366', 'GLODAP', 'RWS (2018-2021)', 'RWS (1975-2018)', 'SOCAT']
 
 for fvar, colour, dataset in zip(fvarr, colourr, datasett): 
@@ -87,7 +87,7 @@ for fvar, colour, dataset in zip(fvarr, colourr, datasett):
 
 gebco = xr.open_dataset("data_North_Sea/gebco_2020_noordzee.nc")
 fvarr = [Cefasmean, D366mean, glodapnsmean, RWSnmean, RWSomean, socatnsmean]
-colourr = ["xkcd:orange", "xkcd:neon pink", "xkcd:light violet", "xkcd:evergreen", "xkcd:ultramarine blue", "xkcd:goldenrod"]
+colourr = ["xkcd:orange", "xkcd:neon pink", "xkcd:violet", "xkcd:evergreen", "xkcd:ultramarine blue", "xkcd:goldenrod"]
 datasett = ['CEFAS$_{mean}$', 'D366$_{mean}$', 'GLODAP$_{mean}$', 'RWS$_{mean}$ (2018-2021)', 'RWS$_{mean}$ (1975-2018)', 'SOCAT$_{mean}$']
 
 for fvar, colour, dataset in zip(fvarr, colourr, datasett): 

@@ -44,10 +44,10 @@ def get_DIC_plots(combinedmean, glodapnsmean, Cefasmean, D366mean, RWSnmean, com
     fig, ax = plt.subplots(dpi=300, figsize=(5.5,4))
 
     ax = ax
-    ax.scatter("datenum", "dic", c="b", data=glodapnsmean, label='GLODAP', s=20, alpha=0.4)
-    ax.scatter('datenum', 'dic', c='xkcd:greenish', data=Cefasmean, label='CEFAS', s=20, alpha=0.4)
+    ax.scatter("datenum", "dic", c="xkcd:violet", data=glodapnsmean, label='GLODAP', s=20, alpha=0.4)
+    ax.scatter('datenum', 'dic', c='xkcd:orange', data=Cefasmean, label='CEFAS', s=20, alpha=0.4)
     ax.scatter('datenum', 'dic', c='xkcd:neon pink', data=D366mean, label='D366', s=20, alpha=0.4)
-    ax.scatter('datenum', 'dic', c='xkcd:dark aqua', data=RWSnmean, label='RWS', s=20, alpha=0.4)
+    ax.scatter('datenum', 'dic', c='xkcd:evergreen', data=RWSnmean, label='RWS', s=20, alpha=0.4)
 
     ax.set_ylabel("DIC (µmol/kg)")
     ax.grid(alpha=0.3)
@@ -150,10 +150,10 @@ def get_DIC_plots(combinedmean, glodapnsmean, Cefasmean, D366mean, RWSnmean, com
     fig, ax = plt.subplots(dpi=300, figsize=(5.5,4))
 
     ax = ax
-    ax.scatter("dayofyear", "dic", c="b", data=glodapnsmean, label='GLODAP', s=20, alpha=0.4)
-    ax.scatter('dayofyear', 'dic', c='xkcd:greenish', data=Cefasmean, label='CEFAS', s=20, alpha=0.4)
+    ax.scatter("dayofyear", "dic", c="xkcd:violet", data=glodapnsmean, label='GLODAP', s=20, alpha=0.4)
+    ax.scatter('dayofyear', 'dic', c='xkcd:orange', data=Cefasmean, label='CEFAS', s=20, alpha=0.4)
     ax.scatter('dayofyear', 'dic', c='xkcd:neon pink', data=D366mean, label='D366', s=20, alpha=0.4)
-    ax.scatter('dayofyear', 'dic', c='xkcd:dark aqua', data=RWSnmean, label='RWS', s=20, alpha=0.4)
+    ax.scatter('dayofyear', 'dic', c='xkcd:evergreen', data=RWSnmean, label='RWS', s=20, alpha=0.4)
 
     ax.grid(alpha=0.3)
     ax.set_ylabel("DIC (µmol/kg)")
@@ -270,10 +270,10 @@ def get_DIC_plots(combinedmean, glodapnsmean, Cefasmean, D366mean, RWSnmean, com
     fig, ax = plt.subplots(dpi=300, figsize=(5.5,4))
 
     ax = ax
-    ax.scatter("distance_to_shore", "dic", c="b", data=glodapnsmean, label='GLODAP', s=20, alpha=0.4)
-    ax.scatter('distance_to_shore', 'dic', c='xkcd:greenish', data=Cefasmean, label='CEFAS', s=20, alpha=0.4)
+    ax.scatter("distance_to_shore", "dic", c="xkcd:violet", data=glodapnsmean, label='GLODAP', s=20, alpha=0.4)
+    ax.scatter('distance_to_shore', 'dic', c='xkcd:orange', data=Cefasmean, label='CEFAS', s=20, alpha=0.4)
     ax.scatter('distance_to_shore', 'dic', c='xkcd:neon pink', data=D366mean, label='D366', s=20, alpha=0.4)
-    ax.scatter('distance_to_shore', 'dic', c='xkcd:dark aqua', data=RWSnmean, label='RWS', s=20, alpha=0.4)
+    ax.scatter('distance_to_shore', 'dic', c='xkcd:evergreen', data=RWSnmean, label='RWS', s=20, alpha=0.4)
 
     ax.set_ylabel("DIC (µmol/kg)")
     ax.grid(alpha=0.3)
