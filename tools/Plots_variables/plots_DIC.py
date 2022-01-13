@@ -479,6 +479,40 @@ def get_DIC_plots(combinedmean, glodapnsmean, Cefasmean, D366mean, RWSnmean, com
     changeperyear = changelongterm / (year)
     print(f"Change per year: {changeperyear:.6e}") 
 
+    #%%
+
+    L1 = (combinedmean.year <= 2011)
+    DICone = combinedmean[L1]
+    slope, intercept, r, p, se = linregress(combinedmean[L1]['datenum'], combinedmean[L1]['dic_correctd_final'])
+    
+    xbegin = DICone.datenum.min() 
+    xend = DICone.datenum.max() 
+
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2001-2011: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")
+    
+    L2 = (combinedmean.year >= 2011)
+    DICtwo = combinedmean[L2]
+    slope, intercept, r, p, se = linregress(combinedmean[L2]['datenum'], combinedmean[L2]['dic_correctd_final'])
+       
+    xbegin = DICtwo.datenum.min() 
+    xend = DICtwo.datenum.max()
+
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2011-2020: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}") 
+    
     # Use the fit to predict fCO2 in console: SC_tools.seasonalcycle_fit(opt_result['x'], 1)
     # Last number is date (1 = 1 january 1970)
 

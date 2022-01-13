@@ -14,16 +14,16 @@ resultsRWSo = pd.read_csv("dataframes_made/resultsRWSo_final.csv")
 combinedmean = pd.read_csv("dataframes_made/combinedmean_final.csv")
 resultscombined = pd.read_csv("dataframes_made/resultscombined_final.csv")
 socatnsmean = pd.read_csv("dataframes_made/socatnsmean_final.csv")
+socatnsmeanair = pd.read_csv("dataframes_made/socatnsmeanair_final.csv")
 
 #%% # pH verification model TA (combined) & pCO2 air (SOCAT) & fCO2 sea (SOCAT)
 
 # Predict TA for the RWS dataset based on the linear relationship of S & TA (combined dataset)
-slope, intercept, r, p, se = linregress(combinedmean['salinity'], combinedmean['alkalinity'])
+slope, intercept, r, p, se = linregress(combinedmean['salinity'], combinedmean['normalized_TA'])
 combinedmean['predicted_alkalinity'] = (slope * combinedmean['salinity']) + intercept
 RWSomean['predicted_alkalinity'] = (slope * RWSomean['salinity']) + intercept
 
 # Predict pCO2 air & fCO2 sea for the RWS dataset based on the seasonal cycle (sin curve) of pCO2 air & fCO2 sea (SOCAT dataset)
-socatnsmeanair = socatnsmean.dropna(axis='rows', how='all', subset=['pCO2'])
 opt_result = least_squares(SF_tools.lsq_seasonalcycle_fit, [0.006, 600, 162, 680], 
                            args=(socatnsmeanair['datenum'], socatnsmeanair['pCO2']))
 
@@ -33,8 +33,8 @@ RWSomean['predicted_pCO2_air'] = SF_tools.seasonalcycle_fit(opt_result['x'], RWS
 opt_result = least_squares(SF_tools.lsq_seasonalcycle_fit, [0.006, 600, 162, 680], 
                            args=(socatnsmean['datenum'], socatnsmean['fco2_sea']))
 
-combinedmean['predicted_fCO2_sea'] = SF_tools.seasonalcycle_fit(opt_result['x'], combinedmean['datenum'])
-RWSomean['predicted_fCO2_sea'] = SF_tools.seasonalcycle_fit(opt_result['x'], RWSomean['datenum'])
+combinedmean['predicted_fCO2_sea'] = SF_tools.seasonalcycle_fit_fco2_sea(opt_result['x'], combinedmean['datenum'])
+RWSomean['predicted_fCO2_sea'] = SF_tools.seasonalcycle_fit_fco2_sea(opt_result['x'], RWSomean['datenum'])
 
 # Predict pH based on TA (combined) & pCO2 air (SOCAT)
 TA = RWSomean['predicted_alkalinity']

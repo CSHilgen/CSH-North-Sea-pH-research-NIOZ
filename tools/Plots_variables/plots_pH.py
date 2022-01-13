@@ -399,7 +399,7 @@ def get_pH_plots(RWSomean, RWSnmean):
     sns.regplot(x='datenum', y='pH_total', data=RWSomean, ax=ax,
                 scatter_kws={"color": "xkcd:water blue"}, line_kws={"color": "blue", 'label': f'y = {slope:.1e}x + {intercept:.2f}'}, label='Initial pH RWS')
     sns.regplot(x='datenum', y='pH_total_spectro_out', data=RWSnmean, ax=ax,
-                scatter_kws={"color": "xkcd:water blue"}, line_kws={"color": "blue", 'linestyle': 'dashdot', 'label': f'y = {nslope:.1e}x + {nintercept:.2f}'}, label='Initial pH$_{spectro}$ RWS')
+                scatter_kws={"color": "xkcd:cobalt blue"}, line_kws={"color": "xkcd:cobalt blue", 'linestyle': 'dashdot', 'label': f'y = {nslope:.1e}x + {nintercept:.2f}'}, label='Initial pH$_{spectro}$ RWS')
     
     ax.set_title("pH RWS data - North Sea")
     ax.grid(alpha=0.3)
@@ -442,6 +442,24 @@ def get_pH_plots(RWSomean, RWSnmean):
     yend = (slope * xend) + intercept
     changelongterm = yend - ybegin
     print(f"Change over 2018-2021: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}") 
+    
+    #%%
+    
+    L2 = (RWSomean.year >= 2010)
+    RWSa = RWSomean[L2]
+    RWSa = RWSa.dropna(axis='rows', how='all', subset=['pH_total'])
+    slope, intercept, r, p, se = linregress(RWSa['datenum'], RWSa['pH_total'])
+   
+    xbegin = RWSa.datenum.min() # 14640
+    xend = RWSa.datenum.max() #17896
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2010-2018: {changelongterm:6e}")
     changeperyear = changelongterm / (year)
     print(f"Change per year: {changeperyear:.6e}") 
     
@@ -500,7 +518,7 @@ def get_pH_plots(RWSomean, RWSnmean):
     sns.regplot(x='datenum', y='pH_total', data=RWSomean[L2], ax=ax,
                 scatter_kws={"color": "xkcd:water blue"}, line_kws={"color": "blue", 'label': f'y = {slope:.1e}x + {intercept:.1f}'}, label='Initial pH RWS')
     sns.regplot(x='datenum', y='pH_total_spectro_out', data=RWSnmean, ax=ax,
-                scatter_kws={"color": "xkcd:water blue"}, line_kws={"color": "blue", 'linestyle': 'dashdot', 'label': f'y = {nslope:.1e}x + {nintercept:.1f}'}, label='Initial pH$_{spectro}$ RWS')
+                scatter_kws={"color": "xkcd:cobalt blue"}, line_kws={"color": "xkcd:cobalt blue", 'linestyle': 'dashdot', 'label': f'y = {nslope:.1e}x + {nintercept:.1f}'}, label='Initial pH$_{spectro}$ RWS')
 
     ax.grid(alpha=0.3)
     ax.set_xlabel("Time (yrs)")
@@ -539,7 +557,7 @@ def get_pH_plots(RWSomean, RWSnmean):
     sns.regplot(x='datenum', y='pH_total', data=RWSomeanpH[L2], ax=ax,
                 scatter_kws={"color": "xkcd:water blue"}, line_kws={"color": "blue", 'label': f'y = {bslope:.1e}x + {bintercept:.1f}', 'linestyle': 'dotted'})
     sns.regplot(x='datenum', y='pH_total_spectro_out', data=RWSnmean, ax=ax,
-                scatter_kws={"color": "xkcd:water blue"}, line_kws={"color": "blue", 'linestyle': 'dashdot', 'label': f'y = {nslope:.1e}x + {nintercept:.1f}'}, label='Initial pH$_{spectro}$ RWS')
+                scatter_kws={"color": "xkcd:cobalt blue"}, line_kws={"color": "xkcd:cobalt blue", 'linestyle': 'dashdot', 'label': f'y = {nslope:.1e}x + {nintercept:.1f}'}, label='Initial pH$_{spectro}$ RWS')
     
     ax.set_title("pH RWS data - North Sea")
     ax.grid(alpha=0.3)

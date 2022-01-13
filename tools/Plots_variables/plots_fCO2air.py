@@ -335,11 +335,11 @@ def get_fCO2air_plots(socatnsmean, socatnsmeanair):
 
     print('Long term trend of fCO$_2$ air SOCAT')
 
+    fig, axs = plt.subplots(nrows=3, dpi=300, figsize=(10,6), sharex=True)
+
     opt_result = least_squares(SF_tools.lsq_seasonalcycle_fit, [0.006, 386, 162, 680], 
                                args=(socatnsmeanair['datenum'], socatnsmeanair['fCO2']))
     slope, intercept, sine_stretch, sine_shift = opt_result['x']
-
-    fig, axs = plt.subplots(nrows=3, dpi=300, figsize=(10,6), sharex=True)
 
     slope, intercept, r, p, se = linregress(socatnsmeanair['datenum'], socatnsmeanair['fCO2'])
     print("Linear regression Initial data")

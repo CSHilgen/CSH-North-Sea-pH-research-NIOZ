@@ -32,6 +32,7 @@ def plot_salinity_vs_DIC(combinedmean):
     ax.set_xlim([31, 35.5])
     
     cbar=fig.colorbar(sc, ax=ax, orientation='vertical')
+    cbar.set_label('Seasons')
     label=[80,172,264,355]
     cbar.set_ticks(label)
     cbar.set_ticklabels(['Winter    ', 'Spring    ', 'Summer    ', 'Autumn    '])
@@ -74,6 +75,7 @@ def plot_salinity_vs_TA(combinedmean):
     ax.set_xlim([31, 35.5])
     
     cbar=fig.colorbar(sc, ax=ax, orientation='vertical')
+    cbar.set_label('Seasons')
     label=[80,172,264,355]
     cbar.set_ticks(label)
     cbar.set_ticklabels(['Winter    ', 'Spring    ', 'Summer    ', 'Autumn    '])

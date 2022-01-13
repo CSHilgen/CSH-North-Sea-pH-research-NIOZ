@@ -14,12 +14,12 @@ def plot_pH_verification(RWSomean, RWSnmean, results_TA_fCO2, results_TA_pCO2):
     ax.scatter('datenum', 'pH_total', c='xkcd:goldenrod', data=results_TA_fCO2, label='pH$_{pred}$ A$_T$ & fCO$_{2SW}$', s=20, alpha=0.4)
 
     ax.grid(alpha=0.3)
-    ax.set_ylabel("pH$_{total}$")
-    ax.set_xlabel("Time (yrs)")
+    ax.set_ylabel("pH$_{total}$", fontsize=12)
+    ax.set_xlabel("Time (yrs)", fontsize=12)
     #ax.set_xlim([9069, 19000])
     ax.set_xlim(10950, 19345)
     ax.set_ylim(7, 8.5)
-    ax.legend()
+    ax.legend()#bbox_to_anchor=(1.0, 1.0), loc='upper left')
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
@@ -90,11 +90,11 @@ def predicted_fCO2_pCO2_alkalinity_RWSo(RWSomean):
     fig, ax = plt.subplots(dpi=300)
     
     ax=ax
-    ax.scatter('datenum', 'predicted_alkalinity', c='xkcd:aqua', data=RWSomean, label='RWS')
+    ax.scatter('datenum', 'predicted_alkalinity', c='xkcd:water blue', data=RWSomean, label='RWS')
 
     ax.grid(alpha=0.3)
     ax.set_xlabel("Time (yrs)")
-    ax.set_ylabel("A$_T$ (μmol/kg)")
+    ax.set_ylabel("nA$_T$ (μmol/kg)")
     ax.set_title("Predicted TA for RWSomean - North Sea")
     ax.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
     ax.get_legend().set_title("Dataset")
@@ -112,7 +112,7 @@ def predicted_fCO2_pCO2_alkalinity_RWSo(RWSomean):
     fig, ax = plt.subplots(dpi=300)
     
     ax=ax
-    ax.scatter('datenum', 'predicted_pCO2_air', c='xkcd:aqua', data=RWSomean, label='RWS')
+    ax.scatter('datenum', 'predicted_pCO2_air', c='xkcd:water blue', data=RWSomean, label='RWS')
 
     ax.grid(alpha=0.3)
     ax.set_xlabel("Time (yrs)")
@@ -135,7 +135,7 @@ def predicted_fCO2_pCO2_alkalinity_RWSo(RWSomean):
     fig, ax = plt.subplots(dpi=300)
     
     ax=ax
-    ax.scatter('datenum', 'predicted_fCO2_sea', c='xkcd:aqua', data=RWSomean, label='RWS')
+    ax.scatter('datenum', 'predicted_fCO2_sea', c='xkcd:water blue', data=RWSomean, label='RWS')
     
     ax.grid(alpha=0.3)
     ax.set_xlabel("Time (yrs)")

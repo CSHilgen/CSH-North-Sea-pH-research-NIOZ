@@ -426,9 +426,9 @@ def get_deltafCO2_plots(socatnsmean, socatnsmeandelta):
     plt.show()
 
     # Delta fCO2 1994-2019
-    xbegin = 9069
-    xend = 18169
     slope, intercept, r, p, se = linregress(socatnsmeandelta['datenum'], socatnsmeandelta['deltafco2'])
+    xbegin = socatnsmeandelta.datenum.min() #9069
+    xend = socatnsmeandelta.datenum.max() # 18169
     year = (xend-xbegin) / 365
     print(f"in {year:6f} years")
     ybegin = (slope * xbegin) + intercept

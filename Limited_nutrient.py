@@ -47,7 +47,7 @@ ax.xaxis.set_minor_locator(mdates.YearLocator())
 ax.legend()
 
 plt.tight_layout()
-plt.savefig("figures/When_P_limited_nutrient_time.png")
+plt.savefig("figures/Nutrient_limitation/When_P_limited_nutrient_time.png")
 plt.show()
 
 #%% # N limited time
@@ -78,7 +78,7 @@ ax.xaxis.set_minor_locator(mdates.YearLocator())
 ax.legend()
 
 plt.tight_layout(pad=0.5)
-plt.savefig("figures/When_N_limited_nutrient_time.png")
+plt.savefig("figures/Nutrient_limitation/When_N_limited_nutrient_time.png")
 plt.show()
 
 #%% # P limited seasons
@@ -111,7 +111,7 @@ ax.set_xlim(0, 365)
 ax.legend()
 
 plt.tight_layout()
-plt.savefig("figures/When_P_limited_nutrient_dayofyear.png")
+plt.savefig("figures/Nutrient_limitation/When_P_limited_nutrient_dayofyear.png")
 plt.show()
 
 #%% # N limited seasons
@@ -144,7 +144,7 @@ ax.set_ylim(0, 0.15)
 ax.legend()
 
 plt.tight_layout(pad=0.5)
-plt.savefig("figures/When_N_limited_nutrient_dayofyear.png")
+plt.savefig("figures/Nutrient_limitation/When_N_limited_nutrient_dayofyear.png")
 plt.show()
 
 #%% # P limited regions
@@ -171,7 +171,7 @@ ax.xaxis.set_major_locator(MultipleLocator(10))
 ax.legend()
 
 plt.tight_layout()
-plt.savefig("figures/When_P_limited_nutrient_region.png")
+plt.savefig("figures/Nutrient_limitation/When_P_limited_nutrient_region.png")
 plt.show()
 
 #%% # N limited regions
@@ -198,5 +198,5 @@ ax.xaxis.set_major_locator(MultipleLocator(10))
 ax.legend()
 
 plt.tight_layout(pad=0.5)
-plt.savefig("figures/When_N_limited_nutrient_region.png")
+plt.savefig("figures/Nutrient_limitation/When_N_limited_nutrient_region.png")
 plt.show()

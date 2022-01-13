@@ -379,8 +379,9 @@ def get_TA_plots(combinedmean, glodapnsmean, Cefasmean, D366mean, RWSnmean):
     plt.show()
 
     # TA 2001-2021
-    xbegin = 11565
-    xend = 18808
+    slope, intercept, r, p, se = linregress(combinedmeanNTA['datenum'], combinedmeanNTA['normalized_TA'])
+    xbegin = combinedmeanNTA.datenum.min()
+    xend = combinedmeanNTA.datenum.max()
     year = (xend-xbegin) / 365
     print(f"in {year:6f} years")
     ybegin = (slope * xbegin) + intercept
