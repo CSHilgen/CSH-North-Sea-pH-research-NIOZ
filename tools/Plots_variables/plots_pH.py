@@ -292,10 +292,13 @@ def get_pH_plots(RWSomean, RWSnmean):
 
     fig, ax = plt.subplots(dpi=300)
 
+    slope, intercept, r, p, se = linregress(RWSomeanpH['distance_to_shore'], RWSomeanpH['pH_total'])
     ax = ax
-    ax.scatter("distance_to_shore", "pH_total", c="xkcd:aqua", data=RWSomean, label='RWS', s=20, alpha=0.4)
-    ax.scatter('distance_to_shore', 'pH_total_spectro_out', c='xkcd:dark aqua', data=RWSnmean, label='RWS$_{spectro}$', s=20, alpha=0.4)
-
+    #ax.scatter("distance_to_shore", "pH_total", c="xkcd:aqua", data=RWSomean, label='RWS', s=20, alpha=0.4)
+    #ax.scatter('distance_to_shore', 'pH_total_spectro_out', c='xkcd:dark aqua', data=RWSnmean, label='RWS$_{spectro}$', s=20, alpha=0.4)
+    sns.regplot(x='distance_to_shore', y='pH_total', data=RWSomean, ax=ax,
+            scatter_kws={"color": "xkcd:water blue"}, line_kws={"color": "blue", 'label': f'y = {slope:.1e}x + {intercept:.1f}'}, label='Initial pH RWS')
+   
     ax.set_ylabel("pH")
     ax.grid(alpha=0.3)
     ax.set_xlabel("Distance to shore (km)")
@@ -307,7 +310,7 @@ def get_pH_plots(RWSomean, RWSnmean):
     ax.set_title('pH RWS data - Datasets North Sea') 
 
     plt.tight_layout()
-    plt.savefig("figures/pH_mean_regions_datasets_RWS.png")
+    #plt.savefig("figures/pH_mean_regions_datasets_RWS.png")
     plt.show()
 
     #%% # pH - Regions - Seasons
@@ -418,51 +421,6 @@ def get_pH_plots(RWSomean, RWSnmean):
     plt.savefig("figures/Long_Term_Trends/pH_fitting_RWSomean.png")    
     plt.show()
 
-    # pH 1975-2018
-    xbegin = 2006
-    xend = 17896
-    slope, intercept, r, p, se = linregress(RWSomeanpH['datenum'], RWSomeanpH['pH_total'])
-    year = (xend-xbegin) / 365
-    print(f"in {year:6f} years")
-    ybegin = (slope * xbegin) + intercept
-    yend = (slope * xend) + intercept
-    changelongterm = yend - ybegin
-    print(f"Change over 1975-2018: {changelongterm:6e}")
-    changeperyear = changelongterm / (year)
-    print(f"Change per year: {changeperyear:.6e}") 
-    
-    # pH 2018-2021
-    xbegin = 17562
-    xend = 18747
-    slope, intercept, r, p, se = linregress(RWSnmeanpH['datenum'], RWSnmeanpH['pH_total_spectro_out'])
-    
-    year = (xend-xbegin) / 365
-    print(f"in {year:6f} years")
-    ybegin = (slope * xbegin) + intercept
-    yend = (slope * xend) + intercept
-    changelongterm = yend - ybegin
-    print(f"Change over 2018-2021: {changelongterm:6e}")
-    changeperyear = changelongterm / (year)
-    print(f"Change per year: {changeperyear:.6e}") 
-    
-    #%%
-    
-    L2 = (RWSomean.year >= 2010)
-    RWSa = RWSomean[L2]
-    RWSa = RWSa.dropna(axis='rows', how='all', subset=['pH_total'])
-    slope, intercept, r, p, se = linregress(RWSa['datenum'], RWSa['pH_total'])
-   
-    xbegin = RWSa.datenum.min() # 14640
-    xend = RWSa.datenum.max() #17896
-    year = (xend-xbegin) / 365
-    print(f"in {year:6f} years")
-    ybegin = (slope * xbegin) + intercept
-    yend = (slope * xend) + intercept
-    changelongterm = yend - ybegin
-    print(f"Change over 2010-2018: {changelongterm:6e}")
-    changeperyear = changelongterm / (year)
-    print(f"Change per year: {changeperyear:.6e}") 
-    
     # Use the fit to predict fCO2 in console: SC_tools.seasonalcycle_fit(opt_result['x'], 1)
     # Last number is date (1 = 1 january 1970)
 
@@ -575,3 +533,94 @@ def get_pH_plots(RWSomean, RWSnmean):
     plt.tight_layout()
     plt.savefig("figures/Long_Term_Trends/pH_split_up_RWSomeanpH2.png")     
     plt.show()
+    
+#%% # Change per year and period
+    
+    P1 = (RWSomeanpH.year <= 1985)
+    P2 = (RWSomeanpH.year >= 1985) & (RWSomeanpH.year <= 2010)
+    P3 = (RWSomeanpH.year >= 2010)
+    P4 = (RWSomeanpH.year >= 2000)
+    
+    # Total 1975-2018 
+    slope, intercept, r, p, se = linregress(RWSomeanpH['datenum'], RWSomeanpH['pH_total']) 
+    xbegin = RWSomeanpH.datenum.min() 
+    xend = RWSomeanpH.datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 1975-2018: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}") 
+    
+    # Total 1975-1985
+    slope, intercept, r, p, se = linregress(RWSomeanpH[P1]['datenum'], RWSomeanpH[P1]['pH_total']) 
+    xbegin = RWSomeanpH[P1].datenum.min() 
+    xend = RWSomeanpH[P1].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 1975-1985: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}") 
+    
+    # Total 1985-2010 
+    slope, intercept, r, p, se = linregress(RWSomeanpH[P2]['datenum'], RWSomeanpH[P2]['pH_total']) 
+    xbegin = RWSomeanpH[P2].datenum.min() 
+    xend = RWSomeanpH[P2].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 1985-2010: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")
+    
+    # Total 2010-2018
+    slope, intercept, r, p, se = linregress(RWSomeanpH[P3]['datenum'], RWSomeanpH[P3]['pH_total']) 
+    xbegin = RWSomeanpH[P3].datenum.min() 
+    xend = RWSomeanpH[P3].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2010-2018: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")
+    
+    # Total 2018-2021
+    slope, intercept, r, p, se = linregress(RWSnmeanpH['datenum'], RWSnmeanpH['pH_total_spectro_out']) 
+    xbegin = RWSnmeanpH.datenum.min() 
+    xend = RWSnmeanpH.datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2018-2021: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")
+
+    # Total 2000-2018
+    slope, intercept, r, p, se = linregress(RWSomeanpH[P4]['datenum'], RWSomeanpH[P4]['pH_total']) 
+    xbegin = RWSomeanpH[P4].datenum.min() 
+    xend = RWSomeanpH[P4].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2000-2018: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")

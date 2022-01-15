@@ -434,19 +434,6 @@ def get_oxygen_plots(RWSomean, RWSomeano2):
     plt.savefig("figures/Long_Term_Trends/Oxygen_season_fitting_RWSomeano2.png")    
     plt.show()
 
-    # Oxygen 1975-2018 
-    xbegin = 2006
-    xend = 17896
-    slope, intercept, r, p, se = linregress(RWSomeano2['datenum'], RWSomeano2['oxygen umol/kg'])
-    year = (xend-xbegin) / 365
-    print(f"in {year:6f} years")
-    ybegin = (slope * xbegin) + intercept
-    yend = (slope * xend) + intercept
-    changelongterm = yend - ybegin
-    print(f"Change over 1975-2018: {changelongterm:6e}")
-    changeperyear = changelongterm / (year)
-    print(f"Change per year: {changeperyear:.6e}") 
-
     # Use the fit to predict fCO2 in console: SC_tools.seasonalcycle_fit(opt_result['x'], 1)
     # Last number is date (1 = 1 january 1970)
 
@@ -554,4 +541,79 @@ def get_oxygen_plots(RWSomean, RWSomeano2):
     plt.savefig("figures/Long_Term_Trends/Oxygen_split_up_RWSomeano22.png")     
     plt.show()
 
+#%% # Change per year and period
+    
+    P1 = (RWSomeano2.year <= 1985)
+    P2 = (RWSomeano2.year >= 1985) & (RWSomeano2.year <= 2010)
+    P3 = (RWSomeano2.year >= 2010)
+    P4 = (RWSomeano2.year >= 2000)
+    
+    # Total 1975-2018 
+    slope, intercept, r, p, se = linregress(RWSomeano2['datenum'], RWSomeano2['oxygen umol/kg']) 
+    xbegin = RWSomeano2.datenum.min() 
+    xend = RWSomeano2.datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 1975-2018: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}") 
+    
+    # Total 1975-1985
+    slope, intercept, r, p, se = linregress(RWSomeano2[P1]['datenum'], RWSomeano2[P1]['oxygen umol/kg']) 
+    xbegin = RWSomeano2[P1].datenum.min() 
+    xend = RWSomeano2[P1].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 1975-1985: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}") 
+    
+    # Total 1985-2010 
+    slope, intercept, r, p, se = linregress(RWSomeano2[P2]['datenum'], RWSomeano2[P2]['oxygen umol/kg']) 
+    xbegin = RWSomeano2[P2].datenum.min() 
+    xend = RWSomeano2[P2].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 1985-2010: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")
+    
+    # Total 2010-2018
+    slope, intercept, r, p, se = linregress(RWSomeano2[P3]['datenum'], RWSomeano2[P3]['oxygen umol/kg']) 
+    xbegin = RWSomeano2[P3].datenum.min() 
+    xend = RWSomeano2[P3].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2010-2018: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")
 
+    # Total 2000-2018
+    slope, intercept, r, p, se = linregress(RWSomeano2[P4]['datenum'], RWSomeano2[P4]['oxygen umol/kg']) 
+    xbegin = RWSomeano2[P4].datenum.min() 
+    xend = RWSomeano2[P4].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2000-2018: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")

@@ -444,19 +444,6 @@ def get_temperature_plots(RWStotalmean, RWStotalmeanT, RWSomean, RWSnmean):
     plt.savefig("figures/Long_Term_Trends/Temperature_season_fitting_RWStotalmeanT.png")    
     plt.show()
 
-    # Temperature 1975-2021 
-    xbegin = 1976
-    xend = 18808
-    slope, intercept, r, p, se = linregress(RWStotalmeanT['datenum'], RWStotalmeanT['temperature'])
-    year = (xend-xbegin) / 365
-    print(f"in {year:6f} years")
-    ybegin = (slope * xbegin) + intercept
-    yend = (slope * xend) + intercept
-    changelongterm = yend - ybegin
-    print(f"Change over 1975-2021: {changelongterm:6e}")
-    changeperyear = changelongterm / (year)
-    print(f"Change per year: {changeperyear:.6e}") 
-
     # Use the fit to predict fCO2 in console: SC_tools.seasonalcycle_fit(opt_result['x'], 1)
     # Last number is date (1 = 1 january 1970)
 
@@ -563,3 +550,80 @@ def get_temperature_plots(RWStotalmean, RWStotalmeanT, RWSomean, RWSnmean):
     plt.tight_layout()
     plt.savefig("figures/Long_Term_Trends/Temperature_split_up_RWStotalmeanT2.png")     
     plt.show()
+
+#%% # Change per year and period
+    
+    P1 = (RWStotalmeanT.year <= 1985)
+    P2 = (RWStotalmeanT.year >= 1985) & (RWStotalmeanT.year <= 2010)
+    P3 = (RWStotalmeanT.year >= 2010)
+    P4 = (RWStotalmeanT.year >= 2000)
+    
+    # Total 1975-2021 
+    slope, intercept, r, p, se = linregress(RWStotalmeanT['datenum'], RWStotalmeanT['temperature']) 
+    xbegin = RWStotalmeanT.datenum.min() 
+    xend = RWStotalmeanT.datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 1975-2021: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}") 
+    
+    # Total 1975-1985 
+    slope, intercept, r, p, se = linregress(RWStotalmeanT[P1]['datenum'], RWStotalmeanT[P1]['temperature']) 
+    xbegin = RWStotalmeanT[P1].datenum.min() 
+    xend = RWStotalmeanT[P1].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 1975-1985: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}") 
+    
+    # Total 1985-2010 
+    slope, intercept, r, p, se = linregress(RWStotalmeanT[P2]['datenum'], RWStotalmeanT[P2]['temperature']) 
+    xbegin = RWStotalmeanT[P2].datenum.min() 
+    xend = RWStotalmeanT[P2].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 1985-2010: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")
+    
+    # Total 2010-2021
+    slope, intercept, r, p, se = linregress(RWStotalmeanT[P3]['datenum'], RWStotalmeanT[P3]['temperature']) 
+    xbegin = RWStotalmeanT[P3].datenum.min() 
+    xend = RWStotalmeanT[P3].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2010-2021: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")
+    
+    # Total 2000-2021
+    slope, intercept, r, p, se = linregress(RWStotalmeanT[P4]['datenum'], RWStotalmeanT[P4]['temperature']) 
+    xbegin = RWStotalmeanT[P4].datenum.min() 
+    xend = RWStotalmeanT[P4].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2000-2021: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")

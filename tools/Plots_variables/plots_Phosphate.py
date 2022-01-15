@@ -435,20 +435,7 @@ def get_phosphate_plots(RWSomean, RWSomeanP):
     plt.tight_layout()
     plt.savefig("figures/Long_Term_Trends/Phosphate_season_fitting_RWSomeanP.png")    
     plt.show()
-    
-    # Phosphate 1975-2018
-    xbegin = 1976
-    xend = 17896
-    slope, intercept, r, p, se = linregress(RWSomeanP['datenum'], RWSomeanP['total_phosphate'])
-    year = (xend-xbegin) / 365
-    print(f"in {year:6f} years")
-    ybegin = (slope * xbegin) + intercept
-    yend = (slope * xend) + intercept
-    changelongterm = yend - ybegin
-    print(f"Change over 1975-2018: {changelongterm:6e}")
-    changeperyear = changelongterm / (year)
-    print(f"Change per year: {changeperyear:.6e}") 
-    
+      
     # Use the fit to predict fCO2 in console: SC_tools.seasonalcycle_fit(opt_result['x'], 1)
     # Last number is date (1 = 1 january 1970)
     
@@ -557,3 +544,80 @@ def get_phosphate_plots(RWSomean, RWSomeanP):
     plt.tight_layout()
     plt.savefig("figures/Long_Term_Trends/Phosphate_split_up_RWSomeanP2.png")     
     plt.show()
+
+#%% # Change per year and period
+    
+    P1 = (RWSomeanP.year <= 1985)
+    P2 = (RWSomeanP.year >= 1985) & (RWSomeanP.year <= 2010)
+    P3 = (RWSomeanP.year >= 2010)
+    P4 = (RWSomeanP.year >= 2000)
+    
+    # Total 1975-2018 
+    slope, intercept, r, p, se = linregress(RWSomeanP['datenum'], RWSomeanP['total_phosphate']) 
+    xbegin = RWSomeanP.datenum.min() 
+    xend = RWSomeanP.datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 1975-2018: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}") 
+    
+    # Total 1975-1985
+    slope, intercept, r, p, se = linregress(RWSomeanP[P1]['datenum'], RWSomeanP[P1]['total_phosphate']) 
+    xbegin = RWSomeanP[P1].datenum.min() 
+    xend = RWSomeanP[P1].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 1975-1985: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}") 
+    
+    # Total 1985-2010 
+    slope, intercept, r, p, se = linregress(RWSomeanP[P2]['datenum'], RWSomeanP[P2]['total_phosphate']) 
+    xbegin = RWSomeanP[P2].datenum.min() 
+    xend = RWSomeanP[P2].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 1985-2010: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")
+    
+    # Total 2010-2018
+    slope, intercept, r, p, se = linregress(RWSomeanP[P3]['datenum'], RWSomeanP[P3]['total_phosphate']) 
+    xbegin = RWSomeanP[P3].datenum.min() 
+    xend = RWSomeanP[P3].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2010-2018: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")
+    
+    # Total 2000-2018
+    slope, intercept, r, p, se = linregress(RWSomeanP[P4]['datenum'], RWSomeanP[P4]['total_phosphate']) 
+    xbegin = RWSomeanP[P4].datenum.min() 
+    xend = RWSomeanP[P4].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2000-2018: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")

@@ -424,19 +424,6 @@ def get_fCO2sea_plots(socatnsmean):
     plt.savefig("figures/Long_Term_Trends/fCO2_sea_season_fitting_SOCAT.png")    
     plt.show()
 
-    # fCO2 sea 1991-2020 
-    xbegin = 8003
-    xend = 18596
-    slope, intercept, r, p, se = linregress(socatnsmean['datenum'], socatnsmean['fco2_sea'])
-    year = (xend-xbegin) / 365
-    print(f"in {year:6f} years")
-    ybegin = (slope * xbegin) + intercept
-    yend = (slope * xend) + intercept
-    changelongterm = yend - ybegin
-    print(f"Change over 1991-2020: {changelongterm:6e}")
-    changeperyear = changelongterm / (year)
-    print(f"Change per year: {changeperyear:.6e}") 
-
     # Use the fit to predict fCO2 in console: SC_tools.seasonalcycle_fit(opt_result['x'], 1)
     # Last number is date (1 = 1 january 1970)
 
@@ -520,3 +507,65 @@ def get_fCO2sea_plots(socatnsmean):
     plt.tight_layout()
     plt.savefig("figures/Long_Term_Trends/fCO2_sea_split_up_SOCAT2.png")     
     plt.show()
+    
+#%% # Change per year and period
+    
+    P2 = (socatnsmean.year <= 2010)
+    P3 = (socatnsmean.year >= 2010)
+    P4 = (socatnsmean.year >= 2000)
+    
+    # Total 1991-2019 
+    slope, intercept, r, p, se = linregress(socatnsmean['datenum'], socatnsmean['fco2_sea']) 
+    xbegin = socatnsmean.datenum.min() 
+    xend = socatnsmean.datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 1991-2019: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}") 
+       
+    # Total 1991-2010 
+    slope, intercept, r, p, se = linregress(socatnsmean[P2]['datenum'], socatnsmean[P2]['fco2_sea']) 
+    xbegin = socatnsmean[P2].datenum.min() 
+    xend = socatnsmean[P2].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 1991-2010: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")
+    
+    # Total 2010-2019
+    slope, intercept, r, p, se = linregress(socatnsmean[P3]['datenum'], socatnsmean[P3]['fco2_sea']) 
+    xbegin = socatnsmean[P3].datenum.min() 
+    xend = socatnsmean[P3].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2010-2019: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")
+    
+    # Total 2000-2019
+    slope, intercept, r, p, se = linregress(socatnsmean[P4]['datenum'], socatnsmean[P4]['fco2_sea']) 
+    xbegin = socatnsmean[P4].datenum.min() 
+    xend = socatnsmean[P4].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2000-2019: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")

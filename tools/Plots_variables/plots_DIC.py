@@ -478,40 +478,6 @@ def get_DIC_plots(combinedmean, glodapnsmean, Cefasmean, D366mean, RWSnmean, com
     print(f"Change over 2001-2021: {changelongterm:6e}")
     changeperyear = changelongterm / (year)
     print(f"Change per year: {changeperyear:.6e}") 
-
-    #%%
-
-    L1 = (combinedmean.year <= 2011)
-    DICone = combinedmean[L1]
-    slope, intercept, r, p, se = linregress(combinedmean[L1]['datenum'], combinedmean[L1]['dic_correctd_final'])
-    
-    xbegin = DICone.datenum.min() 
-    xend = DICone.datenum.max() 
-
-    year = (xend-xbegin) / 365
-    print(f"in {year:6f} years")
-    ybegin = (slope * xbegin) + intercept
-    yend = (slope * xend) + intercept
-    changelongterm = yend - ybegin
-    print(f"Change over 2001-2011: {changelongterm:6e}")
-    changeperyear = changelongterm / (year)
-    print(f"Change per year: {changeperyear:.6e}")
-    
-    L2 = (combinedmean.year >= 2011)
-    DICtwo = combinedmean[L2]
-    slope, intercept, r, p, se = linregress(combinedmean[L2]['datenum'], combinedmean[L2]['dic_correctd_final'])
-       
-    xbegin = DICtwo.datenum.min() 
-    xend = DICtwo.datenum.max()
-
-    year = (xend-xbegin) / 365
-    print(f"in {year:6f} years")
-    ybegin = (slope * xbegin) + intercept
-    yend = (slope * xend) + intercept
-    changelongterm = yend - ybegin
-    print(f"Change over 2011-2020: {changelongterm:6e}")
-    changeperyear = changelongterm / (year)
-    print(f"Change per year: {changeperyear:.6e}") 
     
     # Use the fit to predict fCO2 in console: SC_tools.seasonalcycle_fit(opt_result['x'], 1)
     # Last number is date (1 = 1 january 1970)
@@ -596,3 +562,50 @@ def get_DIC_plots(combinedmean, glodapnsmean, Cefasmean, D366mean, RWSnmean, com
     plt.tight_layout()
     plt.savefig("figures/Long_Term_Trends/DIC_split_up_combinedmean3.png")     
     plt.show()
+
+#%% # Change per year and period
+    
+    P2 = (combinedmean.year <= 2011)
+    P3 = (combinedmean.year >= 2010)
+    
+    # Total 2000-2021 
+    slope, intercept, r, p, se = linregress(combinedmean['datenum'], combinedmean['normalized_DIC']) 
+    xbegin = combinedmean.datenum.min() 
+    xend = combinedmean.datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2000-2021: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}") 
+     
+    # Total 2000-2010 
+    slope, intercept, r, p, se = linregress(combinedmean[P2]['datenum'], combinedmean[P2]['normalized_DIC']) 
+    xbegin = combinedmean[P2].datenum.min() 
+    xend = combinedmean[P2].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2000-2011: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")
+    
+    # Total 2010-2021
+    slope, intercept, r, p, se = linregress(combinedmean[P3]['datenum'], combinedmean[P3]['normalized_DIC']) 
+    xbegin = combinedmean[P3].datenum.min() 
+    xend = combinedmean[P3].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2010-2021: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")

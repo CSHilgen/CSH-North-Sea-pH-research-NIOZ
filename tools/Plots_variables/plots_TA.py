@@ -378,19 +378,6 @@ def get_TA_plots(combinedmean, glodapnsmean, Cefasmean, D366mean, RWSnmean):
     plt.savefig("figures/Long_Term_Trends/TA_fitting_Combined.png")    
     plt.show()
 
-    # TA 2001-2021
-    slope, intercept, r, p, se = linregress(combinedmeanNTA['datenum'], combinedmeanNTA['normalized_TA'])
-    xbegin = combinedmeanNTA.datenum.min()
-    xend = combinedmeanNTA.datenum.max()
-    year = (xend-xbegin) / 365
-    print(f"in {year:6f} years")
-    ybegin = (slope * xbegin) + intercept
-    yend = (slope * xend) + intercept
-    changelongterm = yend - ybegin
-    print(f"Change over 2001-2021: {changelongterm:6e}")
-    changeperyear = changelongterm / (year)
-    print(f"Change per year: {changeperyear:.6e}") 
-
     # Use the fit to predict fCO2 in console: SC_tools.seasonalcycle_fit(opt_result['x'], 1)
     # Last number is date (1 = 1 january 1970)
 
@@ -474,4 +461,54 @@ def get_TA_plots(combinedmean, glodapnsmean, Cefasmean, D366mean, RWSnmean):
     plt.tight_layout()
     plt.savefig("figures/Long_Term_Trends/TA_split_up_combinedmean2.png")     
     plt.show()
+
+#%% # Change per year and period
+    
+    P2 = (combinedmeanNTA.year <= 2011)
+    P3 = (combinedmeanNTA.year >= 2010)
+    
+    # Total 2000-2021 
+    slope, intercept, r, p, se = linregress(combinedmeanNTA['datenum'], combinedmeanNTA['normalized_TA']) 
+    xbegin = combinedmeanNTA.datenum.min() 
+    xend = combinedmeanNTA.datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2000-2021: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}") 
+     
+    # Total 2000-2010 
+    slope, intercept, r, p, se = linregress(combinedmeanNTA[P2]['datenum'], combinedmeanNTA[P2]['normalized_TA']) 
+    xbegin = combinedmeanNTA[P2].datenum.min() 
+    xend = combinedmeanNTA[P2].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2000-2011: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")
+    
+    # Total 2010-2021
+    slope, intercept, r, p, se = linregress(combinedmeanNTA[P3]['datenum'], combinedmeanNTA[P3]['normalized_TA']) 
+    xbegin = combinedmeanNTA[P3].datenum.min() 
+    xend = combinedmeanNTA[P3].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2010-2021: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")
+
+
+
 

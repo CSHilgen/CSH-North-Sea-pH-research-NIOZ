@@ -246,19 +246,23 @@ def plot_DIC_TA(combinedmean):
     plt.tight_layout()
     plt.savefig("figures/Spatial_variability/DIC_TA_plot_scatter_mean_dayofyear_combined.png")
     plt.show()
-    
+
 def plot_DIC_TA_year(combinedmean):
     
     from matplotlib import pyplot as plt
     import numpy as np
-    
+   #%% 
     fig, ax = plt.subplots(dpi=300, figsize=(6,4))
     cm = plt.cm.get_cmap('rainbow')
     vmin = 2000
     vmax = 2021
-
+    
+    C1 = combinedmean.dic > 2050
+    slope, intercept, r, p, se = linregress(combinedmean['normalized_DIC'], combinedmean['normalized_TA'])
     ax = ax
     sc = ax.scatter('dic', 'alkalinity', c='year', data=combinedmean, cmap=cm, vmin=vmin, vmax=vmax+1, s=20)
+    sns.regplot(x='dic', y='alkalinity', data=combinedmean[C1], ax=ax,
+            scatter_kws={"color": "None"}, line_kws={"color": "blue", 'label': f'y = {slope:.1e}x + {intercept:.1f}'})
 
     ax.grid(alpha=0.3)
     ax.set_xlabel("DIC (μmol/kg)")
@@ -276,9 +280,9 @@ def plot_DIC_TA_year(combinedmean):
     cbar.set_ticklabels([2000, 2005, 2010, 2015, 2020])
 
     plt.tight_layout()
-    plt.savefig("figures/Spatial_variability/DIC_TA_plot_scatter_mean_year_combined.png")
+    #plt.savefig("figures/Spatial_variability/DIC_TA_plot_scatter_mean_year_combined.png")
     plt.show()
-
+#%%
 def plot_NDIC_NTA(combinedmean):
     from matplotlib import pyplot as plt
     

@@ -436,19 +436,6 @@ def get_nitrate_plots(RWSomean, RWSomeanN):
     plt.savefig("figures/Long_Term_Trends/Nitrate_season_fitting_RWSomeanNN.png")    
     plt.show()
 
-    # Nitrate 1975-2017
-    xbegin = 1976
-    xend = 17531
-    slope, intercept, r, p, se = linregress(RWSomeanN['datenum'], RWSomeanN['total_nitrate'])
-    year = (xend-xbegin) / 365
-    print(f"in {year:6f} years")
-    ybegin = (slope * xbegin) + intercept
-    yend = (slope * xend) + intercept
-    changelongterm = yend - ybegin
-    print(f"Change over 1975-2017: {changelongterm:6e}")
-    changeperyear = changelongterm / (year)
-    print(f"Change per year: {changeperyear:.6e}") 
-
     # Use the fit to predict fCO2 in console: SC_tools.seasonalcycle_fit(opt_result['x'], 1)
     # Last number is date (1 = 1 january 1970)
 
@@ -556,3 +543,79 @@ def get_nitrate_plots(RWSomean, RWSomeanN):
     plt.savefig("figures/Long_Term_Trends/Nitrate_split_up_RWSomeanN2.png")     
     plt.show()
 
+#%% # Change per year and period
+    
+    P1 = (RWSomeanN.year <= 1985)
+    P2 = (RWSomeanN.year >= 1985) & (RWSomeanN.year <= 2010)
+    P3 = (RWSomeanN.year >= 2010)
+    P4 = (RWSomeanN.year >= 2000)
+    
+    # Total 1975-2017
+    slope, intercept, r, p, se = linregress(RWSomeanN['datenum'], RWSomeanN['total_nitrate']) 
+    xbegin = RWSomeanN.datenum.min() 
+    xend = RWSomeanN.datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 1975-2017: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}") 
+    
+    # Total 1975-1985
+    slope, intercept, r, p, se = linregress(RWSomeanN[P1]['datenum'], RWSomeanN[P1]['total_nitrate']) 
+    xbegin = RWSomeanN[P1].datenum.min() 
+    xend = RWSomeanN[P1].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 1975-1985: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}") 
+    
+    # Total 1985-2010 
+    slope, intercept, r, p, se = linregress(RWSomeanN[P2]['datenum'], RWSomeanN[P2]['total_nitrate']) 
+    xbegin = RWSomeanN[P2].datenum.min() 
+    xend = RWSomeanN[P2].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 1985-2010: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")
+    
+    # Total 2010-2017
+    slope, intercept, r, p, se = linregress(RWSomeanN[P3]['datenum'], RWSomeanN[P3]['total_nitrate']) 
+    xbegin = RWSomeanN[P3].datenum.min() 
+    xend = RWSomeanN[P3].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2010-2017: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")
+
+    # Total 2000-2017
+    slope, intercept, r, p, se = linregress(RWSomeanN[P4]['datenum'], RWSomeanN[P4]['total_nitrate']) 
+    xbegin = RWSomeanN[P4].datenum.min() 
+    xend = RWSomeanN[P4].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2000-2017: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")

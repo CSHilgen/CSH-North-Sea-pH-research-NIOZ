@@ -96,7 +96,7 @@ print('fCO2 sea')
 fig, axs = plt.subplots(dpi=300, ncols=3, gridspec_kw={'width_ratios': [1, 1, 5]}, figsize=(10.5,2.25), sharey=True)
 
 ax = axs[0]
-ax.scatter('distance_to_shore', 'fco2_sea', c='xkcd:orange', data=socatnsmean, s=20, alpha=0.4)
+ax.scatter('distance_to_shore', 'fco2_sea', c='xkcd:goldenrod', data=socatnsmean, s=20, alpha=0.4)
 
 ax.grid(alpha=0.3)
 ax.set_xlabel("Distance to shore (km)")
@@ -110,7 +110,7 @@ ax.yaxis.set_major_locator(MultipleLocator(50))
 # ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
 
 ax = axs[1]
-ax.scatter('dayofyear', 'fco2_sea', c='xkcd:orange', data=socatnsmean, s=20, alpha=0.4)
+ax.scatter('dayofyear', 'fco2_sea', c='xkcd:goldenrod', data=socatnsmean, s=20, alpha=0.4)
 
 ax.grid(alpha=0.3)
 ax.set_ylabel(None)
@@ -130,7 +130,7 @@ print(f"p value from 1991-2020 = {ap:6f}")
 
 ax = axs[2]
 sns.regplot(x='datenum', y='fco2_sea', data=socatnsmean, ax=ax,
-            scatter_kws={"color": "xkcd:orange"}, line_kws={"color": "blue", 'label': f'y = {aslope:.1e}x + {aintercept:.1f}'}, label='Initial fCO$_2$ sea SOCAT')
+            scatter_kws={"color": "xkcd:goldenrod"}, line_kws={"color": "blue", 'label': f'y = {aslope:.1e}x + {aintercept:.1f}'}, label='Initial fCO$_2$ sea SOCAT')
 
 ax.grid(alpha=0.3)
 ax.set_xlabel('Time (yrs)')
@@ -572,7 +572,7 @@ ax.grid(alpha=0.3)
 ax.set_xlabel("Distance to shore (km)")
 ax.set_ylabel("Chlorophyll-a (µg/L)")
 ax.set_xlim(0, 75)
-ax.set_ylim(0, 30)
+ax.set_ylim(0, 28)
 ax.minorticks_on()
 ax.xaxis.set_major_locator(MultipleLocator(25))
 ax.yaxis.set_major_locator(MultipleLocator(5))
@@ -862,7 +862,7 @@ print('Salinity')
 fig, axs = plt.subplots(dpi=300, ncols=3, gridspec_kw={'width_ratios': [1, 1, 5]}, figsize=(10.5,2.25), sharey=True)
 
 ax = axs[0]
-ax.scatter('distance_to_shore', 'salinity', c='xkcd:golden', data=RWStotalmean, s=20, alpha=0.4)
+ax.scatter('distance_to_shore', 'salinity', c='xkcd:orange', data=RWStotalmean, s=20, alpha=0.4)
 
 ax.grid(alpha=0.3)
 ax.set_xlabel("Distance to shore (km)")
@@ -876,7 +876,7 @@ ax.yaxis.set_major_locator(MultipleLocator(1))
 # ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
 
 ax = axs[1]
-ax.scatter('dayofyear', 'salinity', c='xkcd:golden', data=RWStotalmean, s=20, alpha=0.4)
+ax.scatter('dayofyear', 'salinity', c='xkcd:orange', data=RWStotalmean, s=20, alpha=0.4)
 
 ax.grid(alpha=0.3)
 ax.set_ylabel(None)
@@ -895,7 +895,7 @@ print(f"p value 1975-2021 = {p:6f}")
  
 ax = axs[2]
 sns.regplot(x='datenum', y='salinity', data=RWStotalmeanS, ax=ax,
-            scatter_kws={"color": "xkcd:golden"}, line_kws={"color": "blue", 'label': f'y = {slope:.1e}x + {intercept:.1f}'}, label='Initial S$_{SW}$ RWS')
+            scatter_kws={"color": "xkcd:orange"}, line_kws={"color": "blue", 'label': f'y = {slope:.1e}x + {intercept:.1f}'}, label='Initial S$_{SW}$ RWS')
 
 ax.grid(alpha=0.3)
 ax.set_xlabel('Time (yrs)')

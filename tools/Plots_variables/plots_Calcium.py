@@ -605,3 +605,50 @@ def get_calcium_plots(RWSo, RWSoCa):
     plt.savefig("figures/Long_Term_Trends/Calcium_split_up_RWSoCa2c.png")     
     plt.show()
 
+#%% # Change per year and period
+    
+    P2 = (RWSoCa.year <= 2010)
+    P3 = (RWSoCa.year >= 2010)
+    
+    # Total 2009-2021
+    slope, intercept, r, p, se = linregress(RWSoCa['datenum'], RWSoCa['calcium_corrected']) 
+    xbegin = RWSoCa.datenum.min() 
+    xend = RWSoCa.datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2009-2021: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}") 
+    
+    # Total 2009-2010 
+    slope, intercept, r, p, se = linregress(RWSoCa[P2]['datenum'], RWSoCa[P2]['calcium_corrected']) 
+    xbegin = RWSoCa[P2].datenum.min() 
+    xend = RWSoCa[P2].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2009-2010 : {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")
+    
+    # Total 2010-2021
+    slope, intercept, r, p, se = linregress(RWSoCa[P3]['datenum'], RWSoCa[P3]['calcium_corrected']) 
+    xbegin = RWSoCa[P3].datenum.min() 
+    xend = RWSoCa[P3].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2010-2021: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")
+    

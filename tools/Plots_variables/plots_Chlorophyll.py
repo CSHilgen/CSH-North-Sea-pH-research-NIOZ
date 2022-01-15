@@ -435,19 +435,6 @@ def get_chlorophyll_plots(RWSomean, RWSomeanChl):
     plt.savefig("figures/Long_Term_Trends/Chlorophyll_season_fitting_RWSomeanChl.png")    
     plt.show()
 
-    # Chlorophyll 1975-2018
-    xbegin = 1976
-    xend = 17896
-    slope, intercept, r, p, se = linregress(RWSomeanChl['datenum'], RWSomeanChl['chlorophyll'])
-    year = (xend-xbegin) / 365
-    print(f"in {year:6f} years")
-    ybegin = (slope * xbegin) + intercept
-    yend = (slope * xend) + intercept
-    changelongterm = yend - ybegin
-    print(f"Change over 1975-2018: {changelongterm:6e}")
-    changeperyear = changelongterm / (year)
-    print(f"Change per year: {changeperyear:.6e}") 
-
     # Use the fit to predict fCO2 in console: SC_tools.seasonalcycle_fit(opt_result['x'], 1)
     # Last number is date (1 = 1 january 1970)
 
@@ -556,3 +543,80 @@ def get_chlorophyll_plots(RWSomean, RWSomeanChl):
     plt.tight_layout()
     plt.savefig("figures/Long_Term_Trends/Chlorophyll_split_up_RWSomeanChl2.png")     
     plt.show()
+
+#%% # Change per year and period
+    
+    P1 = (RWSomeanChl.year <= 1985)
+    P2 = (RWSomeanChl.year >= 1985) & (RWSomeanChl.year <= 2010)
+    P3 = (RWSomeanChl.year >= 2010)
+    P4 = (RWSomeanChl.year >= 2000)
+    
+    # Total 1975-2018 
+    slope, intercept, r, p, se = linregress(RWSomeanChl['datenum'], RWSomeanChl['chlorophyll']) 
+    xbegin = RWSomeanChl.datenum.min() 
+    xend = RWSomeanChl.datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 1975-2018: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}") 
+    
+    # Total 1975-1985
+    slope, intercept, r, p, se = linregress(RWSomeanChl[P1]['datenum'], RWSomeanChl[P1]['chlorophyll']) 
+    xbegin = RWSomeanChl[P1].datenum.min() 
+    xend = RWSomeanChl[P1].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 1975-1985: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}") 
+    
+    # Total 1985-2010 
+    slope, intercept, r, p, se = linregress(RWSomeanChl[P2]['datenum'], RWSomeanChl[P2]['chlorophyll']) 
+    xbegin = RWSomeanChl[P2].datenum.min() 
+    xend = RWSomeanChl[P2].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 1985-2010: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")
+    
+    # Total 2010-2018
+    slope, intercept, r, p, se = linregress(RWSomeanChl[P3]['datenum'], RWSomeanChl[P3]['chlorophyll']) 
+    xbegin = RWSomeanChl[P3].datenum.min() 
+    xend = RWSomeanChl[P3].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2010-2018: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")
+    
+    # Total 2000-2018
+    slope, intercept, r, p, se = linregress(RWSomeanChl[P4]['datenum'], RWSomeanChl[P4]['chlorophyll']) 
+    xbegin = RWSomeanChl[P4].datenum.min() 
+    xend = RWSomeanChl[P4].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2000-2018: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")

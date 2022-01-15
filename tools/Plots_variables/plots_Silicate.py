@@ -434,20 +434,7 @@ def get_silicate_plots(RWSomean, RWSomeanS):
     plt.tight_layout()
     plt.savefig("figures/Long_Term_Trends/Silicate_season_fitting_RWSomeanS.png")    
     plt.show()
-    
-    # Silicate 1975-2018
-    xbegin = 1976
-    xend = 17896
-    slope, intercept, r, p, s = linregress(RWSomeanS['datenum'], RWSomeanS['total_silicate'])
-    year = (xend-xbegin) / 365
-    print(f"in {year:6f} years")
-    ybegin = (slope * xbegin) + intercept
-    yend = (slope * xend) + intercept
-    changelongterm = yend - ybegin
-    print(f"Change over 1975-2018: {changelongterm:6e}")
-    changeperyear = changelongterm / (year)
-    print(f"Change per year: {changeperyear:.6e}") 
-    
+      
     # Use the fit to predict fCO2 in console: SC_tools.seasonalcycle_fit(opt_result['x'], 1)
     # Last number is date (1 = 1 january 1970)
     
@@ -555,4 +542,80 @@ def get_silicate_plots(RWSomean, RWSomeanS):
     plt.savefig("figures/Long_Term_Trends/Silicate_split_up_RWSomeanS2.png")     
     plt.show()
 
-
+#%% # Change per year and period
+    
+    P1 = (RWSomeanS.year <= 1985)
+    P2 = (RWSomeanS.year >= 1985) & (RWSomeanS.year <= 2010)
+    P3 = (RWSomeanS.year >= 2010)
+    P4 = (RWSomeanS.year >= 2000)
+    
+    # Total 1975-2018 
+    slope, intercept, r, p, se = linregress(RWSomeanS['datenum'], RWSomeanS['total_silicate']) 
+    xbegin = RWSomeanS.datenum.min() 
+    xend = RWSomeanS.datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 1975-2018: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}") 
+    
+    # Total 1975-1985
+    slope, intercept, r, p, se = linregress(RWSomeanS[P1]['datenum'], RWSomeanS[P1]['total_silicate']) 
+    xbegin = RWSomeanS[P1].datenum.min() 
+    xend = RWSomeanS[P1].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 1975-1985: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}") 
+    
+    # Total 1985-2010 
+    slope, intercept, r, p, se = linregress(RWSomeanS[P2]['datenum'], RWSomeanS[P2]['total_silicate']) 
+    xbegin = RWSomeanS[P2].datenum.min() 
+    xend = RWSomeanS[P2].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 1985-2010: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")
+    
+    # Total 2010-2018
+    slope, intercept, r, p, se = linregress(RWSomeanS[P3]['datenum'], RWSomeanS[P3]['total_silicate']) 
+    xbegin = RWSomeanS[P3].datenum.min() 
+    xend = RWSomeanS[P3].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2010-2018: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")
+    
+    # Total 2000-2018
+    slope, intercept, r, p, se = linregress(RWSomeanS[P4]['datenum'], RWSomeanS[P4]['total_silicate']) 
+    xbegin = RWSomeanS[P4].datenum.min() 
+    xend = RWSomeanS[P4].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2000-2018: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")
+    

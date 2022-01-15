@@ -331,7 +331,6 @@ def get_deltafCO2_plots(socatnsmean, socatnsmeandelta):
     plt.savefig("figures/DeltafCO2_mean_regions_year.png")
     plt.show()
 
-
     #%% # Long Term Trend of Delta fCO2 socatnsmean
 
     print('Long term trend of ΔfCO$_2$ SOCAT')
@@ -425,19 +424,6 @@ def get_deltafCO2_plots(socatnsmean, socatnsmeandelta):
     plt.savefig("figures/Long_Term_Trends/DeltafCO2_season_fitting_SOCAT.png")    
     plt.show()
 
-    # Delta fCO2 1994-2019
-    slope, intercept, r, p, se = linregress(socatnsmeandelta['datenum'], socatnsmeandelta['deltafco2'])
-    xbegin = socatnsmeandelta.datenum.min() #9069
-    xend = socatnsmeandelta.datenum.max() # 18169
-    year = (xend-xbegin) / 365
-    print(f"in {year:6f} years")
-    ybegin = (slope * xbegin) + intercept
-    yend = (slope * xend) + intercept
-    changelongterm = yend - ybegin
-    print(f"Change over 1994-2019: {changelongterm:6e}")
-    changeperyear = changelongterm / (year)
-    print(f"Change per year: {changeperyear:.6e}") 
-
     # Use the fit to predict fCO2 in console: SC_tools.seasonalcycle_fit(opt_result['x'], 1)
     # Last number is date (1 = 1 january 1970)
 
@@ -522,4 +508,64 @@ def get_deltafCO2_plots(socatnsmean, socatnsmeandelta):
     plt.savefig("figures/Long_Term_Trends/DeltafCO2_split_up_SOCAT2.png")     
     plt.show()
 
+#%% # Change per year and period
+    
+    P2 = (socatnsmeandelta.year <= 2010)
+    P3 = (socatnsmeandelta.year >= 2010)
+    P4 = (socatnsmeandelta.year >= 2000)
+    
+    # Total 1994-2019 
+    slope, intercept, r, p, se = linregress(socatnsmeandelta['datenum'], socatnsmeandelta['deltafco2']) 
+    xbegin = socatnsmeandelta.datenum.min() 
+    xend = socatnsmeandelta.datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 1994-2019: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}") 
+       
+    # Total 1994-2010 
+    slope, intercept, r, p, se = linregress(socatnsmeandelta[P2]['datenum'], socatnsmeandelta[P2]['deltafco2']) 
+    xbegin = socatnsmeandelta[P2].datenum.min() 
+    xend = socatnsmeandelta[P2].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 1994-2010: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")
+    
+    # Total 2010-2019
+    slope, intercept, r, p, se = linregress(socatnsmeandelta[P3]['datenum'], socatnsmeandelta[P3]['deltafco2']) 
+    xbegin = socatnsmeandelta[P3].datenum.min() 
+    xend = socatnsmeandelta[P3].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2010-2019: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")
 
+    # Total 2000-2019
+    slope, intercept, r, p, se = linregress(socatnsmeandelta[P4]['datenum'], socatnsmeandelta[P4]['deltafco2']) 
+    xbegin = socatnsmeandelta[P4].datenum.min() 
+    xend = socatnsmeandelta[P4].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2000-2019: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")

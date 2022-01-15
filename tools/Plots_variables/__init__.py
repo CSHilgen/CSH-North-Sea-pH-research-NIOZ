@@ -378,20 +378,7 @@ def get_ammonia_plots(RWSomean):
     plt.tight_layout()
     plt.savefig("figures/Long_Term_Trends/Ammonia_fitting_RWSomeanA.png")    
     plt.show()
-     
-    # Ammonia 1975-2018
-    xbegin = 1976
-    xend = 17835
-    slope, intercept, r, p, se = linregress(RWSomeanA['datenum'], RWSomeanA['total_ammonia'])
-    year = (xend-xbegin) / 365
-    print(f"in {year:6f} years")
-    ybegin = (slope * xbegin) + intercept
-    yend = (slope * xend) + intercept
-    changelongterm = yend - ybegin
-    print(f"Change over 1975-2018: {changelongterm:6e}")
-    changeperyear = changelongterm / (year)
-    print(f"Change per year: {changeperyear:.6e}") 
-    
+      
     # Use the fit to predict fCO2 in console: SC_tools.seasonalcycle_fit(opt_result['x'], 1)
     # Last number is date (1 = 1 january 1970)
     
@@ -499,3 +486,79 @@ def get_ammonia_plots(RWSomean):
     plt.savefig("figures/Long_Term_Trends/Ammonia_split_up_RWSomeanA2.png")     
     plt.show()
 
+#%% # Change per year and period
+    
+    P1 = (RWSomeanA.year <= 1985)
+    P2 = (RWSomeanA.year >= 1985) & (RWSomeanA.year <= 2010)
+    P3 = (RWSomeanA.year >= 2010)
+    P4 = (RWSomeanA.year >= 2000)
+    
+    # Total 1975-2018 
+    slope, intercept, r, p, se = linregress(RWSomeanA['datenum'], RWSomeanA['total_ammonia']) 
+    xbegin = RWSomeanA.datenum.min() 
+    xend = RWSomeanA.datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 1975-2018: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}") 
+    
+    # Total 1975-1985
+    slope, intercept, r, p, se = linregress(RWSomeanA[P1]['datenum'], RWSomeanA[P1]['total_ammonia']) 
+    xbegin = RWSomeanA[P1].datenum.min() 
+    xend = RWSomeanA[P1].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 1975-1985: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}") 
+    
+    # Total 1985-2010 
+    slope, intercept, r, p, se = linregress(RWSomeanA[P2]['datenum'], RWSomeanA[P2]['total_ammonia']) 
+    xbegin = RWSomeanA[P2].datenum.min() 
+    xend = RWSomeanA[P2].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 1985-2010: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")
+    
+    # Total 2010-2018
+    slope, intercept, r, p, se = linregress(RWSomeanA[P3]['datenum'], RWSomeanA[P3]['total_ammonia']) 
+    xbegin = RWSomeanA[P3].datenum.min() 
+    xend = RWSomeanA[P3].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2010-2018: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")
+    
+    # Total 2000-2018
+    slope, intercept, r, p, se = linregress(RWSomeanA[P4]['datenum'], RWSomeanA[P4]['total_ammonia']) 
+    xbegin = RWSomeanA[P4].datenum.min() 
+    xend = RWSomeanA[P4].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2000-2018: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")
