@@ -251,7 +251,7 @@ def plot_DIC_TA_year(combinedmean):
     
     from matplotlib import pyplot as plt
     import numpy as np
-   #%% 
+
     fig, ax = plt.subplots(dpi=300, figsize=(6,4))
     cm = plt.cm.get_cmap('rainbow')
     vmin = 2000
@@ -280,9 +280,9 @@ def plot_DIC_TA_year(combinedmean):
     cbar.set_ticklabels([2000, 2005, 2010, 2015, 2020])
 
     plt.tight_layout()
-    #plt.savefig("figures/Spatial_variability/DIC_TA_plot_scatter_mean_year_combined.png")
+    plt.savefig("figures/Spatial_variability/DIC_TA_plot_scatter_mean_year_combined.png")
     plt.show()
-#%%
+
 def plot_NDIC_NTA(combinedmean):
     from matplotlib import pyplot as plt
     

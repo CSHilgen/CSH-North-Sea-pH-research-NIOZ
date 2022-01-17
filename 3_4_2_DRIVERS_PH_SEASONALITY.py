@@ -18,7 +18,7 @@ LC = (resultscombined['year'] >= 2000)
 # Function for pH predicted
 allparameters = HM16_tools.get_pH_predicted(LR, LC, resultsRWSo, resultscombined)
 
-# # Function for cyclic curve
+# Function for cyclic curve
 resultsRWSodubbel, allparametersdubbel = HM16_tools.cycliccurve_2000_2021(allparameters, resultsRWSo, LR)
 
 # Function to get the ΔpH winter-to-summer for each individual parameter

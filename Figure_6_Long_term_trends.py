@@ -287,11 +287,11 @@ print('TA')
 fig, axs = plt.subplots(dpi=300, ncols=3, gridspec_kw={'width_ratios': [1, 1, 5]}, figsize=(10.5,2.25), sharey=True)
 
 ax = axs[0]
-dts = ax.scatter('distance_to_shore', 'alkalinity', c='xkcd:red', data=combinedmean, s=20, alpha=0.4, label='A$_T$ Combined')
+dts = ax.scatter('distance_to_shore', 'alkalinity', c='xkcd:red', data=combinedmean, s=20, alpha=0.4, label='TA Combined')
 
 ax.grid(alpha=0.3)
 ax.set_xlabel("Distance to shore (km)")
-ax.set_ylabel("A$_T$ (µmol/kg)")
+ax.set_ylabel("TA (µmol/kg)")
 ax.set_xlim(0, 260)
 ax.set_ylim(2280, 2420)
 ax.minorticks_on()
@@ -331,7 +331,7 @@ ax.xaxis.set_minor_locator(mdates.YearLocator())
 ax.minorticks_on()
 # ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
 # ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
-labelz = ['Initial A$_T$ Combined', 'Initial A$_T$ Combined', f'y = {aslope:.1e}x + {aintercept:.1f}', 'nA$_T$ Combined']
+labelz = ['Initial TA Combined', 'Initial TA Combined', f'y = {aslope:.1e}x + {aintercept:.1f}', 'nTA Combined']
 fig.legend([dts, doy, nta1, nta1], labels=labelz, loc="lower center", ncol=5, bbox_to_anchor=(.075, 0.95, 0.9, 1.02), borderaxespad=0, mode='expand', fontsize=9)
 
 plt.subplots_adjust(wspace=0, hspace=0)

@@ -359,7 +359,7 @@ def get_TA_plots(combinedmean, glodapnsmean, Cefasmean, D366mean, RWSnmean):
 
     ax = ax
     sns.regplot(x='datenum', y='normalized_TA', data=combinedmean, ax=ax, ci=99.9,
-                scatter_kws={"color": "xkcd:red"}, line_kws={"color": "blue", 'label': f'y = {slope:.1e}x + {intercept:.1f}'}, label='Normalized A$_T$ Combined')
+                scatter_kws={"color": "xkcd:red"}, line_kws={"color": "blue", 'label': f'y = {slope:.1e}x + {intercept:.1f}'}, label='Normalized TA Combined')
 
     ax.set_title("Normalized TA combined data - North Sea")
     ax.grid(alpha=0.3)
@@ -392,7 +392,7 @@ def get_TA_plots(combinedmean, glodapnsmean, Cefasmean, D366mean, RWSnmean):
 
     ax = axs[0]
     sns.regplot(x='datenum', y='normalized_TA', data=combinedmean[L0], ax=ax,
-                scatter_kws={"color": "xkcd:red"}, line_kws={"color": "blue", 'label': f'y = {slope:.1e}x + {intercept:.1f}'}, label='Normalized A$_T$ Combined')
+                scatter_kws={"color": "xkcd:red"}, line_kws={"color": "blue", 'label': f'y = {slope:.1e}x + {intercept:.1f}'}, label='Normalized TA Combined')
 
     ax.set_title("Normalized TA combined data - North Sea")
     ax.grid(alpha=0.3)
@@ -411,7 +411,7 @@ def get_TA_plots(combinedmean, glodapnsmean, Cefasmean, D366mean, RWSnmean):
 
     ax = axs[1]
     sns.regplot(x='datenum', y='normalized_TA', data=combinedmean[L1], ax=ax,
-                scatter_kws={"color": "xkcd:red"}, line_kws={"color": "blue", 'label': f'y = {slope:.1e}x + {intercept:.1f}'}, label='Normalized A$_T$ Combined')
+                scatter_kws={"color": "xkcd:red"}, line_kws={"color": "blue", 'label': f'y = {slope:.1e}x + {intercept:.1f}'}, label='Normalized TA Combined')
 
     ax.grid(alpha=0.3)
     ax.set_xlabel(None)

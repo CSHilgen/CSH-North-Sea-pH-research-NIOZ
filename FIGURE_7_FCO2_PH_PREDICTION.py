@@ -55,7 +55,8 @@ ax.legend([handles[idx] for idx in order],[labels[idx] for idx in order], ncol=6
 plt.tight_layout()
 plt.savefig("figures/Final_plots/fCO2_TA_DICair.png") 
 
-#%%
+#%% # pH prediction (TA and DIC)
+
 RWSomeanpH = RWSomean.dropna(axis='rows', how='all', subset=['pH_total'])
 combinedmeanpH = combinedmean.dropna(axis='rows', how='all', subset=['pH_total'])
 
@@ -104,7 +105,7 @@ plt.tight_layout()
 plt.savefig("figures/Final_plots/pH_TA_DIC.png")    
 plt.show()
 
-#%% 
+#%% # Predict pH based on nTA and nDIC
 
 #combinedmean = combinedmean.reset_index()
 
@@ -139,6 +140,8 @@ LRg = resultscombinedmeanN['dataset'] == str('glodapnsmean')
 LRd = resultscombinedmeanN['dataset'] == str('D366mean')
 LRc = resultscombinedmeanN['dataset'] == str('Cefasmean')
 LRr = resultscombinedmeanN['dataset'] == str('RWSnmean')
+
+#%% # # pH prediction (nTA and nDIC)
 
 slope, intercept, r, p, se = linregress(RWSomeanpH[L1]['datenum'], RWSomeanpH[L1]['pH_total'])
 dslope, dintercept, dr, dp, dse = linregress(RWSomeanpH[L2]['datenum'], RWSomeanpH[L2]['pH_total'])
@@ -182,7 +185,7 @@ plt.tight_layout()
 plt.savefig("figures/Final_plots/pH_nTA_nDIC.png")    
 plt.show()
 
-#%%
+#%% # Predict pH based on nTA and corrected nDIC
 
 TA = combinedmean['normalized_TA']
 DIC = combinedmean['dic_correctd_final']

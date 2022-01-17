@@ -301,17 +301,22 @@ def get_T_DIC_TA_curves(allparametersdubbel, allparameters, timeperiod):
     
     fvarr = ['temperature', 'normalized_DIC', 'normalized_TA']
     colourr = ['xkcd:pink', 'xkcd:purple', 'xkcd:red']
-    label_yy = ['Temperature (°C)', 'DIC (µmol/kg)', 'A$_T$ (µmol/kg)']
+    label_yy = ['Temperature (°C)', 'DIC (µmol/kg)', 'TA (µmol/kg)']
     Tdata = pd.DataFrame(columns=['dayofyear', 'temperature'])
     DICdata = pd.DataFrame(columns=['dayofyear', 'normalized_DIC'])
     TAdata = pd.DataFrame(columns=['dayofyear', 'normalized_TA'])
     dff = [Tdata, DICdata, TAdata]
-    # if timeperiod == str(2000_2021):
-    yrangee = [[2.5, 23], [1900, 2400], [2200, 2500]] # period 2000-2021
-    # yrangee = [[2.5, 23], [2075, 2225], [2320, 2400]] # period 2000-2005
-    # yrangee = [[2.5, 21], [2100, 2200], [2340, 2410]] # period 2010-2015
-    # yrangee = [[2.5, 21], [1700, 2400], [2250, 2450]] # period 2015-2018
-    # yrangee = [[2.5, 23], [1700, 2400], [2100, 2500]] # period 2018-2021
+    
+    if timeperiod == '2000_2021':
+        yrangee = [[2.5, 23], [1900, 2400], [2200, 2500]] # period 2000-2021
+    elif timeperiod == '2000_2005':
+        yrangee = [[2.5, 23], [2075, 2225], [2320, 2400]] # period 2000-2005
+    elif timeperiod == '2010_2015':
+        yrangee = [[2.5, 21], [2100, 2200], [2340, 2410]] # period 2010-2015
+    elif timeperiod == '2015_2018':
+        yrangee = [[2.5, 21], [1700, 2400], [2250, 2450]] # period 2015-2018
+    elif timeperiod == '2018_2021':
+        yrangee = [[2.5, 23], [1700, 2400], [2100, 2500]] # period 2018-2021
     
     for fvar, colour, label_y, yrange, df in zip(fvarr, colourr, label_yy, yrangee, dff):
        
@@ -356,7 +361,7 @@ def get_T_DIC_TA_curves(allparametersdubbel, allparameters, timeperiod):
         df[fvar] = y_plotting
         
         plt.tight_layout()
-        # plt.savefig("figures/pH_Hagens&Middelburg_2016/Data_" + timeperiod + "_" + fvar + ".png") 
+        plt.savefig("figures/pH_Hagens&Middelburg_2016/Data_" + timeperiod + "_" + fvar + ".png") 
         plt.show()
                
     return Tdata, DICdata, TAdata

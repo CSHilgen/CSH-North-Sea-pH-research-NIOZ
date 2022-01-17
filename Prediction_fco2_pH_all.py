@@ -41,7 +41,7 @@ ax.scatter('datenum', 'fCO2', data=combinedmean[Lr], edgecolors='xkcd:evergreen'
 sns.regplot(x='datenum', y='fCO2', data=combinedmean, ax=ax, x_estimator=np.mean,
             scatter_kws={"color": "None"}, line_kws={"color": "grey", 'label': f'y = {aslope:.1e}x + {aintercept:.1f}'})
 
-ax.set_title("SOCAT & predicted fCO$_2$ sea based on A$_T$ & DIC data - North Sea")
+ax.set_title("SOCAT & predicted fCO$_2$ sea based on TA & DIC data - North Sea")
 ax.grid(alpha=0.3)
 ax.set_xlabel("Time (yrs)", fontsize=14)
 ax.set_ylabel('fCO$_2$ (µatm)', fontsize=14)
@@ -80,7 +80,7 @@ ax.scatter('datenum', 'pH_total', data=combinedmean[Lr], edgecolors='xkcd:evergr
 sns.regplot(x='datenum', y='pH_total', data=combinedmean, ax=ax, x_estimator=np.mean,
             scatter_kws={"color": "None"}, line_kws={"color": "grey", 'label': f'y = {bslope:.1e}x + {bintercept:.1f}'})
 
-ax.set_title("RWS & predicted pH based on A$_T$ & DIC data - North Sea")
+ax.set_title("RWS & predicted pH based on TA & DIC data - North Sea")
 ax.grid(alpha=0.3)
 ax.set_xlabel("Time (yrs)", fontsize=14)
 ax.set_ylabel('pH$_{total}$', fontsize=14)
@@ -129,7 +129,7 @@ sns.regplot(x='datenum', y='pH_total', data=combinedmeanpH[S1], ax=ax, x_estimat
 sns.regplot(x='datenum', y='pH_total', data=combinedmeanpH[S2], ax=ax, x_estimator=np.mean,
             scatter_kws={"color": "None"}, line_kws={"color": "grey", 'linestyle': 'dotted', 'label': f'y = {cslope:.1e}x + {cintercept:.1f}'}, x_ci="sd")
 
-ax.set_title("RWS & predicted pH based on A$_T$ & DIC data - North Sea")
+ax.set_title("RWS & predicted pH based on TA & DIC data - North Sea")
 ax.grid(alpha=0.3)
 ax.set_xlabel("Time (yrs)", fontsize=14)
 ax.set_ylabel('pH$_{total}$', fontsize=14)
@@ -200,7 +200,7 @@ ax.scatter('datenum', 'fCO2', data=resultscombinedmeanN[LRr], edgecolors='xkcd:e
 sns.regplot(x='datenum', y='fCO2', data=resultscombinedmeanN, ax=ax, x_estimator=np.mean,
             scatter_kws={"color": "None"}, line_kws={"color": "grey", 'label': f'y = {aslope:.1e}x + {aintercept:.1f}'}, x_ci="sd")
 
-ax.set_title("SOCAT & predicted fCO$_2$ sea based on nA$_T$ & nDIC data - North Sea")
+ax.set_title("SOCAT & predicted fCO$_2$ sea based on nTA & nDIC data - North Sea")
 ax.grid(alpha=0.3)
 ax.set_xlabel("Time (yrs)", fontsize=14)
 ax.set_ylabel('fCO$_2$ (µatm)', fontsize=14)
@@ -247,7 +247,7 @@ sns.regplot(x='datenum', y='pH_total', data=resultscombinedmeanNpH[S1], ax=ax, x
 sns.regplot(x='datenum', y='pH_total', data=resultscombinedmeanNpH[S2], ax=ax, x_estimator=np.mean,
             scatter_kws={"color": "None"}, line_kws={"color": "grey", 'linestyle': 'dotted', 'label': f'y = {cslope:.1e}x + {cintercept:.1f}'}, x_ci="sd")
 
-ax.set_title("RWS & predicted pH based on nA$_T$ & nDIC data - North Sea")
+ax.set_title("RWS & predicted pH based on nTA & nDIC data - North Sea")
 ax.grid(alpha=0.3)
 ax.set_xlabel("Time (yrs)", fontsize=14)
 ax.set_ylabel('pH$_{total}$', fontsize=14)
@@ -316,7 +316,7 @@ ax.scatter('datenum', 'fCO2', data=resultscombinedmeanNC[LRr], edgecolors='xkcd:
 sns.regplot(x='datenum', y='fCO2', data=resultscombinedmeanNC, ax=ax, x_estimator=np.mean,
             scatter_kws={"color": "None"}, line_kws={"color": "grey", 'label': f'y = {aslope:.1e}x + {aintercept:.1f}'})
 
-ax.set_title("SOCAT & predicted fCO$_{2SW}$ based on nA$_T$ & corrected nDIC data - North Sea")
+ax.set_title("SOCAT & predicted fCO$_{2SW}$ based on nTA & corrected nDIC data - North Sea")
 ax.grid(alpha=0.3)
 ax.set_xlabel("Time (yrs)", fontsize=14)
 ax.set_ylabel('fCO$_2$ (µatm)', fontsize=14)
@@ -362,7 +362,7 @@ sns.regplot(x='datenum', y='pH_total', data=resultscombinedmeanNCpH[S1], ax=ax, 
 sns.regplot(x='datenum', y='pH_total', data=resultscombinedmeanNCpH[S2], ax=ax, x_estimator=np.mean,
             scatter_kws={"color": "None"}, line_kws={"color": "grey", 'linestyle': 'dotted', 'label': f'y = {cslope:.1e}x + {cintercept:.1f}'})
 
-ax.set_title("RWS & predicted pH based on nA$_T$ & corrected nDIC data - North Sea")
+ax.set_title("RWS & predicted pH based on nTA & corrected nDIC data - North Sea")
 ax.grid(alpha=0.3)
 ax.set_xlabel("Time (yrs)", fontsize=14)
 ax.set_ylabel('pH$_{total}$', fontsize=14)

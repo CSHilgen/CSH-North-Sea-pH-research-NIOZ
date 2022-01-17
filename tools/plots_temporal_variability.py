@@ -1,7 +1,7 @@
 
 def plot_DIC_combined_clustering(combinedmeandubbel):
     """ CLuster DIC and day of year profile with MeanShift and interpolate"""
- #%%
+
     import pandas as pd, numpy as np
     from matplotlib import pyplot as plt
     import seaborn as sns
@@ -18,7 +18,7 @@ def plot_DIC_combined_clustering(combinedmeandubbel):
     y = combinedmeandubbel.normalized_DIC.to_numpy()
     
     x_v = np.vstack(x)
-    clustering = MeanShift(bandwidth=28).fit(x_v)
+    clustering = MeanShift(bandwidth=5).fit(x_v)
     cluster_labels = clustering.labels_
     
     x_clusters = clustering.cluster_centers_.ravel()
@@ -36,8 +36,8 @@ def plot_DIC_combined_clustering(combinedmeandubbel):
   
     fig, ax = plt.subplots(dpi=300)
 
-    sc = ax.scatter('dayofyear', 'dic', data=combinedmeandubbel, c='year', s=50, cmap=cm, 
-               vmin=vmin, vmax=vmax+1, label='Initial DIC Combined')
+    sc = ax.scatter('dayofyear', 'normalized_DIC', data=combinedmeandubbel, c='year', s=50, cmap=cm, 
+               vmin=vmin, vmax=vmax+1, edgecolors='grey', linewidth=0.5, label='Initial DIC Combined')
     ax.scatter(x_clusters, y_clusters, c='xkcd:green', s=10)
     ax.plot(x_plotting, y_plotting, c='xkcd:green', label='Seasonal cycle')
     
@@ -68,7 +68,7 @@ def plot_DIC_combined_clustering(combinedmeandubbel):
 
 def plot_DIC_and_Chl(combinedmeandubbel, RWSo):
     """ Plot DIC and Chlorophyll on day of year to observe algalbloom"""
-#%%
+
     import pandas as pd, numpy as np
     from matplotlib import pyplot as plt
     import seaborn as sns
@@ -128,10 +128,9 @@ def plot_DIC_and_Chl(combinedmeandubbel, RWSo):
     ax.legend()
  
     plt.tight_layout()
-    #plt.savefig("figures/Temporal_variability/Chl_DIC_dayofyear.png")
+    plt.savefig("figures/Temporal_variability/Chl_DIC_dayofyear.png")
     plt.show()
-    
-#%%
+
 def plot_DIC_dayofyear_cycle_RWSn(RWSnmeandubbel):
     import pandas as pd, numpy as np
     from matplotlib import pyplot as plt
@@ -140,7 +139,7 @@ def plot_DIC_dayofyear_cycle_RWSn(RWSnmeandubbel):
     from scipy import interpolate 
     from matplotlib.ticker import FuncFormatter
     from matplotlib.dates import MonthLocator, DateFormatter 
-#%%
+
     yeardataa = [2018, 2019, 2020, 2021]
     yeardatatextt = ['2018', '2019', '2020', '2021']
     

@@ -466,19 +466,7 @@ def get_DIC_plots(combinedmean, glodapnsmean, Cefasmean, D366mean, RWSnmean, com
     plt.tight_layout()
     plt.savefig("figures/Long_Term_Trends/DIC_fitting_Combined.png")    
     plt.show()
-
-    # DIC 2001-2021
-    xbegin = 11565
-    xend = 18808
-    year = (xend-xbegin) / 365
-    print(f"in {year:6f} years")
-    ybegin = (slope * xbegin) + intercept
-    yend = (slope * xend) + intercept
-    changelongterm = yend - ybegin
-    print(f"Change over 2001-2021: {changelongterm:6e}")
-    changeperyear = changelongterm / (year)
-    print(f"Change per year: {changeperyear:.6e}") 
-    
+   
     # Use the fit to predict fCO2 in console: SC_tools.seasonalcycle_fit(opt_result['x'], 1)
     # Last number is date (1 = 1 january 1970)
 
@@ -569,7 +557,7 @@ def get_DIC_plots(combinedmean, glodapnsmean, Cefasmean, D366mean, RWSnmean, com
     P3 = (combinedmean.year >= 2010)
     
     # Total 2000-2021 
-    slope, intercept, r, p, se = linregress(combinedmean['datenum'], combinedmean['normalized_DIC']) 
+    slope, intercept, r, p, se = linregress(combinedmean['datenum'], combinedmean['dic_correctd_final']) 
     xbegin = combinedmean.datenum.min() 
     xend = combinedmean.datenum.max() 
     
@@ -583,7 +571,7 @@ def get_DIC_plots(combinedmean, glodapnsmean, Cefasmean, D366mean, RWSnmean, com
     print(f"Change per year: {changeperyear:.6e}") 
      
     # Total 2000-2010 
-    slope, intercept, r, p, se = linregress(combinedmean[P2]['datenum'], combinedmean[P2]['normalized_DIC']) 
+    slope, intercept, r, p, se = linregress(combinedmean[P2]['datenum'], combinedmean[P2]['dic_correctd_final']) 
     xbegin = combinedmean[P2].datenum.min() 
     xend = combinedmean[P2].datenum.max() 
     
@@ -597,7 +585,7 @@ def get_DIC_plots(combinedmean, glodapnsmean, Cefasmean, D366mean, RWSnmean, com
     print(f"Change per year: {changeperyear:.6e}")
     
     # Total 2010-2021
-    slope, intercept, r, p, se = linregress(combinedmean[P3]['datenum'], combinedmean[P3]['normalized_DIC']) 
+    slope, intercept, r, p, se = linregress(combinedmean[P3]['datenum'], combinedmean[P3]['dic_correctd_final']) 
     xbegin = combinedmean[P3].datenum.min() 
     xend = combinedmean[P3].datenum.max() 
     

@@ -114,7 +114,7 @@ combinedmeandubbel = combinedmeandubbel.append(combinedmeandubbel.loc[[18] *1].a
 x = combinedmeandubbel['dayofyear'].to_numpy()
 y = combinedmeandubbel.normalized_DIC.to_numpy()
 x_v = np.vstack(x)
-clustering = MeanShift(bandwidth=28).fit(x_v)
+clustering = MeanShift(bandwidth=5).fit(x_v)
 cluster_labels = clustering.labels_
 
 x_clusters = clustering.cluster_centers_.ravel()
