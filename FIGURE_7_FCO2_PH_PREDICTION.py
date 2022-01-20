@@ -156,7 +156,7 @@ fig, ax = plt.subplots(dpi=300, figsize=(10,6))
 
 ax = ax
 sns.regplot(x='datenum', y='pH_total', data=RWSomeanpH[L1], ax=ax, x_estimator=np.mean,
-            scatter_kws={"color": "None"}, line_kws={"color": "blue", 'label': f'y = {aslope:.1e}x + {aintercept:.1f}'})
+            scatter_kws={"color": "None"}, line_kws={"color": "blue", 'label': f'y = {slope:.1e}x + {intercept:.1f}'})
 sns.regplot(x='datenum', y='pH_total', data=RWSomeanpH[L2][L0], ax=ax, x_estimator=np.mean,
             scatter_kws={"color": "None"}, line_kws={"color": "blue", 'label': f'y = {dslope:.1e}x + {dintercept:.1f}', 'linestyle': 'dotted'})
 sns.regplot(x='datenum', y='pH_total', data=resultscombinedmeanNpH[S1], ax=ax, x_estimator=np.mean,
@@ -234,7 +234,7 @@ fig, ax = plt.subplots(dpi=300, figsize=(10,6))
 
 ax = ax
 sns.regplot(x='datenum', y='pH_total', data=RWSomeanpH[L1], ax=ax, x_estimator=np.mean,
-            scatter_kws={"color": "None"}, line_kws={"color": "blue", 'label': f'y = {aslope:.1e}x + {aintercept:.1f}'})
+            scatter_kws={"color": "None"}, line_kws={"color": "blue", 'label': f'y = {slope:.1e}x + {intercept:.1f}'}, x_ci="sd")
 sns.regplot(x='datenum', y='pH_total', data=RWSomeanpH[L2][L0], ax=ax, x_estimator=np.mean,
             scatter_kws={"color": "None"}, line_kws={"color": "blue", 'label': f'y = {dslope:.1e}x + {dintercept:.1f}', 'linestyle': 'dotted'})
 sns.regplot(x='datenum', y='pH_total', data=resultscombinedmeanNCpH[S1], ax=ax, x_estimator=np.mean,

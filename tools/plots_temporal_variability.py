@@ -52,7 +52,6 @@ def plot_DIC_combined_clustering(combinedmeandubbel):
     ax.xaxis.set_major_locator(MonthLocator())
     ax.xaxis.set_major_formatter(FuncFormatter(m_fmt))
     ax.set_title('DIC combined - Seasonal cycle')
-    ax.minorticks_on()
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.legend()
@@ -122,7 +121,6 @@ def plot_DIC_and_Chl(combinedmeandubbel, RWSo):
     ax.xaxis.set_major_locator(MonthLocator())
     ax.xaxis.set_major_formatter(FuncFormatter(m_fmt))
     ax.set_title('Chl and DIC data - Day of Year North Sea')
-    ax.minorticks_on()
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.legend()
@@ -183,7 +181,6 @@ def plot_DIC_dayofyear_cycle_RWSn(RWSnmeandubbel):
 
         ax.xaxis.set_major_locator(MonthLocator())
         ax.xaxis.set_major_formatter(FuncFormatter(m_fmt))
-        ax.minorticks_on()
         ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
         ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
         ax.set_title('DIC ' + yeardatatext + ' - Seasonal cycle')

@@ -37,7 +37,7 @@ def get_calcium_plots(RWSo, RWSoCa):
     ax.xaxis.set_major_locator(mdates.YearLocator(1))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('Calcium Method 1 corrected - Datasets North Sea')
@@ -148,7 +148,7 @@ def get_calcium_plots(RWSo, RWSoCa):
     ax.xaxis.set_major_locator(mdates.YearLocator(1))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('Calcium data - Datasets North Sea')
@@ -172,7 +172,7 @@ def get_calcium_plots(RWSo, RWSoCa):
     ax.xaxis.set_major_locator(mdates.YearLocator(1))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('Calcium data - Datasets North Sea')
@@ -196,7 +196,7 @@ def get_calcium_plots(RWSo, RWSoCa):
     ax.xaxis.set_major_locator(mdates.YearLocator())
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('Calcium data - Seasons North Sea')
@@ -249,7 +249,7 @@ def get_calcium_plots(RWSo, RWSoCa):
     ax.xaxis.set_major_locator(mdates.YearLocator())
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+
     ax.set_ylim(0, 7500)
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
@@ -281,7 +281,7 @@ def get_calcium_plots(RWSo, RWSoCa):
     ax.set_ylabel("Relative Calcium (μmol/kg)")
     ax.legend()
     ax.set_ylim(0, 7500)
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('Calcium RWSo data - Datasets North Sea')
@@ -332,7 +332,7 @@ def get_calcium_plots(RWSo, RWSoCa):
     ax.xaxis.set_major_formatter(FuncFormatter(m_fmt))
     ax.set_ylabel('Relative Calcium (μmol/kg)')
     ax.set_ylim(0, 7500)
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
@@ -369,7 +369,7 @@ def get_calcium_plots(RWSo, RWSoCa):
     ax.xaxis.set_major_formatter(FuncFormatter(m_fmt))
     ax.set_ylabel('Relative Calcium (μmol/kg)')
     ax.set_ylim(0, 7500)
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('Calcium RWSo data - Year North Sea')
@@ -392,7 +392,7 @@ def get_calcium_plots(RWSo, RWSoCa):
     ax.set_ylabel("Relative Calcium (μmol/kg)")
     ax.legend()
     ax.set_ylim(0, 7500)
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('Calcium RWSo data - Datasets North Sea')
@@ -413,7 +413,7 @@ def get_calcium_plots(RWSo, RWSoCa):
     ax.set_xlabel("Distance to shore (km)")
     ax.set_ylabel('Relative Calcium (μmol/kg)')
     ax.set_ylim(0, 7500)
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('Calcium RWSo data - Seasons North Sea')
@@ -448,7 +448,7 @@ def get_calcium_plots(RWSo, RWSoCa):
     ax.set_xlabel('Distance to shore (km)')
     ax.set_ylabel('Relative Calcium (μmol/kg)')
     ax.set_ylim(0, 7500)
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('Calcium RWSo data - Year North Sea')
@@ -484,7 +484,7 @@ def get_calcium_plots(RWSo, RWSoCa):
     ax.xaxis.set_major_locator(mdates.YearLocator())
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.MonthLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.legend()
@@ -523,7 +523,7 @@ def get_calcium_plots(RWSo, RWSoCa):
     ax.xaxis.set_major_locator(mdates.YearLocator())
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.MonthLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.legend()
@@ -541,7 +541,7 @@ def get_calcium_plots(RWSo, RWSoCa):
     ax.xaxis.set_major_locator(mdates.YearLocator())
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.MonthLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.legend()
@@ -559,7 +559,7 @@ def get_calcium_plots(RWSo, RWSoCa):
     ax.xaxis.set_major_locator(mdates.YearLocator())
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.MonthLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.legend()
@@ -596,7 +596,7 @@ def get_calcium_plots(RWSo, RWSoCa):
     ax.xaxis.set_major_locator(mdates.YearLocator())
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.legend()
@@ -651,4 +651,47 @@ def get_calcium_plots(RWSo, RWSoCa):
     print(f"Change over 2010-2021: {changelongterm:6e}")
     changeperyear = changelongterm / (year)
     print(f"Change per year: {changeperyear:.6e}")
+    
+    # Total 2009-2015
+    slope, intercept, r, p, se = linregress(RWSoCa[L0]['datenum'], RWSoCa[L0]['calcium_corrected']) 
+    xbegin = RWSoCa[L0].datenum.min() 
+    xend = RWSoCa[L0].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2009-2015: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")
+    
+    # Total 2015-2017
+    slope, intercept, r, p, se = linregress(RWSoCa[L1]['datenum'], RWSoCa[L1]['calcium_corrected']) 
+    xbegin = RWSoCa[L1].datenum.min() 
+    xend = RWSoCa[L1].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2015-2017: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")
+    
+    # Total 2017-2018
+    slope, intercept, r, p, se = linregress(RWSoCa[L2]['datenum'], RWSoCa[L2]['calcium_corrected']) 
+    xbegin = RWSoCa[L2].datenum.min() 
+    xend = RWSoCa[L2].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2017-2018: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")
+    
     

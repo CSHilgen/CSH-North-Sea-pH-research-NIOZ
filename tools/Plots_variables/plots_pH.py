@@ -10,6 +10,9 @@ def get_pH_plots(RWSomean, RWSnmean):
     from matplotlib.ticker import FuncFormatter
     from matplotlib.dates import MonthLocator, DateFormatter 
     
+    RWSomeanpH = RWSomean.dropna(axis='rows', how='all', subset=['pH_total'])
+    RWSnmeanpH = RWSnmean.dropna(axis='rows', how='all', subset=['pH_total_spectro_out'])
+    
     #%% # pH - Time - Datasets
 
     fig, ax = plt.subplots(dpi=300)
@@ -26,7 +29,7 @@ def get_pH_plots(RWSomean, RWSnmean):
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('pH RWS data - Datasets North Sea') 
@@ -50,7 +53,7 @@ def get_pH_plots(RWSomean, RWSnmean):
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('pH RWS data - Seasons North Sea') 
@@ -133,7 +136,7 @@ def get_pH_plots(RWSomean, RWSnmean):
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('pH RWS data - Regions North Sea') 
@@ -160,7 +163,7 @@ def get_pH_plots(RWSomean, RWSnmean):
     ax.xaxis.set_major_locator(MonthLocator())
     ax.xaxis.set_major_formatter(FuncFormatter(m_fmt))
     ax.set_xlim(0, 365)
-    ax.minorticks_on()
+
     ax.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
     ax.get_legend().set_title("Dataset")
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
@@ -243,7 +246,7 @@ def get_pH_plots(RWSomean, RWSnmean):
     ax.xaxis.set_major_locator(MonthLocator())
     ax.xaxis.set_major_formatter(FuncFormatter(m_fmt))
     ax.set_xlim(0, 365)
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('pH RWS data - Regions North Sea') 
@@ -274,7 +277,7 @@ def get_pH_plots(RWSomean, RWSnmean):
     ax.xaxis.set_major_locator(MonthLocator())
     ax.xaxis.set_major_formatter(FuncFormatter(m_fmt))
     ax.set_xlim(0, 365)
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('pH RWS data - Year North Sea') 
@@ -304,7 +307,7 @@ def get_pH_plots(RWSomean, RWSnmean):
     ax.set_xlabel("Distance to shore (km)")
     ax.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
     ax.get_legend().set_title("Dataset")
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('pH RWS data - Datasets North Sea') 
@@ -325,7 +328,7 @@ def get_pH_plots(RWSomean, RWSnmean):
     ax.set_ylabel("pH")
     ax.grid(alpha=0.3)
     ax.set_xlabel("Distance to shore (km)")
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('pH RWS data - Seasons North Sea') 
@@ -354,7 +357,7 @@ def get_pH_plots(RWSomean, RWSnmean):
     ax.set_ylabel("pH")
     ax.grid(alpha=0.3)
     ax.set_xlabel("Distance to shore (km)")
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('pH RWS data - Year North Sea') 
@@ -376,7 +379,6 @@ def get_pH_plots(RWSomean, RWSnmean):
     L1 = (RWSomean.year >= 1985) & (RWSomean.year <= 2010)
     L2 = (RWSomean.year >= 2010)
             
-    RWSomeanpH = RWSomean.dropna(axis='rows', how='all', subset=['pH_total'])
     slope, intercept, r, p, se = linregress(RWSomeanpH['datenum'], RWSomeanpH['pH_total'])
     print("Linear regression Initial data")
     print(f"Slope: {slope:.6e}")
@@ -386,7 +388,6 @@ def get_pH_plots(RWSomean, RWSnmean):
     print(f"P-value: {p:.6e}")
     print(f"Standard error: {se:.6e}")
 
-    RWSnmeanpH = RWSnmean.dropna(axis='rows', how='all', subset=['pH_total_spectro_out'])
     nslope, nintercept, nr, np, nse = linregress(RWSnmeanpH['datenum'], RWSnmeanpH['pH_total_spectro_out'])
     print("Linear regression Initial Spectro data")
     print(f"Slope: {nslope:.6e}")
@@ -412,7 +413,7 @@ def get_pH_plots(RWSomean, RWSnmean):
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.legend()
@@ -446,7 +447,7 @@ def get_pH_plots(RWSomean, RWSnmean):
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.legend()
@@ -464,7 +465,7 @@ def get_pH_plots(RWSomean, RWSnmean):
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.legend()
@@ -485,7 +486,7 @@ def get_pH_plots(RWSomean, RWSnmean):
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.legend()
@@ -525,7 +526,7 @@ def get_pH_plots(RWSomean, RWSnmean):
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.legend()

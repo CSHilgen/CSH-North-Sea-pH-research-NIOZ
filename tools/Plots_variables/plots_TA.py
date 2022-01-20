@@ -29,7 +29,7 @@ def get_TA_plots(combinedmean, glodapnsmean, Cefasmean, D366mean, RWSnmean):
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('TA combined data - Datasets North Sea')
@@ -56,7 +56,7 @@ def get_TA_plots(combinedmean, glodapnsmean, Cefasmean, D366mean, RWSnmean):
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('TA combined data - Datasets North Sea') 
@@ -79,7 +79,7 @@ def get_TA_plots(combinedmean, glodapnsmean, Cefasmean, D366mean, RWSnmean):
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('TA combined data - Seasons North Sea') 
@@ -135,7 +135,7 @@ def get_TA_plots(combinedmean, glodapnsmean, Cefasmean, D366mean, RWSnmean):
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('TA combined data - Regions North Sea') 
@@ -164,7 +164,7 @@ def get_TA_plots(combinedmean, glodapnsmean, Cefasmean, D366mean, RWSnmean):
     ax.xaxis.set_major_locator(MonthLocator())
     ax.xaxis.set_major_formatter(FuncFormatter(m_fmt))
     ax.set_xlim(0, 365)
-    ax.minorticks_on()
+
     ax.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
     ax.get_legend().set_title("Dataset")
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
@@ -220,7 +220,7 @@ def get_TA_plots(combinedmean, glodapnsmean, Cefasmean, D366mean, RWSnmean):
     ax.xaxis.set_major_locator(MonthLocator())
     ax.xaxis.set_major_formatter(FuncFormatter(m_fmt))
     ax.set_xlim(0, 365)
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('TA combined data - Regions North Sea') 
@@ -250,7 +250,7 @@ def get_TA_plots(combinedmean, glodapnsmean, Cefasmean, D366mean, RWSnmean):
     ax.xaxis.set_major_locator(MonthLocator())
     ax.xaxis.set_major_formatter(FuncFormatter(m_fmt))
     ax.set_xlim(0, 365)
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('TA combined data - Year North Sea') 
@@ -279,7 +279,7 @@ def get_TA_plots(combinedmean, glodapnsmean, Cefasmean, D366mean, RWSnmean):
     ax.set_xlabel("Distance to shore (km)")
     ax.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
     ax.get_legend().set_title("Dataset")
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('TA combined data - Datasets North Sea') 
@@ -299,7 +299,7 @@ def get_TA_plots(combinedmean, glodapnsmean, Cefasmean, D366mean, RWSnmean):
     ax.set_ylabel("Total Alkalinity (µmol/kg)")
     ax.grid(alpha=0.3)
     ax.set_xlabel("Distance to shore (km)")
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('TA combined data - Seasons North Sea') 
@@ -327,7 +327,7 @@ def get_TA_plots(combinedmean, glodapnsmean, Cefasmean, D366mean, RWSnmean):
     ax.set_ylabel("Total Alkalinity (µmol/kg)")
     ax.grid(alpha=0.3)
     ax.set_xlabel("Distance to shore (km)")
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('TA combined data - Year North Sea') 
@@ -369,7 +369,7 @@ def get_TA_plots(combinedmean, glodapnsmean, Cefasmean, D366mean, RWSnmean):
     ax.xaxis.set_major_locator(mdates.YearLocator())
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.MonthLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.legend()
@@ -402,7 +402,7 @@ def get_TA_plots(combinedmean, glodapnsmean, Cefasmean, D366mean, RWSnmean):
     ax.xaxis.set_major_locator(mdates.YearLocator())
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.MonthLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.legend()
@@ -420,7 +420,7 @@ def get_TA_plots(combinedmean, glodapnsmean, Cefasmean, D366mean, RWSnmean):
     ax.xaxis.set_major_locator(mdates.YearLocator())
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.MonthLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.legend()
@@ -453,7 +453,7 @@ def get_TA_plots(combinedmean, glodapnsmean, Cefasmean, D366mean, RWSnmean):
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.legend()

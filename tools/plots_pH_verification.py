@@ -3,7 +3,7 @@ def plot_pH_verification(RWSomean, RWSnmean, results_TA_fCO2, results_TA_pCO2):
     from matplotlib import pyplot as plt
     import matplotlib.dates as mdates
     
-    fig, ax = plt.subplots(dpi=300)
+    fig, ax = plt.subplots(dpi=300, figsize=(10,6))
 
     ax = ax
     ax.scatter('datenum', 'pH_total', c='xkcd:water blue', data=RWSomean, label='pH RWS$_{1975-2018}$', s=20, alpha=0.4)
@@ -19,11 +19,11 @@ def plot_pH_verification(RWSomean, RWSnmean, results_TA_fCO2, results_TA_pCO2):
     #ax.set_xlim([9069, 19000])
     ax.set_xlim(10950, 19345)
     ax.set_ylim(7, 8.5)
-    ax.legend()#bbox_to_anchor=(1.0, 1.0), loc='upper left')
+    ax.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+    ax.yaxis.set_minor_locator(MultipleLocator(0.1))
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('pH predicted - Datasets North Sea') 
@@ -101,7 +101,6 @@ def predicted_fCO2_pCO2_alkalinity_RWSo(RWSomean):
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     
@@ -124,7 +123,6 @@ def predicted_fCO2_pCO2_alkalinity_RWSo(RWSomean):
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     
@@ -148,7 +146,6 @@ def predicted_fCO2_pCO2_alkalinity_RWSo(RWSomean):
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     

@@ -29,7 +29,7 @@ def get_fCO2sea_plots(socatnsmean):
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('fCO$_2$ sea SOCAT data - Datasets North Sea')
@@ -53,7 +53,7 @@ def get_fCO2sea_plots(socatnsmean):
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('fCO$_2$ sea SOCAT data - Datasets North Sea')
@@ -76,7 +76,7 @@ def get_fCO2sea_plots(socatnsmean):
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('fCO$_2$ sea SOCAT data - Seasons North Sea')
@@ -129,7 +129,7 @@ def get_fCO2sea_plots(socatnsmean):
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
@@ -159,7 +159,7 @@ def get_fCO2sea_plots(socatnsmean):
     ax.set_xlim(0, 365)
     ax.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
     ax.get_legend().set_title("Dataset")
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('fCO$_2$ sea SOCAT data - Datasets North Sea')
@@ -210,7 +210,7 @@ def get_fCO2sea_plots(socatnsmean):
     ax.xaxis.set_major_locator(MonthLocator())
     ax.xaxis.set_major_formatter(FuncFormatter(m_fmt))
     ax.set_xlim(0, 365)
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
@@ -247,7 +247,7 @@ def get_fCO2sea_plots(socatnsmean):
     ax.xaxis.set_major_locator(MonthLocator())
     ax.xaxis.set_major_formatter(FuncFormatter(m_fmt))
     ax.set_xlim(0, 365)
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('fCO$_2$ sea SOCAT data - Year North Sea')
@@ -268,7 +268,7 @@ def get_fCO2sea_plots(socatnsmean):
     ax.set_ylabel("fCO$_2$ (uatm)")
     ax.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
     ax.get_legend().set_title("Dataset")
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('fCO$_2$ sea SOCAT data - Datasets North Sea')
@@ -288,7 +288,7 @@ def get_fCO2sea_plots(socatnsmean):
     ax.grid(alpha=0.3)
     ax.set_xlabel("Distance to shore (km)")
     ax.set_ylabel("fCO$_2$ (uatm)")
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('fCO$_2$ sea SOCAT data - Seasons North Sea')
@@ -322,7 +322,7 @@ def get_fCO2sea_plots(socatnsmean):
     ax.grid(alpha=0.3)
     ax.set_xlabel('Distance to shore (km)')
     ax.set_ylabel('fCO$_2$ (uatm)')
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('fCO$_2$ sea SOCAT data - Year North Sea')
@@ -352,7 +352,7 @@ def get_fCO2sea_plots(socatnsmean):
     
     ax = axs[0]
     sns.regplot(x='datenum', y='fco2_sea', data=socatnsmean, ax=ax, ci=99.9,
-                scatter_kws={"color": "xkcd:orange"}, line_kws={"color": "blue", 'label': f'y = {slope:.1e}x + {intercept:.1f}'}, label='Initial fCO$_2$ sea SOCAT')
+                scatter_kws={"color": "xkcd:goldenrod"}, line_kws={"color": "blue", 'label': f'y = {slope:.1e}x + {intercept:.1f}'}, label='Initial fCO$_2$ sea SOCAT')
 
     ax.set_title("fCO$_2$ sea SOCAT data - North Sea")
     ax.grid(alpha=0.3)
@@ -362,7 +362,7 @@ def get_fCO2sea_plots(socatnsmean):
     ax.xaxis.set_major_locator(mdates.YearLocator())
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.legend()
@@ -377,7 +377,7 @@ def get_fCO2sea_plots(socatnsmean):
     print(f"Standard error: {se:.6e}")
 
     ax = axs[1]
-    socatnsmean.plot.scatter("datenum", "fco2_sea", ax=ax, c='xkcd:orange', label='Initial fCO$_2$ sea SOCAT')
+    socatnsmean.plot.scatter("datenum", "fco2_sea", ax=ax, c='xkcd:goldenrod', label='Initial fCO$_2$ sea SOCAT')
 
     fx = np.linspace(socatnsmean.datenum.min(), socatnsmean.datenum.max(), 1000)
     fy = SF_tools.seasonalcycle_fit_fco2_sea(opt_result['x'], fx)
@@ -391,7 +391,7 @@ def get_fCO2sea_plots(socatnsmean):
     ax.xaxis.set_major_locator(mdates.YearLocator())
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.legend()
@@ -407,7 +407,7 @@ def get_fCO2sea_plots(socatnsmean):
 
     ax = axs[2]
     sns.regplot(x='datenum', y='ms_fco2_sea', data=socatnsmean, ax=ax, ci=99.9,
-                scatter_kws={"color": "xkcd:orange"}, line_kws={"color": "blue", 'label': f'y = {slope:.1f}x + {intercept:.1e}'}, label='Seasonal corrected fCO$_2$ sea SOCAT')
+                scatter_kws={"color": "xkcd:goldenrod"}, line_kws={"color": "blue", 'label': f'y = {slope:.1f}x + {intercept:.1e}'}, label='Seasonal corrected fCO$_2$ sea SOCAT')
 
     ax.grid(alpha=0.3)
     ax.set_xlabel("Time (yrs)")
@@ -415,7 +415,7 @@ def get_fCO2sea_plots(socatnsmean):
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.legend()
@@ -438,7 +438,7 @@ def get_fCO2sea_plots(socatnsmean):
 
     ax = axs[0]
     sns.regplot(x='datenum', y='fco2_sea', data=socatnsmean[L1], ax=ax,
-                scatter_kws={"color": "xkcd:orange"}, line_kws={"color": "blue", 'label': f'y = {slope:.1e}x + {intercept:.1f}'}, label='Initial fCO$_2$ sea SOCAT')
+                scatter_kws={"color": "xkcd:goldenrod"}, line_kws={"color": "blue", 'label': f'y = {slope:.1e}x + {intercept:.1f}'}, label='Initial fCO$_2$ sea SOCAT')
 
     ax.set_title("fCO$_2$ sea SOCAT data - North Sea")
     ax.grid(alpha=0.3)
@@ -448,7 +448,7 @@ def get_fCO2sea_plots(socatnsmean):
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.legend()
@@ -457,7 +457,7 @@ def get_fCO2sea_plots(socatnsmean):
 
     ax = axs[1]
     sns.regplot(x='datenum', y='fco2_sea', data=socatnsmean[L2], ax=ax,
-                scatter_kws={"color": "xkcd:orange"}, line_kws={"color": "blue", 'label': f'y = {slope:.1e}x + {intercept:.1f}'}, label='Initial fCO$_2$ sea SOCAT')
+                scatter_kws={"color": "xkcd:goldenrod"}, line_kws={"color": "blue", 'label': f'y = {slope:.1e}x + {intercept:.1f}'}, label='Initial fCO$_2$ sea SOCAT')
 
     ax.grid(alpha=0.3)
     ax.set_xlabel("Time (yrs)")
@@ -466,7 +466,7 @@ def get_fCO2sea_plots(socatnsmean):
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.legend()
@@ -487,9 +487,9 @@ def get_fCO2sea_plots(socatnsmean):
     
     ax = ax
     sns.regplot(x='datenum', y='fco2_sea', data=socatnsmean[L1], ax=ax,
-                scatter_kws={"color": "xkcd:orange"}, line_kws={"color": "blue", 'label': f'y = {aslope:.1e}x + {aintercept:.1f}'}, label='Initial fCO$_2$ sea SOCAT')
+                scatter_kws={"color": "xkcd:goldenrod"}, line_kws={"color": "blue", 'label': f'y = {aslope:.1e}x + {aintercept:.1f}'}, label='Initial fCO$_2$ sea SOCAT')
     sns.regplot(x='datenum', y='fco2_sea', data=socatnsmean[L2], ax=ax,
-                scatter_kws={"color": "xkcd:orange"}, line_kws={"color": "blue", 'label': f'y = {bslope:.1e}x + {bintercept:.1f}', 'linestyle': 'dotted'})
+                scatter_kws={"color": "xkcd:goldenrod"}, line_kws={"color": "blue", 'label': f'y = {bslope:.1e}x + {bintercept:.1f}', 'linestyle': 'dotted'})
     
     ax.set_title("fCO$_2$ sea SOCAT data - North Sea")
     ax.grid(alpha=0.3)
@@ -499,7 +499,7 @@ def get_fCO2sea_plots(socatnsmean):
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.legend()

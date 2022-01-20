@@ -71,7 +71,7 @@ allparameters = HM16_tools.get_pH_predicted(LR, LC, resultsRWSo, resultscombined
 # Function for cyclic curve
 resultsRWSodubbel, allparametersdubbel = HM16_tools.cycliccurve_2005_2010(allparameters, resultsRWSo, LR)
 
-# 'x' must contain at least 2 elements. 
+# Error: 'x' must contain at least 2 elements. 
 
 # Function to get the ΔpH winter-to-summer for each individual parameter
 # HM16_tools.deltapH_winter_summer(allparametersdubbel, resultsRWSodubbel)
@@ -112,15 +112,15 @@ pH_preddata, pH_fitdata = HM16_plots.get_pHpred_pHfit(allparameters, allparamete
 
 #%% # Getting the mean of the period 2015-2018
 
-timeperiod = '2015-2018'
+timeperiod = '2015_2018'
 print(timeperiod)
-LR = (resultsRWSo['year'] >= 2015) & (resultsRWSo['year'] <= 2018) 
-LC = (resultscombined['year'] >= 2015) & (resultscombined['year'] <= 2018)  
+LR = (resultsRWSo['year'] >= 2000) & (resultsRWSo['year'] <= 2018) 
+LC = (resultscombined['year'] >= 2000) & (resultscombined['year'] <= 2018)  
 
 # Function for pH predicted
 allparameters = HM16_tools.get_pH_predicted(LR, LC, resultsRWSo, resultscombined)
 
-# # Function for cyclic curve
+# Function for cyclic curve
 resultsRWSodubbel, allparametersdubbel = HM16_tools.cycliccurve_2015_2018(allparameters, resultsRWSo, LR)
 
 # Function to get the ΔpH winter-to-summer for each individual parameter
@@ -137,7 +137,7 @@ pH_preddata, pH_fitdata = HM16_plots.get_pHpred_pHfit(allparameters, allparamete
 
 #%% # Getting the mean of the period 2018-2021
 
-timeperiod = '2018-2021'
+timeperiod = '2018_2021'
 print(timeperiod)
 LR = (resultsRWSo['year'] >= 2018)
 LC = (resultscombined['year'] >= 2018) 

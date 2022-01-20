@@ -30,7 +30,7 @@ def get_chlorophyll_plots(RWSomean, RWSomeanChl):
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('Chlorophyll RWSo data - Datasets North Sea')
@@ -55,7 +55,7 @@ def get_chlorophyll_plots(RWSomean, RWSomeanChl):
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('Chlorophyll RWSo data - Datasets North Sea')
@@ -79,7 +79,7 @@ def get_chlorophyll_plots(RWSomean, RWSomeanChl):
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('Chlorophyll RWSo data - Seasons North Sea')
@@ -133,7 +133,7 @@ def get_chlorophyll_plots(RWSomean, RWSomeanChl):
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
@@ -164,7 +164,7 @@ def get_chlorophyll_plots(RWSomean, RWSomeanChl):
     ax.set_xlim(0, 365)
     ax.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
     ax.get_legend().set_title("Dataset")
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('Chlorophyll RWSo data - Datasets North Sea')
@@ -216,7 +216,7 @@ def get_chlorophyll_plots(RWSomean, RWSomeanChl):
     ax.xaxis.set_major_locator(MonthLocator())
     ax.xaxis.set_major_formatter(FuncFormatter(m_fmt))
     ax.set_xlim(0, 365)
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
@@ -254,7 +254,7 @@ def get_chlorophyll_plots(RWSomean, RWSomeanChl):
     ax.xaxis.set_major_locator(MonthLocator())
     ax.xaxis.set_major_formatter(FuncFormatter(m_fmt))
     ax.set_xlim(0, 365)
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('Chlorophyll RWSo data - Year North Sea')
@@ -276,7 +276,7 @@ def get_chlorophyll_plots(RWSomean, RWSomeanChl):
     ax.set_ylim(0, 30)
     ax.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
     ax.get_legend().set_title("Dataset")
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('Chlorophyll RWSo data - Datasets North Sea')
@@ -297,7 +297,7 @@ def get_chlorophyll_plots(RWSomean, RWSomeanChl):
     ax.set_xlabel("Distance to shore (km)")
     ax.set_ylabel("Chlorophyll-a (µg/L)")
     ax.set_ylim(0, 30)
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('Chlorophyll RWSo data - Seasons North Sea')
@@ -332,7 +332,7 @@ def get_chlorophyll_plots(RWSomean, RWSomeanChl):
     ax.set_xlabel('Distance to shore (km)')
     ax.set_ylabel("Chlorophyll-a (µg/L)")
     ax.set_ylim(0, 30)
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_title('Chlorophyll RWSo data - Year North Sea')
@@ -372,7 +372,7 @@ def get_chlorophyll_plots(RWSomean, RWSomeanChl):
     ax.xaxis.set_major_locator(mdates.YearLocator())
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.legend()
@@ -401,7 +401,7 @@ def get_chlorophyll_plots(RWSomean, RWSomeanChl):
     ax.xaxis.set_major_locator(mdates.YearLocator())
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.legend()
@@ -426,7 +426,7 @@ def get_chlorophyll_plots(RWSomean, RWSomeanChl):
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.legend()
@@ -460,7 +460,7 @@ def get_chlorophyll_plots(RWSomean, RWSomeanChl):
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.legend()
@@ -478,7 +478,7 @@ def get_chlorophyll_plots(RWSomean, RWSomeanChl):
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.legend()
@@ -496,7 +496,7 @@ def get_chlorophyll_plots(RWSomean, RWSomeanChl):
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.legend()
@@ -535,7 +535,7 @@ def get_chlorophyll_plots(RWSomean, RWSomeanChl):
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
-    ax.minorticks_on()
+
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.legend()

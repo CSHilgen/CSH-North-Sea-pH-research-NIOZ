@@ -60,12 +60,12 @@ def plot_salinity_vs_TA(combinedmean):
     sns.regplot(x='salinity', y='alkalinity', data=combinedmean, ax=ax,
                 scatter_kws={"color": "none"}, line_kws={"color": "blue", 'label': f'y = {slope:.1f}x + {intercept:.1f}'})
     
-    #sc = ax.scatter('salinity', 'normalized_TA', c='dayofyear', cmap=cm, data=combinedmean, label='Normalized A$_T$', vmin=vmin, vmax=vmax)
-    sc = ax.scatter('salinity', 'alkalinity', c='dayofyear', cmap=cm, data=combinedmean, label='Initial A$_T$', vmin=vmin, vmax=vmax)
+    #sc = ax.scatter('salinity', 'normalized_TA', c='dayofyear', cmap=cm, data=combinedmean, label='Normalized TA', vmin=vmin, vmax=vmax)
+    sc = ax.scatter('salinity', 'alkalinity', c='dayofyear', cmap=cm, data=combinedmean, label='Initial TA', vmin=vmin, vmax=vmax)
     
     ax.grid(alpha=0.3)
     ax.set_xlabel("Salinity")
-    ax.set_ylabel("A$_T$ (µmol/kg)")
+    ax.set_ylabel("TA (µmol/kg)")
     ax.set_title("TA and S combined data - North Sea")
     ax.legend()
     ax.minorticks_on()
@@ -108,7 +108,6 @@ def plot_normalized_DIC(combinedmean):
     ax.xaxis.set_major_locator(mdates.YearLocator())
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.MonthLocator())
-    ax.minorticks_on()
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_ylim([2000, 2250])
@@ -124,7 +123,6 @@ def plot_normalized_DIC(combinedmean):
     ax.xaxis.set_major_locator(mdates.YearLocator())
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.MonthLocator())
-    ax.minorticks_on()
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_ylim([2000, 2250])
@@ -142,7 +140,6 @@ def plot_normalized_DIC(combinedmean):
     ax.xaxis.set_major_locator(mdates.YearLocator())
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.MonthLocator())
-    ax.minorticks_on()
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_ylim([2000, 2250])
@@ -166,16 +163,15 @@ def plot_normalized_TA(combinedmean):
     
     ax = axs[0]
     sns.regplot(x='datenum', y='alkalinity', data=combinedmean, ax=ax,
-                scatter_kws={"color": "red"}, line_kws={"color": "blue", 'label': f'y = {slope:.1e}x + {intercept:.1f}'}, label='Initial A$_T$', marker='x')
+                scatter_kws={"color": "red"}, line_kws={"color": "blue", 'label': f'y = {slope:.1e}x + {intercept:.1f}'}, label='Initial TA', marker='x')
     
-    ax.set_title("A$_T$ - Fitting North Sea")
+    ax.set_title("TA - Fitting North Sea")
     ax.grid(alpha=0.3)
     ax.set_xlabel("Time (yrs)")
-    ax.set_ylabel('A$_T$ (μmol/kg)')
+    ax.set_ylabel('TA (μmol/kg)')
     ax.xaxis.set_major_locator(mdates.YearLocator())
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.MonthLocator())
-    ax.minorticks_on()
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_ylim([2280, 2420])
@@ -183,7 +179,7 @@ def plot_normalized_TA(combinedmean):
     
     ax = axs[1]
     combinedmean.plot.scatter("datenum", "alkalinity", ax=ax, c='red', label='Initial TA', marker='x')
-    combinedmean.plot.scatter('datenum', 'normalized_TA', ax=ax, c='red', label='Normalized A$_T$')
+    combinedmean.plot.scatter('datenum', 'normalized_TA', ax=ax, c='red', label='Normalized TA')
     
     ax.grid(alpha=0.3)
     ax.set_xlabel("Time (yrs)")
@@ -191,7 +187,6 @@ def plot_normalized_TA(combinedmean):
     ax.xaxis.set_major_locator(mdates.YearLocator())
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.MonthLocator())
-    ax.minorticks_on()
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_ylim([2280, 2420])
@@ -201,15 +196,14 @@ def plot_normalized_TA(combinedmean):
     
     ax = axs[2]
     sns.regplot(x='datenum', y='normalized_TA', data=combinedmean, ax=ax, ci=99.9,
-                scatter_kws={"color": "red"}, line_kws={"color": "blue", 'label': f'y = {slope:.1e}x + {intercept:.1f}'}, label='Normalized A$_T$')
+                scatter_kws={"color": "red"}, line_kws={"color": "blue", 'label': f'y = {slope:.1e}x + {intercept:.1f}'}, label='Normalized TA')
     
     ax.grid(alpha=0.3)
     ax.set_xlabel("Time (yrs)")
-    ax.set_ylabel('A$_T$ (μmol/kg)')
+    ax.set_ylabel('TA (μmol/kg)')
     ax.xaxis.set_major_locator(mdates.YearLocator())
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.MonthLocator())
-    ax.minorticks_on()
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_ylim([2280, 2420])
@@ -221,7 +215,7 @@ def plot_normalized_TA(combinedmean):
     
 def plot_DIC_TA(combinedmean):
     from matplotlib import pyplot as plt
-
+    
     fig, ax = plt.subplots(dpi=300, figsize=(6,4))
     cm = plt.cm.get_cmap('twilight')
     
@@ -235,7 +229,7 @@ def plot_DIC_TA(combinedmean):
     
     ax.grid(alpha=0.3)
     ax.set_xlabel("DIC (μmol/kg)")
-    ax.set_ylabel("A$_T$ (μmol/kg)")
+    ax.set_ylabel("TA (μmol/kg)")
     ax.set_xlim([2000, 2250])
     ax.set_ylim([2280, 2420])
     ax.minorticks_on()
@@ -248,10 +242,11 @@ def plot_DIC_TA(combinedmean):
     plt.show()
 
 def plot_DIC_TA_year(combinedmean):
-    
     from matplotlib import pyplot as plt
     import numpy as np
-
+    from scipy.stats import linregress
+    import seaborn as sns
+    
     fig, ax = plt.subplots(dpi=300, figsize=(6,4))
     cm = plt.cm.get_cmap('rainbow')
     vmin = 2000
@@ -261,12 +256,12 @@ def plot_DIC_TA_year(combinedmean):
     slope, intercept, r, p, se = linregress(combinedmean['normalized_DIC'], combinedmean['normalized_TA'])
     ax = ax
     sc = ax.scatter('dic', 'alkalinity', c='year', data=combinedmean, cmap=cm, vmin=vmin, vmax=vmax+1, s=20)
-    sns.regplot(x='dic', y='alkalinity', data=combinedmean[C1], ax=ax,
-            scatter_kws={"color": "None"}, line_kws={"color": "blue", 'label': f'y = {slope:.1e}x + {intercept:.1f}'})
+    # sns.regplot(x='dic', y='alkalinity', data=combinedmean[C1], ax=ax,
+    #         scatter_kws={"color": "None"}, line_kws={"color": "blue", 'label': f'y = {slope:.1e}x + {intercept:.1f}'})
 
     ax.grid(alpha=0.3)
     ax.set_xlabel("DIC (μmol/kg)")
-    ax.set_ylabel("A$_T$ (μmol/kg)")
+    ax.set_ylabel("TA (μmol/kg)")
     ax.set_xlim([2000, 2250])
     ax.set_ylim([2280, 2420])
     ax.minorticks_on()
@@ -299,7 +294,7 @@ def plot_NDIC_NTA(combinedmean):
     
     ax.grid(alpha=0.3)
     ax.set_xlabel("nDIC (μmol/kg)")
-    ax.set_ylabel("nA$_T$ (μmol/kg)")
+    ax.set_ylabel("nTA (μmol/kg)")
     ax.set_xlim([2000, 2250])
     ax.set_ylim([2280, 2420])
     ax.minorticks_on()
@@ -312,7 +307,6 @@ def plot_NDIC_NTA(combinedmean):
     plt.show()
 
 def plot_NDIC_NTA_year(combinedmean):
-    
     from matplotlib import pyplot as plt
     import numpy as np
     
@@ -326,7 +320,7 @@ def plot_NDIC_NTA_year(combinedmean):
 
     ax.grid(alpha=0.3)
     ax.set_xlabel("nDIC (μmol/kg)")
-    ax.set_ylabel("nA$_T$ (μmol/kg)")
+    ax.set_ylabel("nTA (μmol/kg)")
     ax.set_xlim([2000, 2250])
     ax.set_ylim([2280, 2420])
     ax.minorticks_on()
