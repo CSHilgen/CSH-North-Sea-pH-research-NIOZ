@@ -714,7 +714,7 @@ print(f"p value 1975-2018 = {p:6f}")
 
 ax = axs[2]
 sns.regplot(x='datenum', y='total_phosphate', data=RWSomeanP, ax=ax,
-            scatter_kws={"color": "xkcd:apricot"}, line_kws={"color": "blue", 'label': f'y = {slope:.1e}x + {intercept:.2f}'}, label='Initial PO$_4^{-3}$ RWS')
+            scatter_kws={"color": "xkcd:apricot"}, line_kws={"color": "blue", 'label': f'y = {slope:.1e}x + {intercept:.2f}'}, label='Initial PO$_4^{3-}$ RWS')
 
 ax.grid(alpha=0.3)
 ax.set_xlabel('Time (yrs)')
@@ -832,7 +832,7 @@ print(f"p value 1975-2018 = {p:6f}")
 
 ax = axs[2]
 sns.regplot(x='datenum', y='total_silicate', data=RWSomeanS, ax=ax,
-            scatter_kws={"color": "xkcd:navy"}, line_kws={"color": "blue", 'label': f'y = {slope:.1e}x + {intercept:.2f}'}, label='Initial SiO$_4^{-4}$ RWS')
+            scatter_kws={"color": "xkcd:navy"}, line_kws={"color": "blue", 'label': f'y = {slope:.1e}x + {intercept:.2f}'}, label='Initial SiO$_4^{4-}$ RWS')
 
 ax.grid(alpha=0.3)
 ax.set_xlabel('Time (yrs)')

@@ -69,6 +69,9 @@ SV_plots.plot_DIC_TA_year(combinedmean)
 SV_plots.plot_NDIC_NTA(combinedmean)
 SV_plots.plot_NDIC_NTA_year(combinedmean)
 
+combinedmean['dicta_ratio'] = combinedmean['dic'] / combinedmean['alkalinity']
+combinedmean['ndicta_ratio'] = combinedmean['normalized_DIC'] / combinedmean['normalized_TA']
+
 #%% # Save all datasets assessing the spatial variability
 
 resultsRWSo.to_csv("dataframes_made/resultsRWSo_final.csv")
