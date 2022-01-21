@@ -21,7 +21,7 @@ socatns = pd.read_csv("dataframes_made/socatns_final.csv")
 variable = 'pH'
 
 for variable in ['pH', 'aou', 'oxygen umol/kg', 'chlorophyll', 'ammonia', 'phosphate', 'silicate', 'nitrate', 'calcium']:
-
+    
     selecteddf = RWSo.dropna(axis='rows', how='all', subset=[variable])
     
     x = selecteddf['datenum']
