@@ -590,12 +590,25 @@ ax.set_xlim(0, 365)
 ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
 ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
 
-print(f"p value 1975-2018 = {p:6f}")
-slope, intercept, r, p, se = linregress(RWSomeanChl['datenum'], RWSomeanChl['chlorophyll'])
+L0 = (RWSomeanChl.year <= 1985)
+L1 = (RWSomeanChl.year >= 1985) & (RWSomeanChl.year <= 2010)
+L2 = (RWSomeanChl.year >= 2010)
+
+
+slope, intercept, r, p, se = linregress(RWSomeanChl[L0]['datenum'], RWSomeanChl[L0]['chlorophyll'])
+aslope, aintercept, ar, ap, ase = linregress(RWSomeanChl[L1]['datenum'], RWSomeanChl[L1]['chlorophyll'])
+bslope, bintercept, br, bp, bse = linregress(RWSomeanChl[L2]['datenum'], RWSomeanChl[L2]['chlorophyll'])    
+print(f"p value 1975-1985 = {p:6f}")
+print(f"p value 1985-2010 = {ap:6f}")
+print(f"p value from 2010 = {bp:6f}")
 
 ax = axs[2]
-sns.regplot(x='datenum', y='chlorophyll', data=RWSomeanChl, ax=ax,
-            scatter_kws={"color": "xkcd:brown"}, line_kws={"color": "blue", 'label': f'y = {slope:.1e}x + {intercept:.1f}'}, label='Initial Chl RWS')
+sns.regplot(x='datenum', y='chlorophyll', data=RWSomeanChl[L0], ax=ax,
+            scatter_kws={"color": "xkcd:brown"}, line_kws={"color": "blue", 'label': f'y = {slope:.1e}x + {intercept:.1f}', 'linestyle': '--',}, label='Initial Chl RWS')
+sns.regplot(x='datenum', y='chlorophyll', data=RWSomeanChl[L1], ax=ax,
+            scatter_kws={"color": "xkcd:brown"}, line_kws={"color": "blue", 'label': f'y = {aslope:.1e}x + {aintercept:.1f}'})
+sns.regplot(x='datenum', y='chlorophyll', data=RWSomeanChl[L2], ax=ax,
+            scatter_kws={"color": "xkcd:brown"}, line_kws={"color": "blue", 'label': f'y = {bslope:.1e}x + {bintercept:.1f}', 'linestyle': 'dotted'})
 
 ax.grid(alpha=0.3)
 ax.set_xlabel('Time (yrs)')
@@ -607,8 +620,8 @@ ax.xaxis.set_minor_locator(mdates.YearLocator())
 ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
 ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
 handles, labels = ax.get_legend_handles_labels()
-order = [1,0]
-fig.legend([handles[idx] for idx in order],[labels[idx] for idx in order], loc="lower center", ncol=2, bbox_to_anchor=(.075, 0.95, 0.9, 1.02), borderaxespad=0, mode='expand', fontsize=9)
+order = [3,1,2]
+fig.legend([handles[idx] for idx in order],[labels[idx] for idx in order], loc="lower center", ncol=3, bbox_to_anchor=(.075, 0.95, 0.9, 1.02), borderaxespad=0, mode='expand', fontsize=9)
 
 plt.subplots_adjust(wspace=0, hspace=0)
 

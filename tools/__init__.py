@@ -517,3 +517,34 @@ def deltapH_winter_summer_RWSn(allparametersdubbel, resultsRWSodubbel, resultsRW
     meansummer = plotting.y_plotting[Lsummer].mean()
     meanwinter = plotting.y_plotting[Lwinter].mean()
     print(f"pHfitted ΔpH winter-to-summer : {meansummer - meanwinter:4f}")
+
+def cycliccurve_2000_2011(allparameters, resultsRWSo, LR):
+    # Get a cyclic curve
+    allparametersdubbel = allparameters.append(allparameters.loc[4078 : 4097].assign(**{'dayofyear':407}), ignore_index=True)
+    allparametersdubbel = allparametersdubbel.append(allparametersdubbel.loc[4607 : 4613].assign(**{'dayofyear':-35}), ignore_index=True)
+    allparametersdubbel = allparametersdubbel.append(allparametersdubbel.loc[4555 : 4599].assign(**{'dayofyear':-36}), ignore_index=True)
+    # Drop na for fitted pH values
+    resultsRWSoNN = resultsRWSo[LR].dropna(axis='rows', how='all', subset=['pH_total'])
+    resultsRWSodubbel = resultsRWSoNN.append(resultsRWSoNN.loc[[1607] *1].assign(**{'dayofyear':367}), ignore_index=True)
+    resultsRWSodubbel = resultsRWSodubbel.append(resultsRWSodubbel.loc[[710] *1].assign(**{'dayofyear':368}), ignore_index=True)
+    resultsRWSodubbel = resultsRWSodubbel.append(resultsRWSodubbel.loc[[986] *1].assign(**{'dayofyear':368}), ignore_index=True)
+    resultsRWSodubbel = resultsRWSodubbel.append(resultsRWSodubbel.loc[[2068] *1].assign(**{'dayofyear':368}), ignore_index=True)
+    resultsRWSodubbel = resultsRWSodubbel.append(resultsRWSodubbel.loc[[189] *1].assign(**{'dayofyear':-2}), ignore_index=True)
+    resultsRWSodubbel = resultsRWSodubbel.append(resultsRWSodubbel.loc[[460] *1].assign(**{'dayofyear':-2}), ignore_index=True)
+    resultsRWSodubbel = resultsRWSodubbel.append(resultsRWSodubbel.loc[[1117] *1].assign(**{'dayofyear':-2}), ignore_index=True)
+    
+    return resultsRWSodubbel, allparametersdubbel
+
+def cycliccurve_2010_2018(allparameters, resultsRWSo, LR):
+    # Get a cyclic curve
+    allparametersdubbel = allparameters.append(allparameters.loc[2001 : 2012].assign(**{'dayofyear':387}), ignore_index=True)
+    allparametersdubbel = allparametersdubbel.append(allparametersdubbel.loc[1472 : 1506].assign(**{'dayofyear':-19}), ignore_index=True)
+    # Drop na for fitted pH values
+    resultsRWSoNN = resultsRWSo[LR].dropna(axis='rows', how='all', subset=['pH_total'])
+    resultsRWSodubbel = resultsRWSoNN.append(resultsRWSoNN.loc[[3899] *1].assign(**{'dayofyear':371}), ignore_index=True)
+    resultsRWSodubbel = resultsRWSodubbel.append(resultsRWSodubbel.loc[[345] *1].assign(**{'dayofyear':371}), ignore_index=True)
+    resultsRWSodubbel = resultsRWSodubbel.append(resultsRWSodubbel.loc[[877] *1].assign(**{'dayofyear':371}), ignore_index=True)
+    resultsRWSodubbel = resultsRWSodubbel.append(resultsRWSodubbel.loc[[674] *1].assign(**{'dayofyear':-10}), ignore_index=True)
+    resultsRWSodubbel = resultsRWSodubbel.append(resultsRWSodubbel.loc[[1203] *1].assign(**{'dayofyear':-10}), ignore_index=True)
+    
+    return resultsRWSodubbel, allparametersdubbel

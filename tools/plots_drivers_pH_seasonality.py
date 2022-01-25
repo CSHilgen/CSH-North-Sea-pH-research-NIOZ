@@ -301,7 +301,7 @@ def get_T_DIC_TA_curves(allparametersdubbel, allparameters, timeperiod):
     
     fvarr = ['temperature', 'normalized_DIC', 'normalized_TA']
     colourr = ['xkcd:pink', 'xkcd:purple', 'xkcd:red']
-    label_yy = ['Temperature (°C)', 'DIC (µmol/kg)', 'TA (µmol/kg)']
+    label_yy = ['Temperature (°C)', 'nDIC (µmol/kg)', 'nTA (µmol/kg)']
     Tdata = pd.DataFrame(columns=['dayofyear', 'temperature'])
     DICdata = pd.DataFrame(columns=['dayofyear', 'normalized_DIC'])
     TAdata = pd.DataFrame(columns=['dayofyear', 'normalized_TA'])
@@ -317,6 +317,10 @@ def get_T_DIC_TA_curves(allparametersdubbel, allparameters, timeperiod):
         yrangee = [[2.5, 21], [1700, 2400], [2250, 2450]] # period 2015-2018
     elif timeperiod == '2018_2021':
         yrangee = [[2.5, 23], [1700, 2400], [2100, 2500]] # period 2018-2021
+    elif timeperiod == '2000_2011':
+        yrangee = [[2, 22], [2000, 2300], [2250, 2450]] # period 2000-2011
+    elif timeperiod == '2010_2018':
+        yrangee = [[2, 22], [1950, 2350], [2200, 2450]] # period 2000-2018
     
     for fvar, colour, label_y, yrange, df in zip(fvarr, colourr, label_yy, yrangee, dff):
        
@@ -606,4 +610,74 @@ def get_quantitative_contribution():
     
     # plt.tight_layout()
     plt.savefig("figures/pH_Hagens&Middelburg_2016/Quantitative_contribution_FINAL.png")
+    plt.show()
+
+def get_quantitative_contribution_2():
+    
+    import matplotlib.pyplot as plt
+    import pandas as pd
+    from matplotlib.ticker import (MultipleLocator, AutoMinorLocator)
+    
+    labels = ['2000-2021', '2000-2011', '2010-2018', '2018-2021']
+    pH_pred_means = [-0.030193, -0.072360, -0.039653, -0.008515]
+    pH_fit_means = [0.074431, 0.070427, 0.093333, -0.008046]
+    T_means = [-0.176867, -0.178098, -0.169319, -0.185910]
+    DIC_means = [0.120855, 0.061168, 0.103253, 0.109603]
+    TA_means = [0.028111, 0.042649, 0.036680, 0.067784]
+    S_means = [-0.002945, -0.000232, -0.005597, -0.005808]
+    TotB_means = [-0.001412, -0.000111, -0.002692, -0.002775]
+    TotF_means = [0.000001, 0,  0.000002, 0.000002]
+    TotSO4_means = [-0, -0,  -0, -0] 
+    Totnutrients_means = [0.000075, 4.0e-05, 4.7e-05, 0.001409]
+    
+    labels_line = ['2000-2011', '2010-2018', '2018-2021']
+    pH_pred_means_line = [-0.072360, -0.039653, -0.008515]
+    pH_fit_means_line = [0.070427, 0.093333, -0.008046]
+    
+    labels_scatter = [0]
+    pH_pred_means_scatter = [-0.030193]
+    pH_fit_means_scatter = [0.074431]
+    
+    # men_std = [2, 3, 4, 1, 2]
+    # women_std = [3, 5, 2, 3, 3]
+    width = 0.5 # the width of the bars: can also be len(x) sequence
+    
+    df = pd.DataFrame(labels, columns=['periods'])
+    df['pH_pred_means'] = pH_pred_means
+    df['pH_fit_means'] = pH_fit_means
+    df['T_means'] = T_means
+    df['DIC_means'] = DIC_means
+    df['TA_means'] = TA_means
+    df['S_means'] = S_means
+    df['TotB_means'] = TotB_means
+    df['TotF_means'] = TotF_means
+    df['TotSO4_means'] = TotSO4_means 
+    df['Totnutrients_means'] = Totnutrients_means
+    
+    fig, ax = plt.subplots(dpi=300, figsize=(7,5))
+    
+    ax.bar(df['periods'], df['Totnutrients_means'], width, color='xkcd:brown', label='∆pH$_{∆Totnutrients}$') #, yerr=men_std )
+    ax.bar(df['periods'], df['TA_means'], width, bottom=Totnutrients_means, color='xkcd:red', label='∆pH$_{∆TA}$') #, yerr=women_std )
+    ax.bar(df['periods'], df['DIC_means'], width, bottom=TA_means, color='xkcd:purple', label='∆pH$_{∆DIC}$') #, yerr=women_std )
+    ax.bar(df['periods'], df['T_means'], width, bottom=S_means, color='xkcd:pink', label='∆pH$_{∆T}$') #, yerr=men_std )
+    ax.bar(df['periods'], df['S_means'], width, bottom=TotB_means, color='xkcd:golden', label='∆pH$_{∆S}$') #, yerr=men_std )
+    ax.bar(df['periods'], df['TotB_means'], width, color='xkcd:light green', label='∆pH$_{∆TotB}$') #, yerr=men_std )
+    #ax.bar(df['periods'], df['TotF_means'], width, color='xkcd:royal', label='∆pH$_{∆T}$') #, yerr=men_std )
+    #ax.bar(df['periods'], df['TotSO4_means'], width, color='xkcd:dark grey', label='∆pH$_{∆T}$') #, yerr=men_std )
+    
+    ax.plot(labels_line, pH_pred_means_line, '-o', markerfacecolor='none', linestyle='dashed', color='xkcd:water blue', label='∆pH$_{predicted}$') #, yerr=men_std )
+    ax.plot(labels_line, pH_fit_means_line, '-o', markerfacecolor='none', linestyle='dashed', color='xkcd:black', label='∆pH$_{fitted}$') #, yerr=men_std )
+    ax.scatter(labels_scatter, pH_pred_means_scatter, color='xkcd:water blue', facecolor='none', zorder=10)
+    ax.scatter(labels_scatter, pH_fit_means_scatter, color='black', facecolor='none', zorder=10)
+    
+    ax.yaxis.grid(color='gray', linestyle='dashed', alpha=0.7)# x ticks
+    ax.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
+    ax.set_ylabel('winter-to-summer ∆pH')
+    ax.set_xlabel('Periods (yrs)')
+    ax.set_title('Quantitative contribution 2')
+    ax.set_ylim(-0.2, 0.2)
+    ax.yaxis.set_major_locator(MultipleLocator(0.05))
+    
+    # plt.tight_layout()
+    plt.savefig("figures/pH_Hagens&Middelburg_2016/Quantitative_contribution_FINAL_2.png")
     plt.show()
