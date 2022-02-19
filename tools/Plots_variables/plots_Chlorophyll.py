@@ -1,6 +1,6 @@
 
 def get_chlorophyll_plots(RWSomean, RWSomeanChl):
-    
+    """Plot chlorophyll data: year, distance to shore, dayofyear, longterm""" 
     import pandas as pd, numpy as np
     from matplotlib import pyplot as plt
     import seaborn as sns
@@ -550,6 +550,7 @@ def get_chlorophyll_plots(RWSomean, RWSomeanChl):
     P2 = (RWSomeanChl.year >= 1985) & (RWSomeanChl.year <= 2010)
     P3 = (RWSomeanChl.year >= 2010)
     P4 = (RWSomeanChl.year >= 2000)
+    P5 = (RWSomeanChl.year >= 2000) & (RWSomeanChl.year <= 2010)
     
     # Total 1975-2018 
     slope, intercept, r, p, se = linregress(RWSomeanChl['datenum'], RWSomeanChl['chlorophyll']) 
@@ -592,7 +593,21 @@ def get_chlorophyll_plots(RWSomean, RWSomeanChl):
     print(f"Change over 1985-2010: {changelongterm:6e}")
     changeperyear = changelongterm / (year)
     print(f"Change per year: {changeperyear:.6e}")
+            
+    # Total 2000-2010 
+    slope, intercept, r, p, se = linregress(RWSomeanChl[P5]['datenum'], RWSomeanChl[P5]['chlorophyll']) 
+    xbegin = RWSomeanChl[P5].datenum.min() 
+    xend = RWSomeanChl[P5].datenum.max() 
     
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2000-2010: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")
+        
     # Total 2010-2018
     slope, intercept, r, p, se = linregress(RWSomeanChl[P3]['datenum'], RWSomeanChl[P3]['chlorophyll']) 
     xbegin = RWSomeanChl[P3].datenum.min() 

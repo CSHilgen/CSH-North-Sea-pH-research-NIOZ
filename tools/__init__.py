@@ -155,7 +155,7 @@ def deltapH_winter_summer(allparametersdubbel, resultsRWSodubbel):
         Lsummer = (plotting.x_plotting >= 172) & (plotting.x_plotting < 264) # 21 juni - 21 sep
         meansummer = plotting.y_plotting[Lsummer].mean()
         meanwinter = plotting.y_plotting[Lwinter].mean()
-        print(fvar + f" ΔpH winter-to-summer : {meansummer - meanwinter:4f}")
+        print(fvar + f" ΔpH winter-to-summer : {meanwinter - meansummer:4f}")
     
     LpHf = (resultsRWSodubbel.pH_total >= 7.5) & (resultsRWSodubbel.pH_total <= 8.5)
     x = resultsRWSodubbel['dayofyear'][LpHf].to_numpy()
@@ -181,13 +181,13 @@ def deltapH_winter_summer(allparametersdubbel, resultsRWSodubbel):
     Lsummer = (plotting.x_plotting >= 172) & (plotting.x_plotting < 264) # 21 juni - 21 sep
     meansummer = plotting.y_plotting[Lsummer].mean()
     meanwinter = plotting.y_plotting[Lwinter].mean()
-    print(f"pHfitted ΔpH winter-to-summer : {meansummer - meanwinter:4f}")
+    print(f"pHfitted ΔpH winter-to-summer : {meanwinter - meansummer:4f}")
     
 def cycliccurve_2000_2021(allparameters, resultsRWSo, LR):
-    # Get a cyclic curve
+    """ Get a cyclic curve"and drop na for fitted pH values"""
     allparametersdubbel = allparameters.append(allparameters.loc[1438 : 1537].assign(**{'dayofyear':-19}), ignore_index=True)
     allparametersdubbel = allparametersdubbel.append(allparametersdubbel.loc[8318 : 8353].assign(**{'dayofyear':378}), ignore_index=True)
-    # Drop na for fitted pH values
+    
     resultsRWSoNN = resultsRWSo[LR].dropna(axis='rows', how='all', subset=['pH_total'])
     resultsRWSodubbel = resultsRWSoNN.append(resultsRWSoNN.loc[[3612] *1].assign(**{'dayofyear':-2}), ignore_index=True)
     resultsRWSodubbel = resultsRWSodubbel.append(resultsRWSodubbel.loc[[23] *1].assign(**{'dayofyear':367}), ignore_index=True)
@@ -204,11 +204,11 @@ def cycliccurve_2000_2021(allparameters, resultsRWSo, LR):
     return resultsRWSodubbel, allparametersdubbel
 
 def cycliccurve_2000_2005(allparameters, resultsRWSo, LR):
-    # Get a cyclic curve
+    """ Get a cyclic curve"and drop na for fitted pH values"""
     allparametersdubbel = allparameters.append(allparameters.loc[1731:1750].assign(**{'dayofyear':407}), ignore_index=True)
     allparametersdubbel = allparametersdubbel.append(allparametersdubbel.loc[2074 : 2080].assign(**{'dayofyear':-35}), ignore_index=True)
     allparametersdubbel = allparametersdubbel.append(allparametersdubbel.loc[1998 : 2042].assign(**{'dayofyear':-36}), ignore_index=True)
-    # Drop na for fitted pH values
+    
     resultsRWSoNN = resultsRWSo[LR].dropna(axis='rows', how='all', subset=['pH_total'])
     resultsRWSodubbel = resultsRWSoNN.append(resultsRWSoNN.loc[[1607] *1].assign(**{'dayofyear':367}), ignore_index=True)
     resultsRWSodubbel = resultsRWSodubbel.append(resultsRWSodubbel.loc[[23] *1].assign(**{'dayofyear':367}), ignore_index=True)
@@ -225,11 +225,11 @@ def cycliccurve_2000_2005(allparameters, resultsRWSo, LR):
     return resultsRWSodubbel, allparametersdubbel
 
 def cycliccurve_2005_2010(allparameters, resultsRWSo, LR):
-    # Get a cyclic curve
+    """ Get a cyclic curve"and drop na for fitted pH values"""
     allparametersdubbel = allparameters.append(allparameters.loc[171:174].assign(**{'dayofyear':370}), ignore_index=True)
     allparametersdubbel = allparametersdubbel.append(allparametersdubbel.loc[548:554].assign(**{'dayofyear':-35}), ignore_index=True)
     allparametersdubbel = allparametersdubbel.append(allparametersdubbel.loc[214:225].assign(**{'dayofyear':-36}), ignore_index=True)
-    # Drop na for fitted pH values
+    
     resultsRWSoNN = resultsRWSo[LR].dropna(axis='rows', how='all', subset=['pH_total'])
     resultsRWSodubbel = resultsRWSoNN.append(resultsRWSoNN.loc[[13971] *1].assign(**{'dayofyear':372}), ignore_index=True)
     resultsRWSodubbel = resultsRWSodubbel.append(resultsRWSodubbel.loc[[12] *1].assign(**{'dayofyear':367}), ignore_index=True)
@@ -252,7 +252,7 @@ def cycliccurve_2005_2010(allparameters, resultsRWSo, LR):
     return resultsRWSodubbel, allparametersdubbel
 
 def cycliccurve_2010_2015(allparameters, resultsRWSo, LR):
-    # Get a cyclic curve
+    """ Get a cyclic curve"and drop na for fitted pH values"""
     allparametersdubbel = allparameters.append(allparameters.loc[832:834].assign(**{'dayofyear':371}), ignore_index=True)
     allparametersdubbel = allparametersdubbel.append(allparametersdubbel.loc[1050:1051].assign(**{'dayofyear':372}), ignore_index=True)
     allparametersdubbel = allparametersdubbel.append(allparametersdubbel.loc[294:297].assign(**{'dayofyear':-13}), ignore_index=True)
@@ -260,7 +260,7 @@ def cycliccurve_2010_2015(allparameters, resultsRWSo, LR):
     allparametersdubbel = allparametersdubbel.append(allparametersdubbel.loc[1022:1023].assign(**{'dayofyear':374}), ignore_index=True)
     allparametersdubbel = allparametersdubbel.append(allparametersdubbel.loc[1018:1021].assign(**{'dayofyear':-14}), ignore_index=True)
     allparametersdubbel = allparametersdubbel.append(allparametersdubbel.loc[961:964].assign(**{'dayofyear':-135}), ignore_index=True)
-    # Drop na for fitted pH values
+    
     resultsRWSoNN = resultsRWSo[LR].dropna(axis='rows', how='all', subset=['pH_total'])
     resultsRWSodubbel = resultsRWSoNN.append(resultsRWSoNN.loc[[15367] *1].assign(**{'dayofyear':-13}), ignore_index=True)
     resultsRWSodubbel = resultsRWSodubbel.append(resultsRWSodubbel.loc[[169] *1].assign(**{'dayofyear':371}), ignore_index=True)
@@ -276,7 +276,7 @@ def cycliccurve_2010_2015(allparameters, resultsRWSo, LR):
     return resultsRWSodubbel, allparametersdubbel
 
 def cycliccurve_2015_2018(allparameters, resultsRWSo, LR):
-    # Get a cyclic curve
+    """ Get a cyclic curve"and drop na for fitted pH values"""
     allparametersdubbel = allparameters.append(allparameters.loc[884:886].assign(**{'dayofyear':371}), ignore_index=True)
     allparametersdubbel = allparametersdubbel.append(allparametersdubbel.loc[967:968].assign(**{'dayofyear':372}), ignore_index=True)
     allparametersdubbel = allparametersdubbel.append(allparametersdubbel.loc[1099:1102].assign(**{'dayofyear':-12}), ignore_index=True)
@@ -285,7 +285,7 @@ def cycliccurve_2015_2018(allparameters, resultsRWSo, LR):
     allparametersdubbel = allparametersdubbel.append(allparametersdubbel.loc[1103:1104].assign(**{'dayofyear':374}), ignore_index=True)
     allparametersdubbel = allparametersdubbel.append(allparametersdubbel.loc[777:788].assign(**{'dayofyear':387}), ignore_index=True)
     allparametersdubbel = allparametersdubbel.append(allparametersdubbel.loc[282:301].assign(**{'dayofyear':-19}), ignore_index=True)
-    # Drop na for fitted pH values
+    
     resultsRWSoNN = resultsRWSo[LR].dropna(axis='rows', how='all', subset=['pH_total'])
     resultsRWSodubbel = resultsRWSoNN.append(resultsRWSoNN.loc[[3899] *1].assign(**{'dayofyear':371}), ignore_index=True)
     resultsRWSodubbel = resultsRWSodubbel.append(resultsRWSodubbel.loc[[92] *1].assign(**{'dayofyear':371}), ignore_index=True)
@@ -302,11 +302,11 @@ def cycliccurve_2015_2018(allparameters, resultsRWSo, LR):
     return resultsRWSodubbel, allparametersdubbel
 
 def cycliccurve_2018_2021(allparameters, resultsRWSo, LR, resultsRWSn):
-    # Get a cyclic curve
+    """ Get a cyclic curve"and drop na for fitted pH values"""
     allparametersdubbel = allparameters.append(allparameters.loc[3838:3842].assign(**{'dayofyear':-14}), ignore_index=True)
     allparametersdubbel = allparametersdubbel.append(allparametersdubbel.loc[3847:3882].assign(**{'dayofyear':378}), ignore_index=True)
     allparametersdubbel = allparametersdubbel.append(allparametersdubbel.loc[1506:1535].assign(**{'dayofyear':-8}), ignore_index=True)
-    # Drop na for fitted pH values
+    
     resultsRWSoNN = resultsRWSo[LR].dropna(axis='rows', how='all', subset=['pH_total'])
     resultsRWSodubbel = resultsRWSoNN.append(resultsRWSoNN.loc[[3918] *1].assign(**{'dayofyear':373}), ignore_index=True)
     resultsRWSodubbel = resultsRWSodubbel.append(resultsRWSodubbel.loc[[20] *1].assign(**{'dayofyear':373}), ignore_index=True)
@@ -319,7 +319,7 @@ def cycliccurve_2018_2021(allparameters, resultsRWSo, LR, resultsRWSn):
     resultsRWSodubbel = resultsRWSodubbel.append(resultsRWSodubbel.loc[[76] *1].assign(**{'dayofyear':373}), ignore_index=True)
     resultsRWSodubbel = resultsRWSodubbel.append(resultsRWSodubbel.loc[[99] *1].assign(**{'dayofyear':374}), ignore_index=True)
     resultsRWSodubbel = resultsRWSodubbel.append(resultsRWSodubbel.loc[[48] *1].assign(**{'dayofyear':-21}), ignore_index=True)
-    # Get a cyclic curve 
+    
     resultsRWSndubbel = resultsRWSn.append(resultsRWSn.loc[[564] *1].assign(**{'dayofyear':376}), ignore_index=True)
     resultsRWSndubbel = resultsRWSndubbel.append(resultsRWSndubbel.loc[560:562].assign(**{'dayofyear':378}), ignore_index=True)
     resultsRWSndubbel = resultsRWSndubbel.append(resultsRWSndubbel.loc[[83] *1].assign(**{'dayofyear':-19}), ignore_index=True)
@@ -489,7 +489,7 @@ def deltapH_winter_summer_RWSn(allparametersdubbel, resultsRWSodubbel, resultsRW
         Lsummer = (plotting.x_plotting >= 172) & (plotting.x_plotting < 264) # 21 juni - 21 sep
         meansummer = plotting.y_plotting[Lsummer].mean()
         meanwinter = plotting.y_plotting[Lwinter].mean()
-        print(fvar + f" ΔpH winter-to-summer : {meansummer - meanwinter:4f}")
+        print(fvar + f" ΔpH winter-to-summer : {meanwinter - meansummer:4f}")
     
     LpHout = (resultsRWSndubbel.pH_total_spectro_out >= 7.5) & (resultsRWSndubbel.pH_total_spectro_out <= 8.5)
 
@@ -516,14 +516,14 @@ def deltapH_winter_summer_RWSn(allparametersdubbel, resultsRWSodubbel, resultsRW
     Lsummer = (plotting.x_plotting >= 172) & (plotting.x_plotting < 264) # 21 juni - 21 sep
     meansummer = plotting.y_plotting[Lsummer].mean()
     meanwinter = plotting.y_plotting[Lwinter].mean()
-    print(f"pHfitted ΔpH winter-to-summer : {meansummer - meanwinter:4f}")
+    print(f"pHfitted ΔpH winter-to-summer : {meanwinter - meansummer:4f}")
 
 def cycliccurve_2000_2011(allparameters, resultsRWSo, LR):
-    # Get a cyclic curve
+    """ Get a cyclic curve"and drop na for fitted pH values"""
     allparametersdubbel = allparameters.append(allparameters.loc[4078 : 4097].assign(**{'dayofyear':407}), ignore_index=True)
     allparametersdubbel = allparametersdubbel.append(allparametersdubbel.loc[4607 : 4613].assign(**{'dayofyear':-35}), ignore_index=True)
     allparametersdubbel = allparametersdubbel.append(allparametersdubbel.loc[4555 : 4599].assign(**{'dayofyear':-36}), ignore_index=True)
-    # Drop na for fitted pH values
+    
     resultsRWSoNN = resultsRWSo[LR].dropna(axis='rows', how='all', subset=['pH_total'])
     resultsRWSodubbel = resultsRWSoNN.append(resultsRWSoNN.loc[[1607] *1].assign(**{'dayofyear':367}), ignore_index=True)
     resultsRWSodubbel = resultsRWSodubbel.append(resultsRWSodubbel.loc[[710] *1].assign(**{'dayofyear':368}), ignore_index=True)
@@ -536,10 +536,10 @@ def cycliccurve_2000_2011(allparameters, resultsRWSo, LR):
     return resultsRWSodubbel, allparametersdubbel
 
 def cycliccurve_2010_2018(allparameters, resultsRWSo, LR):
-    # Get a cyclic curve
+    """ Get a cyclic curve"and drop na for fitted pH values"""
     allparametersdubbel = allparameters.append(allparameters.loc[2001 : 2012].assign(**{'dayofyear':387}), ignore_index=True)
     allparametersdubbel = allparametersdubbel.append(allparametersdubbel.loc[1472 : 1506].assign(**{'dayofyear':-19}), ignore_index=True)
-    # Drop na for fitted pH values
+    
     resultsRWSoNN = resultsRWSo[LR].dropna(axis='rows', how='all', subset=['pH_total'])
     resultsRWSodubbel = resultsRWSoNN.append(resultsRWSoNN.loc[[3899] *1].assign(**{'dayofyear':371}), ignore_index=True)
     resultsRWSodubbel = resultsRWSodubbel.append(resultsRWSodubbel.loc[[345] *1].assign(**{'dayofyear':371}), ignore_index=True)

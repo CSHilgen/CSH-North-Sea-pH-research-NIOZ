@@ -1,6 +1,6 @@
 
 def get_fCO2sea_plots(socatnsmean):
-    
+    """Plot fCO2 sea data: year, distance to shore, dayofyear, longterm""" 
     import pandas as pd, numpy as np
     from matplotlib import pyplot as plt
     import seaborn as sns

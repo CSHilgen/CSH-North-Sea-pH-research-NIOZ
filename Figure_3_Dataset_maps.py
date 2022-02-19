@@ -24,7 +24,7 @@ glodapnsmean = pd.read_csv("dataframes_made/glodapnsmean_final.csv")
 gebco = xr.open_dataset("data_North_Sea/gebco_2020_noordzee.nc")
 fvarr = [Cefas, D366, glodapns, RWSn, RWSo, socatns]
 colourr = ["xkcd:orange", "xkcd:neon pink", "xkcd:violet", "xkcd:evergreen", "xkcd:ultramarine blue", "xkcd:goldenrod"]
-datasett = ['CEFAS', 'D366', 'GLODAP', 'RWS (2018-2021)', 'RWS (1975-2018)', 'SOCAT']
+datasett = ['Cefas', 'D366', 'GLODAP', 'RWS (2018-2021)', 'RWS (1975-2018)', 'SOCAT']
 
 for fvar, colour, dataset in zip(fvarr, colourr, datasett): 
 
@@ -88,18 +88,28 @@ for fvar, colour, dataset in zip(fvarr, colourr, datasett):
 gebco = xr.open_dataset("data_North_Sea/gebco_2020_noordzee.nc")
 fvarr = [Cefasmean, D366mean, glodapnsmean, RWSnmean, RWSomean, socatnsmean]
 colourr = ["xkcd:orange", "xkcd:neon pink", "xkcd:violet", "xkcd:evergreen", "xkcd:ultramarine blue", "xkcd:goldenrod"]
-datasett = ['CEFAS$_{mean}$', 'D366$_{mean}$', 'GLODAP$_{mean}$', 'RWS$_{mean}$ (2018-2021)', 'RWS$_{mean}$ (1975-2018)', 'SOCAT$_{mean}$']
+#colourr = ["year", "year", "year", "year", "year", "year"]
+datasett = ['Cefas$_{mean}$', 'D366$_{mean}$', 'GLODAP$_{mean}$', 'RWS$_{mean}$ (2018-2021)', 'RWS$_{mean}$ (1975-2018)', 'SOCAT$_{mean}$']
 
 for fvar, colour, dataset in zip(fvarr, colourr, datasett): 
 
     fig = plt.figure(dpi=300)
     ax = fig.add_subplot(projection=ccrs.Robinson(central_longitude=0))
     
+    # cm = plt.cm.get_cmap('rainbow')
+    # vmin = 1975
+    # vmax = 2021
+    
     ax.coastlines()
     
-    ax.scatter("longitude", "latitude", data=fvar, facecolors=colour, 
-               edgecolors='xkcd:dark grey', linewidth=0.08, s=35, 
+    sc = ax.scatter("longitude", "latitude", data=fvar, c=colour, 
+               linewidth=0.08, s=35, 
                transform=ccrs.PlateCarree(), label=dataset)
+    
+    # ticks = np.linspace(vmin, vmax, 10)
+    # cbar = plt.colorbar(sc, ax=ax, orientation='vertical', ticks=ticks)
+    # cbar.set_label('Time (yrs)')
+    # cbar.set_ticklabels([1975, 1980, 1985, 1990, 1995, 2000, 2005, 2010, 2015, 2020])
     
     # Plot bathymetry from data
     gmin = -100

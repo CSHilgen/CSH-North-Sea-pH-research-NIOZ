@@ -1,6 +1,6 @@
 
 def get_DIC_plots(combinedmean, glodapnsmean, Cefasmean, D366mean, RWSnmean, combinedmeansc_dic):
-    
+    """Plot DIC data: year, distance to shore, dayofyear, longterm""" 
     import pandas as pd, numpy as np
     from matplotlib import pyplot as plt
     import seaborn as sns

@@ -1,6 +1,6 @@
 
 def get_salinity_plots(RWStotalmean, RWSomean, RWSnmean):
-    
+    """Plot salinity data: year, distance to shore, dayofyear, longterm""" 
     import pandas as pd, numpy as np
     from matplotlib import pyplot as plt
     import seaborn as sns
@@ -497,6 +497,7 @@ def get_salinity_plots(RWStotalmean, RWSomean, RWSnmean):
     P2 = (RWStotalmeanS.year >= 1985) & (RWStotalmeanS.year <= 2010)
     P3 = (RWStotalmeanS.year >= 2010)
     P4 = (RWStotalmeanS.year >= 2000)
+    P = (RWStotalmeanS.salinity >= 31)
     
     # Total 1975-2021 
     slope, intercept, r, p, se = linregress(RWStotalmeanS['datenum'], RWStotalmeanS['salinity']) 
@@ -555,7 +556,7 @@ def get_salinity_plots(RWStotalmean, RWSomean, RWSnmean):
     print(f"Change per year: {changeperyear:.6e}")
 
     # Total 2000-2021
-    slope, intercept, r, p, se = linregress(RWStotalmeanS[P4]['datenum'], RWStotalmeanS[P4]['salinity']) 
+    slope, intercept, r, p, se = linregress(RWStotalmeanS[P4]['datenum'][P], RWStotalmeanS[P4]['salinity'][P]) 
     xbegin = RWStotalmeanS[P4].datenum.min() 
     xend = RWStotalmeanS[P4].datenum.max() 
     

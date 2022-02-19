@@ -1,6 +1,6 @@
 
 def get_phosphate_plots(RWSomean, RWSomeanP):
-    
+    """Plot phosphate data: year, distance to shore, dayofyear, longterm""" 
     import pandas as pd, numpy as np
     from matplotlib import pyplot as plt
     import seaborn as sns
@@ -551,6 +551,8 @@ def get_phosphate_plots(RWSomean, RWSomeanP):
     P2 = (RWSomeanP.year >= 1985) & (RWSomeanP.year <= 2010)
     P3 = (RWSomeanP.year >= 2010)
     P4 = (RWSomeanP.year >= 2000)
+    P5 = (RWSomeanP.year >= 2000) & (RWSomeanP.year <= 2010)
+    P = (RWSomeanP.total_phosphate <= 0.05)
     
     # Total 1975-2018 
     slope, intercept, r, p, se = linregress(RWSomeanP['datenum'], RWSomeanP['total_phosphate']) 
@@ -594,8 +596,22 @@ def get_phosphate_plots(RWSomean, RWSomeanP):
     changeperyear = changelongterm / (year)
     print(f"Change per year: {changeperyear:.6e}")
     
+    # Total 2000-2010 
+    slope, intercept, r, p, se = linregress(RWSomeanP[P5]['datenum'][P], RWSomeanP[P5]['total_phosphate'][P]) 
+    xbegin = RWSomeanP[P5].datenum.min() 
+    xend = RWSomeanP[P5].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2000-2010: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")
+    
     # Total 2010-2018
-    slope, intercept, r, p, se = linregress(RWSomeanP[P3]['datenum'], RWSomeanP[P3]['total_phosphate']) 
+    slope, intercept, r, p, se = linregress(RWSomeanP[P3]['datenum'][P], RWSomeanP[P3]['total_phosphate'][P]) 
     xbegin = RWSomeanP[P3].datenum.min() 
     xend = RWSomeanP[P3].datenum.max() 
     
@@ -609,7 +625,7 @@ def get_phosphate_plots(RWSomean, RWSomeanP):
     print(f"Change per year: {changeperyear:.6e}")
     
     # Total 2000-2018
-    slope, intercept, r, p, se = linregress(RWSomeanP[P4]['datenum'], RWSomeanP[P4]['total_phosphate']) 
+    slope, intercept, r, p, se = linregress(RWSomeanP[P4]['datenum'][P], RWSomeanP[P4]['total_phosphate'][P]) 
     xbegin = RWSomeanP[P4].datenum.min() 
     xend = RWSomeanP[P4].datenum.max() 
     

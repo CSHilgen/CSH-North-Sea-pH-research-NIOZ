@@ -1,5 +1,6 @@
 
 def plot_salinity_vs_DIC(combinedmean):
+    """ Plot salinity vs DIC for salinity normalization"""
     import pandas as pd, numpy as np
     from matplotlib import pyplot as plt
     import seaborn as sns   
@@ -43,6 +44,7 @@ def plot_salinity_vs_DIC(combinedmean):
     plt.show()
     
 def plot_salinity_vs_TA(combinedmean):
+    """ Plot salinity vs TA for salinity normalization"""
     import pandas as pd, numpy as np
     from matplotlib import pyplot as plt
     import seaborn as sns   
@@ -86,6 +88,7 @@ def plot_salinity_vs_TA(combinedmean):
     plt.show()
 
 def plot_normalized_DIC(combinedmean):
+    """ Plot DIC and nDIC over time for salinity normalization"""
     import pandas as pd, numpy as np
     from matplotlib import pyplot as plt
     import seaborn as sns
@@ -119,7 +122,7 @@ def plot_normalized_DIC(combinedmean):
     
     ax.grid(alpha=0.3)
     ax.set_xlabel("Time (yrs)")
-    ax.set_ylabel('DIC (μmol/kg)')
+    ax.set_ylabel('(n)DIC (μmol/kg)')
     ax.xaxis.set_major_locator(mdates.YearLocator())
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.MonthLocator())
@@ -136,10 +139,10 @@ def plot_normalized_DIC(combinedmean):
     
     ax.grid(alpha=0.3)
     ax.set_xlabel("Time (yrs)")
-    ax.set_ylabel('DIC (μmol/kg)')
+    ax.set_ylabel('nDIC (μmol/kg)')
     ax.xaxis.set_major_locator(mdates.YearLocator())
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
-    ax.xaxis.set_minor_locator(mdates.MonthLocator())
+    ax.xaxis.set_minor_locator(mdates.MonthLocator(7))
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_ylim([2000, 2250])
@@ -150,6 +153,7 @@ def plot_normalized_DIC(combinedmean):
     plt.show()
 
 def plot_normalized_TA(combinedmean):
+    """ Plot TA and nTA over time for salinity normalization"""
     import pandas as pd, numpy as np
     from matplotlib import pyplot as plt
     import seaborn as sns
@@ -183,7 +187,7 @@ def plot_normalized_TA(combinedmean):
     
     ax.grid(alpha=0.3)
     ax.set_xlabel("Time (yrs)")
-    ax.set_ylabel('Total alkalinity (μmol/kg)')
+    ax.set_ylabel('(n)TA (μmol/kg)')
     ax.xaxis.set_major_locator(mdates.YearLocator())
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.MonthLocator())
@@ -200,10 +204,10 @@ def plot_normalized_TA(combinedmean):
     
     ax.grid(alpha=0.3)
     ax.set_xlabel("Time (yrs)")
-    ax.set_ylabel('TA (μmol/kg)')
+    ax.set_ylabel('nTA (μmol/kg)')
     ax.xaxis.set_major_locator(mdates.YearLocator())
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
-    ax.xaxis.set_minor_locator(mdates.MonthLocator())
+    ax.xaxis.set_minor_locator(mdates.MonthLocator(7))
     ax.grid(b=True, which='minor', color='grey', linestyle='-', alpha=0.1)
     ax.grid(b=True, which='major', color='xkcd:dark grey', linestyle='-', alpha=0.2)
     ax.set_ylim([2280, 2420])
@@ -214,12 +218,13 @@ def plot_normalized_TA(combinedmean):
     plt.show()
     
 def plot_DIC_TA(combinedmean):
+    """ Plot DIC against TA"""
     from matplotlib import pyplot as plt
     
     fig, ax = plt.subplots(dpi=300, figsize=(6,4))
     cm = plt.cm.get_cmap('twilight')
     
-    sc = ax.scatter(combinedmean['dic'], combinedmean['alkalinity'], c=combinedmean['dayofyear'], vmin=0, vmax=365, s=35, cmap=cm, edgecolor="None")
+    sc = ax.scatter(combinedmean['dic'], combinedmean['alkalinity'], c=combinedmean['dayofyear'], vmin=0, vmax=365, cmap=cm, edgecolor="None")
     
     cbar=fig.colorbar(sc, ax=ax, orientation='vertical', location='right')
     label=[80,172,264,355]
@@ -242,6 +247,7 @@ def plot_DIC_TA(combinedmean):
     plt.show()
 
 def plot_DIC_TA_year(combinedmean):
+    """ Plot DIC against TA colour is year"""
     from matplotlib import pyplot as plt
     import numpy as np
     from scipy.stats import linregress
@@ -255,7 +261,7 @@ def plot_DIC_TA_year(combinedmean):
     C1 = combinedmean.dic > 2050
     slope, intercept, r, p, se = linregress(combinedmean['normalized_DIC'], combinedmean['normalized_TA'])
     ax = ax
-    sc = ax.scatter('dic', 'alkalinity', c='year', data=combinedmean, cmap=cm, vmin=vmin, vmax=vmax+1, s=20)
+    sc = ax.scatter('dic', 'alkalinity', c='year', data=combinedmean, cmap=cm, vmin=vmin, vmax=vmax+1)
     # sns.regplot(x='dic', y='alkalinity', data=combinedmean[C1], ax=ax,
     #         scatter_kws={"color": "None"}, line_kws={"color": "blue", 'label': f'y = {slope:.1e}x + {intercept:.1f}'})
 
@@ -279,12 +285,13 @@ def plot_DIC_TA_year(combinedmean):
     plt.show()
 
 def plot_NDIC_NTA(combinedmean):
+    """ Plot nDIC against nTA"""
     from matplotlib import pyplot as plt
     
     fig, ax = plt.subplots(dpi=300, figsize=(6,4))
     cm = plt.cm.get_cmap('twilight')
     
-    sc = ax.scatter(combinedmean['normalized_DIC'], combinedmean['normalized_TA'], c=combinedmean['dayofyear'], vmin=0, vmax=365, s=35, cmap=cm, edgecolor="None")
+    sc = ax.scatter(combinedmean['normalized_DIC'], combinedmean['normalized_TA'], c=combinedmean['dayofyear'], vmin=0, vmax=365, cmap=cm, edgecolor="None")
     
     cbar=fig.colorbar(sc, ax=ax, orientation='vertical', location='right')
     label=[80,172,264,355]
@@ -307,6 +314,7 @@ def plot_NDIC_NTA(combinedmean):
     plt.show()
 
 def plot_NDIC_NTA_year(combinedmean):
+    """ Plot nDIC against nTA colour is year"""
     from matplotlib import pyplot as plt
     import numpy as np
     
@@ -316,7 +324,7 @@ def plot_NDIC_NTA_year(combinedmean):
     vmax = 2021
 
     ax = ax
-    sc = ax.scatter('normalized_DIC', 'normalized_TA', c='year', data=combinedmean, cmap=cm, vmin=vmin, vmax=vmax+1, s=20)
+    sc = ax.scatter('normalized_DIC', 'normalized_TA', c='year', data=combinedmean, cmap=cm, vmin=vmin, vmax=vmax+1)
 
     ax.grid(alpha=0.3)
     ax.set_xlabel("nDIC (μmol/kg)")

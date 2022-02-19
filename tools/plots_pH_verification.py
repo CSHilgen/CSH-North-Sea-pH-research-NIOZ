@@ -1,7 +1,9 @@
 
 def plot_pH_verification(RWSomean, RWSnmean, results_TA_fCO2, results_TA_pCO2):
+    """ Plot all predicted and measured pH"""
     from matplotlib import pyplot as plt
     import matplotlib.dates as mdates
+    from matplotlib.ticker import (MultipleLocator, AutoMinorLocator)
     
     fig, ax = plt.subplots(dpi=300, figsize=(10,6))
 
@@ -19,7 +21,7 @@ def plot_pH_verification(RWSomean, RWSnmean, results_TA_fCO2, results_TA_pCO2):
     #ax.set_xlim([9069, 19000])
     ax.set_xlim(10950, 19345)
     ax.set_ylim(7, 8.5)
-    ax.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
+    ax.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left', fontsize=14)
     ax.xaxis.set_major_locator(mdates.YearLocator(5))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_minor_locator(mdates.YearLocator())
@@ -32,16 +34,18 @@ def plot_pH_verification(RWSomean, RWSnmean, results_TA_fCO2, results_TA_pCO2):
     plt.savefig("figures/pH_verification_model/Predicted_pH_mean_time_datasets.png")
     plt.show()
     
-def plot_pH_predicted_vs_initial(RWSomean):
+def plot_pH_predicted_vs_initial(RWStotalmean):
+    """ Plot all predicted (on pCO2) against measured pH"""
     from matplotlib import pyplot as plt
     import pandas as pd, numpy as np
+    from matplotlib.ticker import (MultipleLocator, AutoMinorLocator)
     
     fig, ax = plt.subplots(dpi=300)
     x = np.linspace(7.5,8.5,100)
     y = np.linspace(7.5,8.5,100)
     
     ax = ax
-    ax.scatter('pH_pred_TA_pCO2', 'pH_total', c='xkcd:water blue', data=RWSomean, label='pH$_{pred}$ based on TA & pCO$_{2AIR}$', s=20, alpha=0.4)
+    ax.scatter('pH_pred_TA_pCO2', 'pH_total', c='xkcd:water blue', data=RWStotalmean, label='pH$_{pred}$ based on TA & pCO$_{2AIR}$', s=20, alpha=0.4)
     ax.plot(x, y, color='xkcd:dark grey', label='y = x', alpha=0.3)
     
     ax.grid(alpha=0.3)
@@ -63,7 +67,7 @@ def plot_pH_predicted_vs_initial(RWSomean):
     fig, ax = plt.subplots(dpi=300)
 
     ax = ax
-    ax.scatter('pH_pred_TA_fCO2', 'pH_total', c='xkcd:water blue', data=RWSomean, label='pH$_{pred}$ based on TA & fCO$_{2SW}$', s=20, alpha=0.4)
+    ax.scatter('pH_pred_TA_fCO2', 'pH_total', c='xkcd:water blue', data=RWStotalmean, label='pH$_{pred}$ based on TA & fCO$_{2SW}$', s=20, alpha=0.4)
     ax.plot(x, y, color='xkcd:dark grey', label='y = x', alpha=0.3)
     
     ax.grid(alpha=0.3)
@@ -82,7 +86,8 @@ def plot_pH_predicted_vs_initial(RWSomean):
     plt.savefig("figures/pH_verification_model/Predicted_pH_vs_initial_pH_fCO2sea.png")
     plt.show()
     
-def predicted_fCO2_pCO2_alkalinity_RWSo(RWSomean):    
+def predicted_fCO2_pCO2_alkalinity_RWSo(RWStotalmean):    
+    """ Plot all predicted (on fCO2) against measured pH"""
     from matplotlib import pyplot as plt
     import matplotlib.dates as mdates
     from matplotlib.ticker import (MultipleLocator, AutoMinorLocator)
@@ -90,7 +95,7 @@ def predicted_fCO2_pCO2_alkalinity_RWSo(RWSomean):
     fig, ax = plt.subplots(dpi=300)
     
     ax=ax
-    ax.scatter('datenum', 'predicted_alkalinity', c='xkcd:water blue', data=RWSomean, label='RWS')
+    ax.scatter('datenum', 'predicted_alkalinity', c='xkcd:water blue', data=RWStotalmean, label='RWS')
 
     ax.grid(alpha=0.3)
     ax.set_xlabel("Time (yrs)")
@@ -111,7 +116,7 @@ def predicted_fCO2_pCO2_alkalinity_RWSo(RWSomean):
     fig, ax = plt.subplots(dpi=300)
     
     ax=ax
-    ax.scatter('datenum', 'predicted_pCO2_air', c='xkcd:water blue', data=RWSomean, label='RWS')
+    ax.scatter('datenum', 'predicted_pCO2_air', c='xkcd:water blue', data=RWStotalmean, label='RWS')
 
     ax.grid(alpha=0.3)
     ax.set_xlabel("Time (yrs)")
@@ -133,7 +138,7 @@ def predicted_fCO2_pCO2_alkalinity_RWSo(RWSomean):
     fig, ax = plt.subplots(dpi=300)
     
     ax=ax
-    ax.scatter('datenum', 'predicted_fCO2_sea', c='xkcd:water blue', data=RWSomean, label='RWS')
+    ax.scatter('datenum', 'predicted_fCO2_sea', c='xkcd:water blue', data=RWStotalmean, label='RWS')
     
     ax.grid(alpha=0.3)
     ax.set_xlabel("Time (yrs)")

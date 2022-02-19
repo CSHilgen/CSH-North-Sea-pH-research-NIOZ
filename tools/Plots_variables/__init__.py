@@ -1,6 +1,6 @@
 
 def get_ammonia_plots(RWSomean):
-    
+    """Plot ammonia data: year, distance to shore, dayofyear, longterm""" 
     import pandas as pd, numpy as np
     from matplotlib import pyplot as plt
     import seaborn as sns
@@ -492,6 +492,7 @@ def get_ammonia_plots(RWSomean):
     P2 = (RWSomeanA.year >= 1985) & (RWSomeanA.year <= 2010)
     P3 = (RWSomeanA.year >= 2010)
     P4 = (RWSomeanA.year >= 2000)
+    P5 = (RWSomeanA.year >= 2000) & (RWSomeanA.year <= 2010)
     
     # Total 1975-2018 
     slope, intercept, r, p, se = linregress(RWSomeanA['datenum'], RWSomeanA['total_ammonia']) 
@@ -535,6 +536,20 @@ def get_ammonia_plots(RWSomean):
     changeperyear = changelongterm / (year)
     print(f"Change per year: {changeperyear:.6e}")
     
+    # Total 2000-2010
+    slope, intercept, r, p, se = linregress(RWSomeanA[P5]['datenum'], RWSomeanA[P5]['total_ammonia']) 
+    xbegin = RWSomeanA[P5].datenum.min() 
+    xend = RWSomeanA[P5].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2000-2010: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")
+    
     # Total 2010-2018
     slope, intercept, r, p, se = linregress(RWSomeanA[P3]['datenum'], RWSomeanA[P3]['total_ammonia']) 
     xbegin = RWSomeanA[P3].datenum.min() 
@@ -562,3 +577,4 @@ def get_ammonia_plots(RWSomean):
     print(f"Change over 2000-2018: {changelongterm:6e}")
     changeperyear = changelongterm / (year)
     print(f"Change per year: {changeperyear:.6e}")
+    

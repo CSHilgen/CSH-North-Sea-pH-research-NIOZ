@@ -1,6 +1,6 @@
 
 def get_AOU_plots(RWSomean):
-    
+    """Plot AOU data: year, distance to shore, dayofyear, longterm""" 
     import pandas as pd, numpy as np
     from matplotlib import pyplot as plt
     import seaborn as sns
@@ -490,7 +490,8 @@ def get_AOU_plots(RWSomean):
     P2 = (RWSomeanAOU.year >= 1985) & (RWSomeanAOU.year <= 2010)
     P3 = (RWSomeanAOU.year >= 2010)
     P4 = (RWSomeanAOU.year >= 2000)
-    
+    P5 = (RWSomeanAOU.year >= 2000) & (RWSomeanAOU.year <= 2010)
+        
     # Total 1975-2018 
     slope, intercept, r, p, se = linregress(RWSomeanAOU['datenum'], RWSomeanAOU['aou']) 
     xbegin = RWSomeanAOU.datenum.min() 
@@ -530,6 +531,20 @@ def get_AOU_plots(RWSomean):
     yend = (slope * xend) + intercept
     changelongterm = yend - ybegin
     print(f"Change over 1985-2010: {changelongterm:6e}")
+    changeperyear = changelongterm / (year)
+    print(f"Change per year: {changeperyear:.6e}")
+    
+    # Total 2000-2010 
+    slope, intercept, r, p, se = linregress(RWSomeanAOU[P5]['datenum'], RWSomeanAOU[P5]['aou']) 
+    xbegin = RWSomeanAOU[P5].datenum.min() 
+    xend = RWSomeanAOU[P5].datenum.max() 
+    
+    year = (xend-xbegin) / 365
+    print(f"in {year:6f} years")
+    ybegin = (slope * xbegin) + intercept
+    yend = (slope * xend) + intercept
+    changelongterm = yend - ybegin
+    print(f"Change over 2000-2010: {changelongterm:6e}")
     changeperyear = changelongterm / (year)
     print(f"Change per year: {changeperyear:.6e}")
     

@@ -41,7 +41,7 @@ def plot_DIC_combined_clustering(combinedmeandubbel):
     ax.scatter(x_clusters, y_clusters, c='xkcd:green', s=10)
     ax.plot(x_plotting, y_plotting, c='xkcd:green', label='Seasonal cycle')
     
-    ax.set_ylabel("DIC (μmol/kg)")
+    ax.set_ylabel("nDIC (μmol/kg)")
     ax.grid(alpha=0.3)
     ax.set_xlim(0, 365)
     ax.set_xlabel("Months of year")
@@ -130,6 +130,7 @@ def plot_DIC_and_Chl(combinedmeandubbel, RWSo):
     plt.show()
 
 def plot_DIC_dayofyear_cycle_RWSn(RWSnmeandubbel):
+    """Plot for every year DIC obtain seasonal trend"""
     import pandas as pd, numpy as np
     from matplotlib import pyplot as plt
     import seaborn as sns  

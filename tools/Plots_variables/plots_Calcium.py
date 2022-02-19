@@ -1,6 +1,6 @@
 
 def get_calcium_plots(RWSo, RWSoCa):
-    
+    """Plot calcium data: year, distance to shore, dayofyear, longterm""" 
     import pandas as pd, numpy as np
     from matplotlib import pyplot as plt
     import seaborn as sns

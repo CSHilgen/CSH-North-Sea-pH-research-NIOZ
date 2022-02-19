@@ -1,6 +1,6 @@
 
 def get_deltafCO2_plots(socatnsmean, socatnsmeandelta):
-    
+    """Plot delta fco2 data: year, distance to shore, dayofyear, longterm""" 
     import pandas as pd, numpy as np
     from matplotlib import pyplot as plt
     import seaborn as sns

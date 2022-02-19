@@ -30,7 +30,7 @@ resultsglodapns = pd.read_csv("dataframes_made/resultsglodapns_final.csv")
 
 gebco = xr.open_dataset("data_North_Sea/gebco_2020_noordzee.nc")
 fvarr = [Cefas, D366, glodapns, RWSn, RWSo, socatns]
-colourr = ["xkcd:greenish", "xkcd:neon pink", "xkcd:blue", "xkcd:dark aqua", "xkcd:aqua", "xkcd:goldenrod"]
+colourr = ["xkcd:orange", "xkcd:neon pink", "xkcd:violet", "xkcd:evergreen", "xkcd:ultramarine blue", "xkcd:goldenrod"]
 datasett = ['CEFAS data', 'D366 data', 'GLODAP data', 'RWSn data', 'RWSo data', 'SOCAT data']
 
 for fvar, colour, dataset in zip(fvarr, colourr, datasett): 

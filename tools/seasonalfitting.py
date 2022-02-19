@@ -1,7 +1,8 @@
 # Seasonal curve tools
 
-# Functions to make the seasonal cycle (sin curve)
+
 def seasonalcycle_fit(coeffs, datenum):
+    """Function 1 to make the seasonal cycle (sin curve)""" 
     import numpy as np
     
     slope, intercept, sine_stretch, sine_shift = coeffs
@@ -10,11 +11,11 @@ def seasonalcycle_fit(coeffs, datenum):
     return seasonalcycle
 
 def lsq_seasonalcycle_fit(coeffs, datenum, seasonalcycle):
-    
+    """Function 2 to make the seasonal cycle (sin curve)"""
     return seasonalcycle_fit(coeffs, datenum) - seasonalcycle
 
-# Functions to make the seasonal cycle (sin curve) - only for temperature
 def seasonalcycle_fit_T(coeffs, datenum):
+    """Function 1 to make the seasonal cycle (sin curve) only for temperature""" 
     import numpy as np
         
     slope, intercept, sine_stretch, sine_shift = coeffs
@@ -22,9 +23,11 @@ def seasonalcycle_fit_T(coeffs, datenum):
     return seasonalcycle
 
 def lsq_seasonalcycle_fit_T(coeffs, datenum, seasonalcycle):
+    """Function 2 to make the seasonal cycle (sin curve) only for temperature""" 
     return seasonalcycle_fit_T(coeffs, datenum) - seasonalcycle
 
 def seasonalcycle_fit_fco2_sea(coeffs, datenum):
+    """Function 1 to make the seasonal cycle (sin curve) only for fCO2 sea""" 
     import numpy as np
     
     slope, intercept, sine_stretch, sine_shift = coeffs
@@ -33,5 +36,5 @@ def seasonalcycle_fit_fco2_sea(coeffs, datenum):
     return seasonalcycle
 
 def lsq_seasonalcycle_fit_fco2_sea(coeffs, datenum, seasonalcycle):
-    
+    """Functions 2 to make the seasonal cycle (sin curve) only for fCO2 sea""" 
     return seasonalcycle_fit_fco2_sea(coeffs, datenum) - seasonalcycle

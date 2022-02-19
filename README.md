@@ -1,45 +1,60 @@
 # CSH-North-Sea-pH-research-NIOZ
  
-# Method sections -> run first these in this specific order to make the 
-# datasets used in this study
+Scripts used for Guided Research at NIOZ with Dr. Matthew Humphreys:
+*The carbonate system on the long-term in the Dutch coastal zone: ocean acidification in reverse?*
 
-3_1_2_Save_datasets
+February 2022
 
-3_3_Spatial_variability # including figure 4 
+-> Method sections: run first these in this specific order to make the datasets used in this study
 
-3_4_Temporal_variability # inluding figure 5
+# 3_2_Save_datasets
+*Data collection and measurements*
 
-3_5_1_Verification_model # including figure 8
+# 3_3_1_Spatial_variability # includes figures 4 and S3 
+*Salinity normalization*
 
-3_5_2_Drivers_ph_seasonality_2 # including figure 10 and 11
+# 3_3_2_Temporal_variability # inludes figures 5 and S4
+*Seasonal bias correction*
 
-# Figures -> scripts for the figures corresponding to the report
+# 3_4_1_Verification_model # includes figures 10 and S6
+*pH prediction on TA, pCO2AIR and fCO2SW measurements*
 
-Figure_2_RWS_ph_record
+# 3_4_2_Drivers_ph_seasonality_2 # includes figures 11, 12 and S7
+*Study of Hagens & Middelburg 2016*
 
+-> Figures: scripts for the figures corresponding to the report
 
-Figure_3_Dataset_maps
+# Figure_2_RWS_ph_record
 
+# Figure_3_Dataset_maps # includes figure S1
 
-Figure_6_Long_term_trends
+# Figure_6_7_Long_term_trends
 
+# Figure_9_fCO2_ph_prediction # includes figure S5
 
-Figure_7_fCO2_ph_prediction
+# Figure_13_NOA_index_pH_AOU 
 
+# Figure_13_NOA_index 
 
-Figure_13_Sunspot_T
+# Figure_S2_Calcium
 
+# Figure_S8_Sunspot_T
 
-# Figures and analysis used in the project
-Maps_with_datapoints
+-> Analysis: scripts used during the project
 
-PH_drivers_seasonality_3yearperiod
+# Maps_with_datapoints
 
-Plot_per_variable
+# O2_pH_RWS_stations
 
-Powerspectrum_analysis
+# PH_drivers_seasonality_3yearperiod
 
-Prediction_fco2_ph_all
+# Plot_per_variable 
+*includes p-values and long-term changes (Table 2)*
 
-# Beyond the scope of the project
-Limited_nutrient
+# Powerspectrum_analysis
+
+# Prediction_fco2_ph_all
+
+-> Beyond the scope of the project: scripts with unused analysis 
+
+# Limited_nutrient

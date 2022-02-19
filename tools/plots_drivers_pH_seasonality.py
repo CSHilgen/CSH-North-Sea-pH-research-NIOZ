@@ -1,7 +1,7 @@
 # Hagens & Middelburg 2016 tools
 
 def get_curve_parameters(allparametersdubbel, resultsRWSodubbel, timeperiod):
-       
+    """ Get line plot of all contributors"""
     from matplotlib import pyplot as plt
     import numpy as np
     from sklearn.cluster import MeanShift
@@ -137,7 +137,7 @@ def get_curve_parameters(allparametersdubbel, resultsRWSodubbel, timeperiod):
     ax.xaxis.set_major_formatter(FuncFormatter(m_fmt))
     ax.set_ylabel("pH")
     ax.grid(alpha=0.3)
-    ax.set_title('pH '+ timeperiod + ' - North Sea')
+    #ax.set_title('pH '+ timeperiod + ' - North Sea')
     ax.legend(loc='lower center')
     
     plt.tight_layout()
@@ -145,7 +145,7 @@ def get_curve_parameters(allparametersdubbel, resultsRWSodubbel, timeperiod):
     plt.show()
     
 def get_curve_parameters_2018_2021(allparametersdubbel, resultsRWSodubbel, resultsRWSndubbel):
-       
+    """ Get line plot of all contributors""" 
     from matplotlib import pyplot as plt
     import numpy as np
     from sklearn.cluster import MeanShift
@@ -282,7 +282,7 @@ def get_curve_parameters_2018_2021(allparametersdubbel, resultsRWSodubbel, resul
     ax.xaxis.set_major_formatter(FuncFormatter(m_fmt))
     ax.set_ylabel("pH")
     ax.grid(alpha=0.3)
-    ax.set_title('pH 2018_2021 - North Sea')
+    #ax.set_title('pH 2018_2021 - North Sea')
     ax.legend(loc='lower center')
     
     plt.tight_layout()
@@ -290,7 +290,7 @@ def get_curve_parameters_2018_2021(allparametersdubbel, resultsRWSodubbel, resul
     plt.show()
 
 def get_T_DIC_TA_curves(allparametersdubbel, allparameters, timeperiod):
- 
+    """ Plot line plots and scatter of T, nDIC and nTA"""
     from matplotlib import pyplot as plt
     import numpy as np
     from sklearn.cluster import MeanShift
@@ -359,7 +359,7 @@ def get_T_DIC_TA_curves(allparametersdubbel, allparameters, timeperiod):
         ax.xaxis.set_major_formatter(FuncFormatter(m_fmt))
         ax.set_ylabel(label_y)
         ax.grid(alpha=0.3)
-        ax.set_title(fvar + ' ' + timeperiod + ' - North Sea')
+        #ax.set_title(fvar + ' ' + timeperiod + ' - North Sea')
 
         df['dayofyear'] = x_plotting
         df[fvar] = y_plotting
@@ -371,6 +371,7 @@ def get_T_DIC_TA_curves(allparametersdubbel, allparameters, timeperiod):
     return Tdata, DICdata, TAdata
         
 def get_pHpred_pHfit(allparameters, allparametersdubbel, resultsRWSodubbel, resultsRWSo, LR, timeperiod):
+    """ Plot line plots and scatter of pH predicted and fitted"""
     from matplotlib import pyplot as plt
     import numpy as np
     from sklearn.cluster import MeanShift
@@ -446,7 +447,7 @@ def get_pHpred_pHfit(allparameters, allparametersdubbel, resultsRWSodubbel, resu
     ax.xaxis.set_major_formatter(FuncFormatter(m_fmt))
     ax.set_ylabel("pH")
     ax.legend(loc='lower center')
-    ax.set_title('pH ' + timeperiod + ' - North Sea')
+    #ax.set_title('pH ' + timeperiod + ' - North Sea')
     ax.set_xlim(0, 365)
     ax.set_ylim(7, 8.65)
     
@@ -457,6 +458,7 @@ def get_pHpred_pHfit(allparameters, allparametersdubbel, resultsRWSodubbel, resu
     return pH_preddata, pH_fitdata
     
 def get_pHpred_pHfit_2018_2021(allparametersdubbel, resultsRWSndubbel, allparameters, resultsRWSn, timeperiod):
+    """ Plot line plots and scatter of pH predicted and fitted"""
     from matplotlib import pyplot as plt
     import numpy as np
     from sklearn.cluster import MeanShift
@@ -532,7 +534,7 @@ def get_pHpred_pHfit_2018_2021(allparametersdubbel, resultsRWSndubbel, allparame
     ax.xaxis.set_major_formatter(FuncFormatter(m_fmt))
     ax.set_ylabel("pH")
     ax.legend(loc='lower center')
-    ax.set_title('pH ' + timeperiod + ' - North Sea')
+    #ax.set_title('pH ' + timeperiod + ' - North Sea')
     ax.set_xlim(0, 365)
     ax.set_ylim(7, 8.65)
     
@@ -543,7 +545,7 @@ def get_pHpred_pHfit_2018_2021(allparametersdubbel, resultsRWSndubbel, allparame
     return pH_preddata, pH_fitdata
 
 def get_quantitative_contribution():
-    
+    """ Plot column figure of quantiative contribution to seasonality in pH"""
     import matplotlib.pyplot as plt
     import pandas as pd
     from matplotlib.ticker import (MultipleLocator, AutoMinorLocator)
@@ -613,14 +615,14 @@ def get_quantitative_contribution():
     plt.show()
 
 def get_quantitative_contribution_2():
-    
+    """ Plot column figure of quantiative contribution to seasonality in pH"""
     import matplotlib.pyplot as plt
     import pandas as pd
     from matplotlib.ticker import (MultipleLocator, AutoMinorLocator)
     
     labels = ['2000-2021', '2000-2011', '2010-2018', '2018-2021']
-    pH_pred_means = [-0.030193, -0.072360, -0.039653, -0.008515]
-    pH_fit_means = [0.074431, 0.070427, 0.093333, -0.008046]
+    pH_pred_means = [0.030193, 0.072360, 0.039653, 0.008515]
+    pH_fit_means = [-0.074431, -0.070427, -0.093333, 0.008046]
     T_means = [-0.176867, -0.178098, -0.169319, -0.185910]
     DIC_means = [0.120855, 0.061168, 0.103253, 0.109603]
     TA_means = [0.028111, 0.042649, 0.036680, 0.067784]
@@ -631,12 +633,12 @@ def get_quantitative_contribution_2():
     Totnutrients_means = [0.000075, 4.0e-05, 4.7e-05, 0.001409]
     
     labels_line = ['2000-2011', '2010-2018', '2018-2021']
-    pH_pred_means_line = [-0.072360, -0.039653, -0.008515]
-    pH_fit_means_line = [0.070427, 0.093333, -0.008046]
+    pH_pred_means_line = [0.072360, 0.039653, 0.008515]
+    pH_fit_means_line = [-0.070427, -0.093333, 0.008046]
     
     labels_scatter = [0]
-    pH_pred_means_scatter = [-0.030193]
-    pH_fit_means_scatter = [0.074431]
+    pH_pred_means_scatter = [0.030193]
+    pH_fit_means_scatter = [-0.074431]
     
     # men_std = [2, 3, 4, 1, 2]
     # women_std = [3, 5, 2, 3, 3]

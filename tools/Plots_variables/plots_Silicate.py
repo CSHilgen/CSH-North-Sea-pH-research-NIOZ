@@ -1,6 +1,6 @@
 
 def get_silicate_plots(RWSomean, RWSomeanS):
-    
+    """Plot silicate data: year, distance to shore, dayofyear, longterm""" 
     import pandas as pd, numpy as np
     from matplotlib import pyplot as plt
     import seaborn as sns
@@ -548,7 +548,7 @@ def get_silicate_plots(RWSomean, RWSomeanS):
     P2 = (RWSomeanS.year >= 1985) & (RWSomeanS.year <= 2010)
     P3 = (RWSomeanS.year >= 2010)
     P4 = (RWSomeanS.year >= 2000)
-    
+        
     # Total 1975-2018 
     slope, intercept, r, p, se = linregress(RWSomeanS['datenum'], RWSomeanS['total_silicate']) 
     xbegin = RWSomeanS.datenum.min() 
@@ -619,3 +619,4 @@ def get_silicate_plots(RWSomean, RWSomeanS):
     changeperyear = changelongterm / (year)
     print(f"Change per year: {changeperyear:.6e}")
     
+
